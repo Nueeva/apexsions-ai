@@ -12,6 +12,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <!-- External 3D WebGL & Motion Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -642,6 +646,34 @@
         </a>
       </div>
 
+      <!-- CINEMATIC REALM KEY VISUAL & INTERACTIVE 3D CELESTIAL CORE -->
+      <div class="mt-12 sm:mt-16 max-w-6xl mx-auto motion-reveal">
+        <div class="relative rounded-3xl p-1 bg-gradient-to-b from-cyan-500/30 via-slate-800/40 to-transparent shadow-2xl shadow-cyan-500/10">
+          <div class="relative rounded-[22px] overflow-hidden bg-dark-card border border-dark-border aspect-[16/9] sm:aspect-[21/9] group" data-cursor="VIEW REALM">
+            <!-- Background Realm Artwork -->
+            <img src="assets/images/hero_realm_citadel.jpg" alt="Apexsions Celestial Floating Citadel" class="w-full h-full object-cover object-center transition duration-1000 ease-out group-hover:scale-105 group-hover:brightness-110">
+            <!-- Vignette & Atmospheric Overlays -->
+            <div class="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-black/30 pointer-events-none"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-dark-bg/60 via-transparent to-dark-bg/60 pointer-events-none"></div>
+            
+            <!-- Three.js 3D Celestial Core & Floating Embers Canvas Overlay -->
+            <canvas id="hero-3d-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-10"></canvas>
+            
+            <!-- Bottom Realm Caption & Live Badge -->
+            <div class="absolute bottom-4 sm:bottom-6 inset-x-4 sm:inset-x-8 flex items-end justify-between z-20 pointer-events-none">
+              <div class="text-left">
+                <span class="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-cyan-400 font-semibold block">The Sovereign Realm</span>
+                <h3 class="text-lg sm:text-2xl font-bold text-white tracking-tight">The Celestial Citadel of Apexsions</h3>
+              </div>
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 text-xs font-mono text-slate-300">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                <span>Active Living World</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- 4 Clean Key Metrics -->
       <div class="mt-16 sm:mt-24 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto text-left">
         
@@ -784,11 +816,17 @@
           <div class="carousel-track" id="carousel-track">
             
             <!-- Card 01: Aurelius the Chronicler -->
-            <article class="carousel-card glow-card tilt-card p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between" data-tilt data-cursor="INSPECT">
+            <article class="carousel-card glow-card tilt-card p-5 sm:p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between group/card overflow-hidden" data-tilt data-cursor="INSPECT">
               <div class="specular-sheen"></div>
               <div>
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-bold text-white text-2xl mb-5 shadow-lg shadow-cyan-500/20">
-                  Ω
+                <!-- Character Portrait Frame -->
+                <div class="relative w-full h-72 sm:h-80 rounded-2xl overflow-hidden mb-5 border border-white/10 group/img bg-slate-950">
+                  <img src="assets/images/char_aurelius.jpg" alt="Aurelius the Chronicler" class="w-full h-full object-cover object-top transition duration-700 ease-out group-hover/card:scale-105 group-hover/card:brightness-110">
+                  <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-transparent to-transparent opacity-90"></div>
+                  <!-- Ornate Realm Seal -->
+                  <div class="absolute top-3 right-3 w-9 h-9 rounded-xl bg-cyan-950/80 backdrop-blur-md border border-cyan-500/40 flex items-center justify-center font-bold text-cyan-300 text-sm shadow-lg shadow-cyan-500/20">
+                    Ω
+                  </div>
                 </div>
 
                 <h3 class="text-xl font-bold text-white tracking-tight">Aurelius the Chronicler</h3>
@@ -807,11 +845,17 @@
             </article>
 
             <!-- Card 02: Commander Vael -->
-            <article class="carousel-card glow-card tilt-card p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between" data-tilt data-cursor="INSPECT">
+            <article class="carousel-card glow-card tilt-card p-5 sm:p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between group/card overflow-hidden" data-tilt data-cursor="INSPECT">
               <div class="specular-sheen"></div>
               <div>
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-rose-500 to-amber-600 flex items-center justify-center font-bold text-white text-2xl mb-5 shadow-lg shadow-rose-500/20">
-                  ⚔
+                <!-- Character Portrait Frame -->
+                <div class="relative w-full h-72 sm:h-80 rounded-2xl overflow-hidden mb-5 border border-white/10 group/img bg-slate-950">
+                  <img src="assets/images/char_vael.jpg" alt="Commander Vael" class="w-full h-full object-cover object-top transition duration-700 ease-out group-hover/card:scale-105 group-hover/card:brightness-110">
+                  <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-transparent to-transparent opacity-90"></div>
+                  <!-- Ornate Realm Seal -->
+                  <div class="absolute top-3 right-3 w-9 h-9 rounded-xl bg-rose-950/80 backdrop-blur-md border border-rose-500/40 flex items-center justify-center font-bold text-rose-300 text-sm shadow-lg shadow-rose-500/20">
+                    ⚔
+                  </div>
                 </div>
 
                 <h3 class="text-xl font-bold text-white tracking-tight">Commander Vael</h3>
@@ -830,11 +874,17 @@
             </article>
 
             <!-- Card 03: Archon Scribe Eldrin -->
-            <article class="carousel-card glow-card tilt-card p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between" data-tilt data-cursor="INSPECT">
+            <article class="carousel-card glow-card tilt-card p-5 sm:p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between group/card overflow-hidden" data-tilt data-cursor="INSPECT">
               <div class="specular-sheen"></div>
               <div>
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-500 to-indigo-600 flex items-center justify-center font-bold text-white text-2xl mb-5 shadow-lg shadow-purple-500/20">
-                  ✦
+                <!-- Character Portrait Frame -->
+                <div class="relative w-full h-72 sm:h-80 rounded-2xl overflow-hidden mb-5 border border-white/10 group/img bg-slate-950">
+                  <img src="assets/images/char_eldrin.jpg" alt="Archon Scribe Eldrin" class="w-full h-full object-cover object-top transition duration-700 ease-out group-hover/card:scale-105 group-hover/card:brightness-110">
+                  <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-transparent to-transparent opacity-90"></div>
+                  <!-- Ornate Realm Seal -->
+                  <div class="absolute top-3 right-3 w-9 h-9 rounded-xl bg-purple-950/80 backdrop-blur-md border border-purple-500/40 flex items-center justify-center font-bold text-purple-300 text-sm shadow-lg shadow-purple-500/20">
+                    ✦
+                  </div>
                 </div>
 
                 <h3 class="text-xl font-bold text-white tracking-tight">Archon Scribe Eldrin</h3>
@@ -853,11 +903,17 @@
             </article>
 
             <!-- Card 04: Lord Chancellor Kaelen -->
-            <article class="carousel-card glow-card tilt-card p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between" data-tilt data-cursor="INSPECT">
+            <article class="carousel-card glow-card tilt-card p-5 sm:p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between group/card overflow-hidden" data-tilt data-cursor="INSPECT">
               <div class="specular-sheen"></div>
               <div>
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 to-emerald-600 flex items-center justify-center font-bold text-white text-2xl mb-5 shadow-lg shadow-amber-500/20">
-                  ◈
+                <!-- Character Portrait Frame -->
+                <div class="relative w-full h-72 sm:h-80 rounded-2xl overflow-hidden mb-5 border border-white/10 group/img bg-slate-950">
+                  <img src="assets/images/char_kaelen.jpg" alt="Lord Chancellor Kaelen" class="w-full h-full object-cover object-top transition duration-700 ease-out group-hover/card:scale-105 group-hover/card:brightness-110">
+                  <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-transparent to-transparent opacity-90"></div>
+                  <!-- Ornate Realm Seal -->
+                  <div class="absolute top-3 right-3 w-9 h-9 rounded-xl bg-amber-950/80 backdrop-blur-md border border-amber-500/40 flex items-center justify-center font-bold text-amber-300 text-sm shadow-lg shadow-amber-500/20">
+                    ◈
+                  </div>
                 </div>
 
                 <h3 class="text-xl font-bold text-white tracking-tight">Lord Chancellor Kaelen</h3>
@@ -876,11 +932,17 @@
             </article>
 
             <!-- Card 05: Nyx the Shadow Broker -->
-            <article class="carousel-card glow-card tilt-card p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between" data-tilt data-cursor="INSPECT">
+            <article class="carousel-card glow-card tilt-card p-5 sm:p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between group/card overflow-hidden" data-tilt data-cursor="INSPECT">
               <div class="specular-sheen"></div>
               <div>
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-cyan-600 flex items-center justify-center font-bold text-white text-2xl mb-5 shadow-lg shadow-emerald-500/20">
-                  ⚡
+                <!-- Character Portrait Frame -->
+                <div class="relative w-full h-72 sm:h-80 rounded-2xl overflow-hidden mb-5 border border-white/10 group/img bg-slate-950">
+                  <img src="assets/images/char_nyx.jpg" alt="Nyx the Shadow Broker" class="w-full h-full object-cover object-top transition duration-700 ease-out group-hover/card:scale-105 group-hover/card:brightness-110">
+                  <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-transparent to-transparent opacity-90"></div>
+                  <!-- Ornate Realm Seal -->
+                  <div class="absolute top-3 right-3 w-9 h-9 rounded-xl bg-emerald-950/80 backdrop-blur-md border border-emerald-500/40 flex items-center justify-center font-bold text-emerald-300 text-sm shadow-lg shadow-emerald-500/20">
+                    ⚡
+                  </div>
                 </div>
 
                 <h3 class="text-xl font-bold text-white tracking-tight">Nyx the Shadow Broker</h3>
@@ -994,28 +1056,13 @@
             <!-- Agent Identity Header -->
             <div class="flex items-center justify-between border-b border-dark-border pb-4 mb-4">
               <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-bold text-white text-base shadow-lg shadow-cyan-500/20">
-                  Ω
-                </div>
+                <img id="sim-agent-avatar" src="assets/images/char_aurelius.jpg" alt="Agent Avatar" class="w-12 h-12 rounded-xl object-cover object-top border border-cyan-500/40 shadow-lg shadow-cyan-500/20">
                 <div>
                   <div class="flex items-center gap-2">
                     <span class="text-sm font-bold text-white" id="sim-agent-name">Aurelius the Chronicler</span>
                     <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30 font-semibold">Kingdom Warden</span>
                   </div>
                   <div class="text-[11px] text-slate-400 font-mono mt-0.5" id="sim-model-label">Engine: Claude Sonnet 5.5 &bull; Adaptive Thinking Active (1M Context)</div>
-                </div>
-              </div>
-
-              <!-- Live Audio Waveform & TTFT Indicator -->
-            <!-- Agent Identity Header -->
-            <div class="flex items-center justify-between border-b border-dark-border pb-4 mb-4">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-bold text-white text-base shadow-md shadow-cyan-500/20">
-                  Ω
-                </div>
-                <div>
-                  <div class="text-sm font-bold text-white" id="sim-agent-name">Aurelius the Chronicler</div>
-                  <div class="text-xs text-slate-400 font-mono" id="sim-model-label">Claude Sonnet 5.5 Core</div>
                 </div>
               </div>
 
@@ -1875,6 +1922,7 @@ print("Tool Dispatches:", response.executed_actions)`
     const scenarios = {
       1: {
         agent: "Aurelius the Chronicler",
+        avatar: "assets/images/char_aurelius.jpg",
         context: '{ faction: "Aetherion Guard", standing: "Suspicious", location: "Grand Sanctum Vault" }',
         thinking: "Player presents contraband Void Ore inside the Grand Sanctum. Faction standing is Suspicious (-14). Deny sanctuary pass and issue ultimatum before alerting sentinels.",
         tool: 'inspectContrabandRegistry(item="Void_Ore_T3")',
@@ -1884,6 +1932,7 @@ print("Tool Dispatches:", response.executed_actions)`
       },
       2: {
         agent: "Commander Vael",
+        avatar: "assets/images/char_vael.jpg",
         context: '{ alertLevel: "HIGH", intruder: "Lord_Varian", perimeter: "Bastion_West_Gate" }',
         thinking: "Bastion West breach detected. Lord Varian detonated ender-charge. Engage combat tag to prevent teleport escape and command sentinels to engage.",
         tool: 'engageCombatTag(target="Lord_Varian", duration=60)',
@@ -1893,6 +1942,7 @@ print("Tool Dispatches:", response.executed_actions)`
       },
       3: {
         agent: "Archon Scribe Eldrin",
+        avatar: "assets/images/char_eldrin.jpg",
         context: '{ query: "MONOLITH_ORIGINS", subject: "Ancestral_Monolith" }',
         thinking: "Player queries First Convergence mythos. Query lore codex for Ancestral Monolith origins.",
         tool: 'queryLoreCodex(topic="Ancestral_Monolith")',
@@ -1913,6 +1963,8 @@ print("Tool Dispatches:", response.executed_actions)`
         }
       }
       const data = scenarios[id];
+      const avatarEl = document.getElementById('sim-agent-avatar');
+      if (avatarEl && data.avatar) avatarEl.src = data.avatar;
       document.getElementById('sim-agent-name').textContent = data.agent;
       document.getElementById('sim-context').textContent = data.context;
       document.getElementById('thinking-trace').textContent = data.thinking;
@@ -2339,6 +2391,218 @@ print("Tool Dispatches:", response.executed_actions)`
         osc.stop(now + 0.3);
       }
     };
+
+    // ==========================================
+    // 16. LENIS SMOOTH SCROLL (Awwwards Inertia Physics)
+    // ==========================================
+    (function initLenisScroll() {
+      if (typeof Lenis === 'undefined' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      try {
+        const lenis = new Lenis({
+          duration: 1.25,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: 'vertical',
+          gestureOrientation: 'vertical',
+          smoothWheel: true,
+          wheelMultiplier: 0.9,
+          touchMultiplier: 1.5,
+        });
+        window.lenisInstance = lenis;
+
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Smooth anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href && href.length > 1) {
+              const target = document.querySelector(href);
+              if (target) {
+                e.preventDefault();
+                lenis.scrollTo(target, { offset: -70, duration: 1.2 });
+              }
+            }
+          });
+        });
+      } catch (e) {
+        console.warn('Lenis init notice:', e);
+      }
+    })();
+
+    // ==========================================
+    // 17. THREE.JS 3D CELESTIAL CORE & FLOATING EMBERS
+    // ==========================================
+    (function initThreeJSHeroScene() {
+      const canvas = document.getElementById('hero-3d-canvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      let renderer, scene, camera;
+      let coreGroup, outerIcosahedron, innerOctahedron, particleGeo, particleSystem;
+      let mouseX = 0, mouseY = 0;
+      let targetRotX = 0, targetRotY = 0;
+      let width = canvas.clientWidth || 800;
+      let height = canvas.clientHeight || 450;
+
+      try {
+        renderer = new THREE.WebGLRenderer({
+          canvas: canvas,
+          alpha: true,
+          antialias: true,
+          powerPreference: 'high-performance'
+        });
+        renderer.setSize(width, height, false);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+        camera.position.z = 7;
+
+        // Core Group
+        coreGroup = new THREE.Group();
+        scene.add(coreGroup);
+
+        // Outer Sacred Geometry Icosahedron (Gold Wireframe)
+        const outerGeo = new THREE.IcosahedronGeometry(1.6, 0);
+        const outerMat = new THREE.MeshBasicMaterial({
+          color: 0xF59E0B,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.45
+        });
+        outerIcosahedron = new THREE.Mesh(outerGeo, outerMat);
+        coreGroup.add(outerIcosahedron);
+
+        // Inner Sacred Octahedron (Cyan Wireframe)
+        const innerGeo = new THREE.OctahedronGeometry(1.0, 0);
+        const innerMat = new THREE.MeshBasicMaterial({
+          color: 0x22D3EE,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.75
+        });
+        innerOctahedron = new THREE.Mesh(innerGeo, innerMat);
+        coreGroup.add(innerOctahedron);
+
+        // Core Glowing Center Sphere
+        const centerGeo = new THREE.SphereGeometry(0.35, 16, 16);
+        const centerMat = new THREE.MeshBasicMaterial({
+          color: 0x67E8F9,
+          transparent: true,
+          opacity: 0.85
+        });
+        const centerSphere = new THREE.Mesh(centerGeo, centerMat);
+        coreGroup.add(centerSphere);
+
+        // 3D Floating Embers Particles
+        const particleCount = 140;
+        const positions = new Float32Array(particleCount * 3);
+        const velocities = [];
+
+        for (let i = 0; i < particleCount; i++) {
+          positions[i * 3] = (Math.random() - 0.5) * 12;
+          positions[i * 3 + 1] = (Math.random() - 0.5) * 6;
+          positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
+          velocities.push({
+            vy: Math.random() * 0.015 + 0.005,
+            vx: (Math.random() - 0.5) * 0.004,
+            baseX: positions[i * 3]
+          });
+        }
+
+        particleGeo = new THREE.BufferGeometry();
+        particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        // Create glowing circular particle canvas texture
+        const pCanvas = document.createElement('canvas');
+        pCanvas.width = 32;
+        pCanvas.height = 32;
+        const pCtx = pCanvas.getContext('2d');
+        const grad = pCtx.createRadialGradient(16, 16, 0, 16, 16, 16);
+        grad.addColorStop(0, 'rgba(255, 230, 150, 1)');
+        grad.addColorStop(0.3, 'rgba(245, 158, 11, 0.8)');
+        grad.addColorStop(0.7, 'rgba(6, 182, 212, 0.3)');
+        grad.addColorStop(1, 'transparent');
+        pCtx.fillStyle = grad;
+        pCtx.fillRect(0, 0, 32, 32);
+        const pTex = new THREE.CanvasTexture(pCanvas);
+
+        const particleMat = new THREE.PointsMaterial({
+          size: 0.22,
+          map: pTex,
+          transparent: true,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        });
+
+        particleSystem = new THREE.Points(particleGeo, particleMat);
+        scene.add(particleSystem);
+
+        // Mouse Parallax Listener
+        window.addEventListener('mousemove', (e) => {
+          mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+          mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+          targetRotY = mouseX * 0.8;
+          targetRotX = mouseY * 0.5;
+        }, { passive: true });
+
+        // Resize Listener
+        function onResize() {
+          if (!canvas.parentElement) return;
+          const rect = canvas.getBoundingClientRect();
+          if (rect.width <= 0 || rect.height <= 0) return;
+          width = rect.width;
+          height = rect.height;
+          camera.aspect = width / height;
+          camera.updateProjectionMatrix();
+          renderer.setSize(width, height, false);
+        }
+        window.addEventListener('resize', onResize);
+        setTimeout(onResize, 200);
+
+        // Render Loop
+        let clock = new THREE.Clock();
+        function animateThree() {
+          requestAnimationFrame(animateThree);
+          const delta = clock.getDelta();
+          const elapsed = clock.getElapsedTime();
+
+          // Auto-rotation + smooth mouse damping
+          outerIcosahedron.rotation.x += 0.005;
+          outerIcosahedron.rotation.y += 0.008;
+
+          innerOctahedron.rotation.x -= 0.012;
+          innerOctahedron.rotation.z += 0.01;
+
+          coreGroup.rotation.y += (targetRotY - coreGroup.rotation.y) * 0.05;
+          coreGroup.rotation.x += (targetRotX - coreGroup.rotation.x) * 0.05;
+
+          // Gentle floating bob
+          coreGroup.position.y = Math.sin(elapsed * 1.5) * 0.15;
+
+          // Particle Embers drift upwards
+          const pos = particleGeo.attributes.position.array;
+          for (let i = 0; i < particleCount; i++) {
+            pos[i * 3 + 1] += velocities[i].vy;
+            pos[i * 3] += Math.sin(elapsed + i) * 0.002;
+            // Reset when reaching top
+            if (pos[i * 3 + 1] > 3.5) {
+              pos[i * 3 + 1] = -3.5;
+              pos[i * 3] = (Math.random() - 0.5) * 12;
+            }
+          }
+          particleGeo.attributes.position.needsUpdate = true;
+
+          renderer.render(scene, camera);
+        }
+        animateThree();
+      } catch (err) {
+        console.warn('Three.js scene init notice:', err);
+      }
+    })();
   </script>
 
 </body>
