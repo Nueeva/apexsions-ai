@@ -257,6 +257,244 @@
       will-change: transform;
     }
 
+    /* ==========================================================================
+       AWWWARDS / THE GLIMMERING LEVEL MOTION ARCHITECTURE
+       ========================================================================== */
+
+    /* 1. CUSTOM FLUID MAGNETIC CURSOR (O-CURSOR) */
+    .o-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .o-cursor { display: block; }
+    }
+    .cursor_inner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22D3EE;
+      box-shadow: 0 0 10px #22D3EE, 0 0 20px #06B6D4;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 10001;
+      transition: opacity 0.2s ease, transform 0.15s ease;
+    }
+    .cursor_outer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(6, 182, 212, 0.45);
+      background: rgba(6, 182, 212, 0.04);
+      backdrop-filter: blur(2px);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                  height 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                  border-color 0.25s ease, 
+                  background-color 0.25s ease,
+                  box-shadow 0.25s ease;
+      will-change: transform, width, height;
+      z-index: 10000;
+    }
+    .cursor_outer.is-hovering {
+      width: 68px;
+      height: 68px;
+      border-color: rgba(34, 211, 238, 0.85);
+      background: rgba(6, 182, 212, 0.15);
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.35);
+    }
+    .cursor_outer.is-dragging {
+      width: 80px;
+      height: 80px;
+      border-color: rgba(245, 158, 11, 0.9);
+      background: rgba(245, 158, 11, 0.15);
+      box-shadow: 0 0 35px rgba(245, 158, 11, 0.4);
+    }
+    .cursor_text {
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+      color: #FFFFFF;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: 10002;
+      white-space: nowrap;
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
+    }
+    .cursor_text.has-text {
+      opacity: 1;
+    }
+
+    /* 2. KINETIC PARALLAX BACKDROP TYPOGRAPHY */
+    .kinetic-backdrop {
+      position: absolute;
+      inset-x: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+      user-select: none;
+      opacity: 0.75;
+    }
+    .kinetic-track {
+      display: flex;
+      white-space: nowrap;
+      font-family: 'JetBrains Mono', sans-serif;
+      font-size: clamp(4rem, 9.5vw, 10rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.04);
+      line-height: 0.9;
+      will-change: transform;
+    }
+    .kinetic-track span {
+      display: inline-block;
+      padding-right: 3rem;
+      transition: -webkit-text-stroke 0.4s ease;
+    }
+    .kinetic-track span.accent {
+      -webkit-text-stroke: 1.5px rgba(6, 182, 212, 0.12);
+      color: rgba(6, 182, 212, 0.02);
+    }
+
+    /* 3. ENTITY CAROUSEL DRAGGABLE HORIZONTAL SLIDER */
+    .carousel-track-wrapper {
+      position: relative;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      touch-action: pan-y;
+    }
+    .carousel-track-wrapper:active {
+      cursor: grabbing;
+    }
+    .carousel-track {
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+      padding: 1rem 0;
+    }
+    .carousel-card {
+      flex: 0 0 320px;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    @media (min-width: 640px) {
+      .carousel-card { flex: 0 0 380px; }
+    }
+    .carousel-card:hover {
+      transform: translateY(-6px) scale(1.015);
+      border-color: rgba(6, 182, 212, 0.5);
+      box-shadow: 0 20px 40px -15px rgba(6, 182, 212, 0.2);
+    }
+    .carousel-progress-track {
+      width: 100%;
+      max-width: 280px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .carousel-progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 20%;
+      background: linear-gradient(90deg, #06B6D4, #818CF8);
+      border-radius: 9999px;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* 4. WEB AUDIO EQUALIZER BUTTON */
+    .audio-eq-bar {
+      width: 2px;
+      border-radius: 2px;
+      background-color: #22D3EE;
+      transition: height 0.15s ease;
+    }
+    .audio-eq-bar.active {
+      animation: eqBounce 1.2s ease-in-out infinite alternate;
+    }
+    @keyframes eqBounce {
+      0% { height: 3px; }
+      50% { height: 16px; }
+      100% { height: 6px; }
+    }
+
+    /* 5. CINEMATIC QUANTUM PRELOADER */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: #03060E;
+      z-index: 100000;
+      display: flex;
+      flex-direction: column;
+      items-center: center;
+      justify-content: center;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
+    }
+    #preloader.loaded {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .preloader-track {
+      width: 220px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      position: relative;
+      border-radius: 999px;
+    }
+    .preloader-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #06B6D4, #A855F7);
+      box-shadow: 0 0 12px #06B6D4;
+      transition: width 0.15s linear;
+    }
+
+    /* 6. EDITORIAL MASK REVEAL */
+    .text-reveal-mask {
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: bottom;
+    }
+    .text-reveal-mask > * {
+      transform: translateY(110%);
+      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+    .is-revealed .text-reveal-mask > *,
+    .text-reveal-mask.is-revealed > * {
+      transform: translateY(0);
+    }
+
     /* Accessibility */
     @media (prefers-reduced-motion: reduce) {
       .motion-reveal, .motion-slide-left, .motion-slide-right {
@@ -274,7 +512,33 @@
 </head>
 <body class="selection:bg-cyan-500/30 selection:text-cyan-200">
 
-  <!-- Interactive Background Canvas (Cyber Constellation Grid & Warp Shockwaves) -->
+  <!-- CINEMATIC QUANTUM PRELOADER (THE GLIMMERING STYLE) -->
+  <div id="preloader">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/30">
+        <div class="w-full h-full bg-dark-bg rounded-[11px] flex items-center justify-center font-bold text-cyan-400 font-mono text-lg">
+          Ω
+        </div>
+      </div>
+      <div>
+        <div class="text-sm font-extrabold text-white tracking-wide font-mono">APEXSIONS AGENTIC RUNTIME</div>
+        <div class="text-[10px] text-cyan-400 font-mono" id="preloader-status">INITIALIZING QUANTUM PERCEPTION CORE...</div>
+      </div>
+    </div>
+    <div class="preloader-track mb-3">
+      <div class="preloader-fill" id="preloader-fill"></div>
+    </div>
+    <div class="text-xs font-mono text-slate-400" id="preloader-percent">0%</div>
+  </div>
+
+  <!-- CUSTOM FLUID MAGNETIC CURSOR (O-CURSOR) -->
+  <div class="o-cursor" id="custom-cursor">
+    <div class="cursor_inner"></div>
+    <div class="cursor_outer"></div>
+    <div class="cursor_text" id="cursor-text"></div>
+  </div>
+
+  <!-- Interactive Background Canvas (Cyber Constellation Grid, Embers & Warp Shockwaves) -->
   <canvas id="matrix-canvas"></canvas>
 
   <!-- Fluid Ambient Cursor Aura (Mouse Tracking) -->
@@ -292,7 +556,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
       
       <!-- Brand Logo -->
-      <a href="#" class="flex items-center gap-3 group">
+      <a href="#" class="flex items-center gap-3 group" data-cursor="HOME">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/25 group-hover:shadow-cyan-500/50 group-hover:scale-105 transition transform">
           <div class="w-full h-full bg-dark-bg rounded-[11px] flex items-center justify-center">
             <svg class="w-5 h-5 text-cyan-400 group-hover:rotate-12 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -312,25 +576,39 @@
 
       <!-- Desktop Navigation -->
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-        <a href="#purpose" class="hover:text-cyan-400 transition">What is Apexsions?</a>
-        <a href="#simulator" class="hover:text-cyan-400 transition flex items-center gap-1.5">
+        <a href="#purpose" class="hover:text-cyan-400 transition" data-cursor="EXPLORE">What is Apexsions?</a>
+        <a href="#entities" class="hover:text-cyan-400 transition flex items-center gap-1.5" data-cursor="DISCOVER">
+          <span>Living Cast</span>
+          <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 font-bold uppercase">New</span>
+        </a>
+        <a href="#simulator" class="hover:text-cyan-400 transition flex items-center gap-1.5" data-cursor="TEST">
           <span>Tactical Sandbox</span>
           <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
         </a>
-        <a href="#architecture" class="hover:text-cyan-400 transition">Engine Topology</a>
-        <a href="#pricing" class="hover:text-cyan-400 transition">Server Pricing</a>
-        <a href="/docs" class="hover:text-cyan-400 transition">SDK Docs</a>
+        <a href="#architecture" class="hover:text-cyan-400 transition" data-cursor="INSPECT">Topology</a>
+        <a href="#pricing" class="hover:text-cyan-400 transition" data-cursor="PRICING">Pricing</a>
+        <a href="/docs" class="hover:text-cyan-400 transition" data-cursor="READ">Docs</a>
       </nav>
 
       <!-- Action Buttons -->
       <div class="flex items-center gap-3">
-        <a href="https://github.com/Nueeva/apexsions-ai" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center gap-2 text-xs font-semibold px-3 py-2 rounded-lg text-slate-300 hover:text-white border border-dark-border hover:border-slate-500 transition group">
+        <!-- Interactive Soundscape Synthesizer Toggle -->
+        <button id="audio-toggle" onclick="toggleAudio()" class="inline-flex items-center gap-2 text-xs font-mono px-3 py-2 rounded-lg text-cyan-300 border border-cyan-500/30 bg-cyan-950/30 hover:border-cyan-400 transition" data-cursor="AUDIO" title="Toggle Generative Ambience & UI Soundscape">
+          <div class="flex items-center gap-0.5 h-3">
+            <span class="audio-eq-bar h-1" id="eq-1"></span>
+            <span class="audio-eq-bar h-2.5" id="eq-2"></span>
+            <span class="audio-eq-bar h-1.5" id="eq-3"></span>
+          </div>
+          <span id="audio-label" class="hidden sm:inline">AUDIO: OFF</span>
+        </button>
+
+        <a href="https://github.com/Nueeva/apexsions-ai" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center gap-2 text-xs font-semibold px-3 py-2 rounded-lg text-slate-300 hover:text-white border border-dark-border hover:border-slate-500 transition group" data-cursor="GITHUB">
           <svg class="w-4 h-4 text-slate-400 group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
           </svg>
           <span class="font-mono">GitHub</span>
         </a>
-        <button onclick="openModal()" class="magnetic-btn inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-indigo-500 hover:from-cyan-300 hover:to-indigo-400 text-slate-950 shadow-lg shadow-cyan-500/25 transition active:scale-95">
+        <button onclick="openModal()" class="magnetic-btn inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-indigo-500 hover:from-cyan-300 hover:to-indigo-400 text-slate-950 shadow-lg shadow-cyan-500/25 transition active:scale-95" data-cursor="DEPLOY">
           <span>Get Server Plugin</span>
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
@@ -505,6 +783,265 @@
 
       </div>
     </section>
+
+    <!-- KINETIC PARALLAX STREAM 01 (THE GLIMMERING STYLE TYPOGRAPHIC RUNNER) -->
+    <div class="kinetic-backdrop relative -my-6 sm:-my-10" data-parallax-speed="0.35">
+      <div class="kinetic-track" id="kinetic-track-1">
+        <span>SOVEREIGN AGENTS</span>
+        <span class="accent">&bull; LIVING REALMS &bull;</span>
+        <span>1M EPISODIC HORIZON</span>
+        <span class="accent">&bull; ZERO TICK LAG &bull;</span>
+        <span>AUTONOMOUS CIVILIZATIONS</span>
+        <span class="accent">&bull; EMERGENCE &bull;</span>
+      </div>
+    </div>
+
+    <!-- SECTION: LIVING ENTITY CAST SHOWCASE (THE GLIMMERING STYLE POSTER CAROUSEL) -->
+    <section id="entities" class="py-24 lg:py-32 relative bg-dark-bg border-b border-dark-border overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header with Awwwards style mask reveal & controls -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 motion-reveal">
+          <div>
+            <div class="inline-flex items-center gap-2 text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">
+              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+              Autonomous Citizens Showcase
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+              Sovereign Agents of the Realm
+            </h2>
+            <p class="mt-3 text-slate-400 text-sm max-w-xl">
+              Drag or swipe through live autonomous characters. Powered by Claude 5.5 with persistent memory, real-time voice synthesis, and in-game tool authority.
+            </p>
+          </div>
+
+          <!-- Carousel Controls: Prev/Next Buttons + Progress Bar -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div class="carousel-progress-track">
+              <div class="carousel-progress-fill" id="carousel-progress"></div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="slideCarousel(-1)" class="w-10 h-10 rounded-xl bg-dark-surface border border-dark-border hover:border-cyan-400 text-slate-300 hover:text-white flex items-center justify-center transition active:scale-95 magnetic-btn" data-cursor="PREV" title="Previous Entity">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <button onclick="slideCarousel(1)" class="w-10 h-10 rounded-xl bg-dark-surface border border-dark-border hover:border-cyan-400 text-slate-300 hover:text-white flex items-center justify-center transition active:scale-95 magnetic-btn" data-cursor="NEXT" title="Next Entity">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Draggable Horizontal Slider Track -->
+        <div class="carousel-track-wrapper" id="carousel-wrapper" data-cursor="DRAG">
+          <div class="carousel-track" id="carousel-track">
+            
+            <!-- Card 01: Aurelius the Chronicler -->
+            <article class="carousel-card glow-card tilt-card p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between" data-tilt data-cursor="INSPECT">
+              <div class="specular-sheen"></div>
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30 font-bold uppercase">Tier IV &bull; Royal Sovereign</span>
+                  <div class="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>ACTIVE</span>
+                  </div>
+                </div>
+
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-bold text-white text-2xl mb-4 shadow-lg shadow-cyan-500/25">
+                  Ω
+                </div>
+
+                <h3 class="text-xl font-bold text-white tracking-tight">Aurelius the Chronicler</h3>
+                <div class="text-xs text-cyan-400 font-mono mt-0.5">Kingdom Warden of Aetherion</div>
+                <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+                  Authoritative lawkeeper guarding the Royal Sanctum. Enforces penal treaties, evaluates contraband bribes, and issues sovereign ultimatums.
+                </p>
+
+                <div class="mt-4 p-3 rounded-xl bg-dark-surface border border-dark-border font-mono text-[11px] text-slate-400">
+                  <span class="text-indigo-400 font-semibold">Engine:</span> Claude Sonnet 5.5<br>
+                  <span class="text-purple-400 font-semibold">Memory:</span> 1M Vector Episodic Horizon<br>
+                  <span class="text-cyan-400 font-semibold">Tool:</span> inspectContrabandRegistry()
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-dark-border flex items-center justify-between">
+                <button onclick="playVoiceBark('aurelius')" class="inline-flex items-center gap-2 text-xs font-mono text-cyan-300 hover:text-white transition group/btn" data-cursor="LISTEN">
+                  <span class="w-6 h-6 rounded-lg bg-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover/btn:bg-cyan-500 group-hover/btn:text-slate-950 transition">▶</span>
+                  <span>Audio Bark</span>
+                </button>
+                <span class="text-[10px] font-mono text-slate-500">32ms TTFT</span>
+              </div>
+            </article>
+
+            <!-- Card 02: Commander Vael -->
+            <article class="carousel-card glow-card tilt-card p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between" data-tilt data-cursor="INSPECT">
+              <div class="specular-sheen"></div>
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-rose-950/60 text-rose-300 border border-rose-500/30 font-bold uppercase">Vanguard Commander</span>
+                  <div class="flex items-center gap-1.5 text-[10px] font-mono text-rose-400">
+                    <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
+                    <span>COMBAT_ALERT</span>
+                  </div>
+                </div>
+
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-rose-500 to-amber-600 flex items-center justify-center font-bold text-white text-2xl mb-4 shadow-lg shadow-rose-500/25">
+                  ⚔
+                </div>
+
+                <h3 class="text-xl font-bold text-white tracking-tight">Commander Vael</h3>
+                <div class="text-xs text-rose-400 font-mono mt-0.5">Sentinel of the Iron Gate</div>
+                <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+                  Perimeter battle commander with sub-24ms reflex speed. Issues instant anti-teleport combat tags, summons antimagic ward-fire, and locks borders.
+                </p>
+
+                <div class="mt-4 p-3 rounded-xl bg-dark-surface border border-dark-border font-mono text-[11px] text-slate-400">
+                  <span class="text-indigo-400 font-semibold">Engine:</span> Claude Haiku 5.5 Reflex<br>
+                  <span class="text-purple-400 font-semibold">Reflex Latency:</span> 24ms TTFT<br>
+                  <span class="text-rose-400 font-semibold">Tool:</span> engageCombatTag(duration=60)
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-dark-border flex items-center justify-between">
+                <button onclick="playVoiceBark('vael')" class="inline-flex items-center gap-2 text-xs font-mono text-rose-300 hover:text-white transition group/btn" data-cursor="LISTEN">
+                  <span class="w-6 h-6 rounded-lg bg-rose-500/20 flex items-center justify-center text-rose-400 group-hover/btn:bg-rose-500 group-hover/btn:text-slate-950 transition">▶</span>
+                  <span>Audio Bark</span>
+                </button>
+                <span class="text-[10px] font-mono text-slate-500">24ms TTFT</span>
+              </div>
+            </article>
+
+            <!-- Card 03: Archon Scribe Eldrin -->
+            <article class="carousel-card glow-card tilt-card p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between" data-tilt data-cursor="INSPECT">
+              <div class="specular-sheen"></div>
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-purple-950/60 text-purple-300 border border-purple-500/30 font-bold uppercase">High Lorekeeper</span>
+                  <div class="flex items-center gap-1.5 text-[10px] font-mono text-purple-400">
+                    <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+                    <span>DEEP_RECALL</span>
+                  </div>
+                </div>
+
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-500 to-indigo-600 flex items-center justify-center font-bold text-white text-2xl mb-4 shadow-lg shadow-purple-500/25">
+                  ✦
+                </div>
+
+                <h3 class="text-xl font-bold text-white tracking-tight">Archon Scribe Eldrin</h3>
+                <div class="text-xs text-purple-400 font-mono mt-0.5">Codex Scholar of Convergence</div>
+                <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+                  Holds 1,000,000 tokens of server lore and mythos. Engages players with reverent poetic prose, verifies ancestral bloodlines, and crafts relics.
+                </p>
+
+                <div class="mt-4 p-3 rounded-xl bg-dark-surface border border-dark-border font-mono text-[11px] text-slate-400">
+                  <span class="text-indigo-400 font-semibold">Engine:</span> Claude Opus 5.5 Pinnacle<br>
+                  <span class="text-purple-400 font-semibold">Context:</span> 1M Token Vector RAG<br>
+                  <span class="text-purple-400 font-semibold">Tool:</span> queryEpistemicVectorStore()
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-dark-border flex items-center justify-between">
+                <button onclick="playVoiceBark('eldrin')" class="inline-flex items-center gap-2 text-xs font-mono text-purple-300 hover:text-white transition group/btn" data-cursor="LISTEN">
+                  <span class="w-6 h-6 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 group-hover/btn:bg-purple-500 group-hover/btn:text-slate-950 transition">▶</span>
+                  <span>Audio Bark</span>
+                </button>
+                <span class="text-[10px] font-mono text-slate-500">Pinnacle Reasoning</span>
+              </div>
+            </article>
+
+            <!-- Card 04: Lord Chancellor Kaelen -->
+            <article class="carousel-card glow-card tilt-card p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between" data-tilt data-cursor="INSPECT">
+              <div class="specular-sheen"></div>
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-amber-950/60 text-amber-300 border border-amber-500/30 font-bold uppercase">Economy Governor</span>
+                  <div class="flex items-center gap-1.5 text-[10px] font-mono text-amber-400">
+                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                    <span>BALANCING_MARKET</span>
+                  </div>
+                </div>
+
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 to-emerald-600 flex items-center justify-center font-bold text-white text-2xl mb-4 shadow-lg shadow-amber-500/25">
+                  ◈
+                </div>
+
+                <h3 class="text-xl font-bold text-white tracking-tight">Lord Chancellor Kaelen</h3>
+                <div class="text-xs text-amber-400 font-mono mt-0.5">Imperial Treasury Governor</div>
+                <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+                  Algorithmic market maker. Analyzes real-time server transaction telemetry, counters diamond inflation, taxes monopolies, and creates scarcity events.
+                </p>
+
+                <div class="mt-4 p-3 rounded-xl bg-dark-surface border border-dark-border font-mono text-[11px] text-slate-400">
+                  <span class="text-indigo-400 font-semibold">Engine:</span> Claude Sonnet 5.5 Adaptive<br>
+                  <span class="text-purple-400 font-semibold">Telemetry:</span> Real-time Tick Sync<br>
+                  <span class="text-amber-400 font-semibold">Tool:</span> adjustDynamicTaxRate()
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-dark-border flex items-center justify-between">
+                <button onclick="playVoiceBark('kaelen')" class="inline-flex items-center gap-2 text-xs font-mono text-amber-300 hover:text-white transition group/btn" data-cursor="LISTEN">
+                  <span class="w-6 h-6 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 group-hover/btn:bg-amber-500 group-hover/btn:text-slate-950 transition">▶</span>
+                  <span>Audio Bark</span>
+                </button>
+                <span class="text-[10px] font-mono text-slate-500">Zero Hyperinflation</span>
+              </div>
+            </article>
+
+            <!-- Card 05: Nyx the Shadow Broker -->
+            <article class="carousel-card glow-card tilt-card p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between" data-tilt data-cursor="INSPECT">
+              <div class="specular-sheen"></div>
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-500/30 font-bold uppercase">Syndicate Broker</span>
+                  <div class="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>STEALTH_PROXIMITY</span>
+                  </div>
+                </div>
+
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-cyan-600 flex items-center justify-center font-bold text-white text-2xl mb-4 shadow-lg shadow-emerald-500/25">
+                  ⚡
+                </div>
+
+                <h3 class="text-xl font-bold text-white tracking-tight">Nyx the Shadow Broker</h3>
+                <div class="text-xs text-emerald-400 font-mono mt-0.5">Void Syndicate Informant</div>
+                <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+                  Operates within the criminal underworld. Sells faction espionage whispers, brokers contraband contracts, and triggers emergent territory wars.
+                </p>
+
+                <div class="mt-4 p-3 rounded-xl bg-dark-surface border border-dark-border font-mono text-[11px] text-slate-400">
+                  <span class="text-indigo-400 font-semibold">Engine:</span> Claude Haiku 5.5 Edge<br>
+                  <span class="text-purple-400 font-semibold">Reflex:</span> 22ms TTFT<br>
+                  <span class="text-emerald-400 font-semibold">Tool:</span> issueUndergroundBounty()
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-dark-border flex items-center justify-between">
+                <button onclick="playVoiceBark('nyx')" class="inline-flex items-center gap-2 text-xs font-mono text-emerald-300 hover:text-white transition group/btn" data-cursor="LISTEN">
+                  <span class="w-6 h-6 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover/btn:bg-emerald-500 group-hover/btn:text-slate-950 transition">▶</span>
+                  <span>Audio Bark</span>
+                </button>
+                <span class="text-[10px] font-mono text-slate-500">Underworld Broker</span>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- KINETIC PARALLAX STREAM 02 -->
+    <div class="kinetic-backdrop relative -my-6 sm:-my-10" data-parallax-speed="-0.4">
+      <div class="kinetic-track" id="kinetic-track-2">
+        <span>DYNAMIC REASONING</span>
+        <span class="accent">&bull; NO SCRIPTED TREES &bull;</span>
+        <span>ADAPTIVE THINKING TRACES</span>
+        <span class="accent">&bull; DETERMINISTIC TOOLS &bull;</span>
+        <span>ZERO SERVER TICK LAG</span>
+        <span class="accent">&bull; 20.0 TPS LOCKED &bull;</span>
+      </div>
+    </div>
 
     <!-- SECTION: TACTICAL SANDBOX (LIVE CLAUDE 5.5 REASONING SIMULATOR) -->
     <section id="simulator" class="py-20 lg:py-28 relative motion-reveal">
@@ -735,6 +1272,18 @@
 
       </div>
     </section>
+
+    <!-- KINETIC PARALLAX STREAM 03 (THE GLIMMERING STYLE TYPOGRAPHIC RUNNER) -->
+    <div class="kinetic-backdrop relative -my-6 sm:-my-10" data-parallax-speed="0.28">
+      <div class="kinetic-track" id="kinetic-track-3">
+        <span>TRANSPARENT VALUE</span>
+        <span class="accent">&bull; NO TOKEN MATH &bull;</span>
+        <span>REALM INFRASTRUCTURE</span>
+        <span class="accent">&bull; UNLIMITED WORLDS &bull;</span>
+        <span>ENTERPRISE ISOLATED VPC</span>
+        <span class="accent">&bull; THE PEAK CIVILIZATIONS &bull;</span>
+      </div>
+    </div>
 
     <!-- SECTION: CRYSTAL-CLEAR SERVER PRICING -->
     <section id="pricing" class="py-20 lg:py-28 relative motion-reveal">
@@ -1581,6 +2130,378 @@ print("Tool Dispatches:", response.executed_actions)`
         bA.className = 'px-4 py-1.5 rounded-full text-slate-400 hover:text-white transition flex items-center gap-1.5';
       }
     }
+
+    // ==========================================
+    // 11. CINEMATIC QUANTUM PRELOADER (THE GLIMMERING STYLE)
+    // ==========================================
+    (function initPreloader() {
+      const preloader = document.getElementById('preloader');
+      const fill = document.getElementById('preloader-fill');
+      const percentEl = document.getElementById('preloader-percent');
+      const statusEl = document.getElementById('preloader-status');
+      if (!preloader) return;
+
+      const steps = [
+        { pct: 24, status: "INITIALIZING QUANTUM PERCEPTION CORE..." },
+        { pct: 58, status: "HYDRATING CLAUDE 5.5 ADAPTIVE MATRIX..." },
+        { pct: 84, status: "SYNCHRONIZING PERSISTENT REALM MEMORY..." },
+        { pct: 100, status: "SOVEREIGN AGENTS READY." }
+      ];
+
+      let currentStep = 0;
+      const interval = setInterval(() => {
+        if (currentStep < steps.length) {
+          const s = steps[currentStep];
+          if (fill) fill.style.width = s.pct + '%';
+          if (percentEl) percentEl.textContent = s.pct + '%';
+          if (statusEl) statusEl.textContent = s.status;
+          currentStep++;
+        } else {
+          clearInterval(interval);
+          setTimeout(() => {
+            preloader.classList.add('loaded');
+            document.querySelectorAll('.motion-reveal').forEach(el => {
+              const r = el.getBoundingClientRect();
+              if (r.top < window.innerHeight) el.classList.add('is-revealed');
+            });
+          }, 160);
+        }
+      }, 110);
+    })();
+
+    // ==========================================
+    // 12. ADVANCED MAGNETIC FLUID CURSOR (O-CURSOR)
+    // ==========================================
+    (function initCustomCursor() {
+      const cursor = document.getElementById('custom-cursor');
+      if (!cursor) return;
+      if (window.matchMedia('(pointer: coarse)').matches) {
+        cursor.style.display = 'none';
+        return;
+      }
+
+      const inner = cursor.querySelector('.cursor_inner');
+      const outer = cursor.querySelector('.cursor_outer');
+      const text = document.getElementById('cursor-text');
+
+      let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+      let outerX = mouseX, outerY = mouseY;
+      let isVisible = false;
+
+      window.addEventListener('mousemove', e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (!isVisible) {
+          cursor.style.opacity = '1';
+          isVisible = true;
+        }
+        if (inner) {
+          inner.style.left = `${mouseX}px`;
+          inner.style.top = `${mouseY}px`;
+        }
+        if (text) {
+          text.style.left = `${mouseX}px`;
+          text.style.top = `${mouseY}px`;
+        }
+      });
+
+      document.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+        isVisible = false;
+      });
+
+      function renderCursor() {
+        outerX += (mouseX - outerX) * 0.18;
+        outerY += (mouseY - outerY) * 0.18;
+        if (outer) {
+          outer.style.left = `${outerX}px`;
+          outer.style.top = `${outerY}px`;
+        }
+        requestAnimationFrame(renderCursor);
+      }
+      renderCursor();
+
+      function handleCursorEnter(e) {
+        const target = e.target.closest('[data-cursor], a, button, input, textarea, .tilt-card, [onclick]');
+        if (!target) return;
+
+        const cursorType = target.getAttribute('data-cursor');
+        if (cursorType) {
+          text.textContent = cursorType;
+          text.classList.add('has-text');
+          outer.classList.add('is-hovering');
+        } else if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.hasAttribute('onclick')) {
+          outer.classList.add('is-hovering');
+          text.classList.remove('has-text');
+        }
+      }
+
+      function handleCursorLeave(e) {
+        const target = e.target.closest('[data-cursor], a, button, input, textarea, .tilt-card, [onclick]');
+        if (!target) return;
+        text.classList.remove('has-text');
+        outer.classList.remove('is-hovering');
+      }
+
+      document.addEventListener('mouseover', handleCursorEnter);
+      document.addEventListener('mouseout', handleCursorLeave);
+
+      const carouselWrap = document.getElementById('carousel-wrapper');
+      if (carouselWrap) {
+        carouselWrap.addEventListener('mousedown', () => outer.classList.add('is-dragging'));
+        window.addEventListener('mouseup', () => outer.classList.remove('is-dragging'));
+      }
+    })();
+
+    // ==========================================
+    // 13. KINETIC PARALLAX BACKDROP TYPOGRAPHY
+    // ==========================================
+    (function initKineticParallax() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const track1 = document.getElementById('kinetic-track-1');
+      const track2 = document.getElementById('kinetic-track-2');
+      const track3 = document.getElementById('kinetic-track-3');
+      if (!track1 && !track2 && !track3) return;
+
+      let ticking = false;
+
+      function updateParallax() {
+        const y = window.scrollY;
+        if (track1) track1.style.transform = `translate3d(${-y * 0.22}px, 0, 0)`;
+        if (track2) track2.style.transform = `translate3d(${(y - 900) * 0.2}px, 0, 0)`;
+        if (track3) track3.style.transform = `translate3d(${- (y - 1800) * 0.16}px, 0, 0)`;
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      }, { passive: true });
+      updateParallax();
+    })();
+
+    // ==========================================
+    // 14. LIVING ENTITY CAROUSEL WITH DRAG INERTIA
+    // ==========================================
+    (function initEntityCarousel() {
+      const wrapper = document.getElementById('carousel-wrapper');
+      const track = document.getElementById('carousel-track');
+      const progress = document.getElementById('carousel-progress');
+      if (!wrapper || !track) return;
+
+      let currentX = 0;
+      let targetX = 0;
+      let isDragging = false;
+      let startX = 0;
+      let initialX = 0;
+
+      function getMaxScroll() {
+        return Math.max(0, track.scrollWidth - wrapper.clientWidth);
+      }
+
+      function updateProgress() {
+        const max = getMaxScroll();
+        if (!progress || max <= 0) return;
+        const ratio = Math.min(1, Math.max(0, -currentX / max));
+        const fillWidth = Math.max(20, (wrapper.clientWidth / track.scrollWidth) * 100);
+        progress.style.width = fillWidth + '%';
+        progress.style.left = (ratio * (100 - fillWidth)) + '%';
+      }
+
+      function animate() {
+        currentX += (targetX - currentX) * 0.15;
+        track.style.transform = `translate3d(${currentX.toFixed(2)}px, 0, 0)`;
+        updateProgress();
+        requestAnimationFrame(animate);
+      }
+      animate();
+
+      window.slideCarousel = function(direction) {
+        const card = track.querySelector('.carousel-card');
+        const cardWidth = card ? card.offsetWidth + 24 : 404;
+        const max = getMaxScroll();
+        targetX = Math.min(0, Math.max(-max, targetX - direction * cardWidth));
+      };
+
+      wrapper.addEventListener('pointerdown', e => {
+        isDragging = true;
+        startX = e.clientX;
+        initialX = targetX;
+        wrapper.setPointerCapture(e.pointerId);
+      });
+
+      wrapper.addEventListener('pointermove', e => {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        const max = getMaxScroll();
+        targetX = Math.min(60, Math.max(-max - 60, initialX + dx));
+      });
+
+      function endDrag() {
+        if (!isDragging) return;
+        isDragging = false;
+        const max = getMaxScroll();
+        targetX = Math.min(0, Math.max(-max, targetX));
+      }
+
+      wrapper.addEventListener('pointerup', endDrag);
+      wrapper.addEventListener('pointercancel', endDrag);
+      window.addEventListener('resize', () => {
+        const max = getMaxScroll();
+        targetX = Math.min(0, Math.max(-max, targetX));
+      });
+    })();
+
+    // ==========================================
+    // 15. WEB AUDIO SYNTHESIZER SOUNDSCAPE
+    // ==========================================
+    let audioCtx = null;
+    let isAudioActive = false;
+    let ambientDroneOsc1 = null;
+    let ambientDroneOsc2 = null;
+    let ambientGain = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    window.toggleAudio = function() {
+      const ctx = getAudioContext();
+      const label = document.getElementById('audio-label');
+      const eqBars = document.querySelectorAll('.audio-eq-bar');
+
+      if (!isAudioActive) {
+        try {
+          ambientGain = ctx.createGain();
+          ambientGain.gain.setValueAtTime(0.01, ctx.currentTime);
+          ambientGain.gain.exponentialRampToValueAtTime(0.08, ctx.currentTime + 1.8);
+
+          ambientDroneOsc1 = ctx.createOscillator();
+          ambientDroneOsc1.type = 'sine';
+          ambientDroneOsc1.frequency.setValueAtTime(55, ctx.currentTime);
+
+          ambientDroneOsc2 = ctx.createOscillator();
+          ambientDroneOsc2.type = 'triangle';
+          ambientDroneOsc2.frequency.setValueAtTime(110.2, ctx.currentTime);
+
+          const filter = ctx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(260, ctx.currentTime);
+
+          ambientDroneOsc1.connect(filter);
+          ambientDroneOsc2.connect(filter);
+          filter.connect(ambientGain);
+          ambientGain.connect(ctx.destination);
+
+          ambientDroneOsc1.start();
+          ambientDroneOsc2.start();
+
+          isAudioActive = true;
+          if (label) label.textContent = 'AUDIO: ON';
+          eqBars.forEach(b => b.classList.add('active'));
+
+          playVoiceBark('activation');
+        } catch (err) {
+          console.warn('Audio init error:', err);
+        }
+      } else {
+        if (ambientGain && ctx) {
+          ambientGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.4);
+          setTimeout(() => {
+            try {
+              if (ambientDroneOsc1) ambientDroneOsc1.stop();
+              if (ambientDroneOsc2) ambientDroneOsc2.stop();
+            } catch (e) {}
+          }, 450);
+        }
+        isAudioActive = false;
+        if (label) label.textContent = 'AUDIO: OFF';
+        eqBars.forEach(b => b.classList.remove('active'));
+      }
+    };
+
+    window.playVoiceBark = function(charId) {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      osc.connect(filter);
+
+      if (charId === 'aurelius') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(130.81, now);
+        osc.frequency.exponentialRampToValueAtTime(164.81, now + 0.15);
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(600, now);
+        filter.frequency.exponentialRampToValueAtTime(180, now + 0.5);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+        osc.start(now);
+        osc.stop(now + 0.6);
+      } else if (charId === 'vael') {
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(90, now);
+        osc.frequency.exponentialRampToValueAtTime(45, now + 0.25);
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(320, now);
+        gain.gain.setValueAtTime(0.14, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      } else if (charId === 'eldrin') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.1);
+        osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.25);
+        filter.type = 'highpass';
+        filter.frequency.setValueAtTime(400, now);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.65);
+        osc.start(now);
+        osc.stop(now + 0.7);
+      } else if (charId === 'kaelen') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(329.63, now);
+        osc.frequency.exponentialRampToValueAtTime(440, now + 0.08);
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(1200, now);
+        gain.gain.setValueAtTime(0.15, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+        osc.start(now);
+        osc.stop(now + 0.45);
+      } else if (charId === 'nyx') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(65, now);
+        osc.frequency.exponentialRampToValueAtTime(32, now + 0.4);
+        gain.gain.setValueAtTime(0.16, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+        osc.start(now);
+        osc.stop(now + 0.55);
+      } else {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(440, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc.start(now);
+        osc.stop(now + 0.3);
+      }
+    };
   </script>
 
 </body>
