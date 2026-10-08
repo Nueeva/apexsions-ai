@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Apexsions AI — Autonomous Agentic Engine & Generative World Runtime</title>
-  <meta name="description" content="Next-generation autonomous agent runtime powered by Anthropic Claude 3.5. Sub-85ms reasoning loops, 200k persistent memory, and deterministic tool execution for virtual worlds and interactive gaming environments.">
+  <meta name="description" content="Next-generation autonomous agent runtime powered by Anthropic Claude frontier intelligence. Sub-85ms reasoning loops, 200k persistent memory, and deterministic tool execution for virtual worlds and interactive gaming environments.">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2306B6D4'><path d='M12 2L2 22h20L12 2zm0 4.5l6.5 13H5.5L12 6.5z'/></svg>">
   
   <!-- Fonts -->
@@ -38,11 +38,27 @@
               emerald: '#10B981'
             },
             dark: {
-              bg: '#060911',
-              card: '#0D1322',
-              cardHover: '#131C31',
-              border: '#1E293B',
-              borderLight: '#334155'
+              bg: '#050811',
+              card: '#0B1120',
+              cardHover: '#111A30',
+              border: '#1A2338',
+              borderLight: '#2A3654'
+            }
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'beam': 'beam 2.5s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            beam: {
+              '0%': { transform: 'translateX(-100%)', opacity: '0' },
+              '50%': { opacity: '1' },
+              '100%': { transform: 'translateX(200%)', opacity: '0' },
             }
           }
         }
@@ -52,25 +68,42 @@
 
   <style>
     body {
-      background-color: #060911;
+      background-color: #050811;
       color: #E2E8F0;
       font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
     }
     .grid-pattern {
-      background-image: radial-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px);
-      background-size: 28px 28px;
+      background-image: radial-gradient(rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+      background-size: 32px 32px;
     }
     .glow-cyan {
-      box-shadow: 0 0 50px -10px rgba(6, 182, 212, 0.25);
+      box-shadow: 0 0 60px -10px rgba(6, 182, 212, 0.3);
     }
-    .glow-cyan-sm {
-      box-shadow: 0 0 20px -5px rgba(6, 182, 212, 0.35);
+    .glow-card {
+      position: relative;
+    }
+    .glow-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(6, 182, 212, 0.4), transparent 60%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .glow-card:hover::before {
+      opacity: 1;
     }
     .glass-nav {
-      background: rgba(6, 9, 17, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(5, 8, 17, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
     .text-gradient {
       background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #94A3B8 100%);
@@ -78,30 +111,55 @@
       -webkit-text-fill-color: transparent;
     }
     .text-gradient-cyan {
-      background: linear-gradient(135deg, #22D3EE 0%, #06B6D4 50%, #3B82F6 100%);
+      background: linear-gradient(135deg, #38BDF8 0%, #06B6D4 50%, #3B82F6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+    .text-gradient-gold {
+      background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* Audio waveform bars animation */
+    .wave-bar {
+      animation: wave 1.2s ease-in-out infinite;
+    }
+    @keyframes wave {
+      0%, 100% { height: 4px; }
+      50% { height: 18px; }
+    }
+    /* Conduit beam */
+    .conduit-flow {
+      background: linear-gradient(90deg, transparent, #06B6D4, transparent);
+      animation: conduit 2.5s linear infinite;
+    }
+    @keyframes conduit {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
   </style>
 </head>
-<body class="selection:bg-cyan-500/30 selection:text-cyan-200">
+<body class="selection:bg-cyan-500/30 selection:text-cyan-200 grid-pattern">
 
-  <!-- Background Ambient Glow -->
+  <!-- Interactive Background Canvas (Neural Swarm Nodes) -->
+  <canvas id="neural-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+
+  <!-- Ambient Light Orbs -->
   <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-    <div class="absolute -top-[20%] left-1/2 -translate-x-1/2 w-[900px] h-[550px] bg-gradient-to-b from-cyan-500/10 via-indigo-500/5 to-transparent blur-[140px] rounded-full"></div>
-    <div class="absolute top-[40%] -left-[10%] w-[600px] h-[450px] bg-cyan-600/5 blur-[120px] rounded-full"></div>
-    <div class="absolute top-[65%] -right-[10%] w-[550px] h-[450px] bg-amber-500/5 blur-[130px] rounded-full"></div>
+    <div class="absolute -top-[25%] left-1/2 -translate-x-1/2 w-[1100px] h-[650px] bg-gradient-to-b from-cyan-500/15 via-blue-600/5 to-transparent blur-[150px] rounded-full"></div>
+    <div class="absolute top-[45%] -left-[15%] w-[650px] h-[500px] bg-cyan-600/10 blur-[140px] rounded-full"></div>
+    <div class="absolute top-[70%] -right-[15%] w-[650px] h-[500px] bg-indigo-600/10 blur-[150px] rounded-full"></div>
   </div>
 
   <!-- NAVBAR -->
-  <header class="fixed top-0 inset-x-0 z-50 glass-nav border-b border-dark-border/80 transition-all">
+  <header id="site-header" class="fixed top-0 inset-x-0 z-50 glass-nav border-b border-dark-border/80 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
       
       <!-- Brand Logo -->
       <a href="#" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 to-cyan-400 p-[1px] shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 via-cyan-400 to-blue-500 p-[1px] shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 group-hover:scale-105 transition transform">
           <div class="w-full h-full bg-dark-bg rounded-[11px] flex items-center justify-center">
-            <svg class="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="w-5 h-5 text-cyan-400 group-hover:rotate-12 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 2L2 22h20L12 2z"/>
               <path d="M12 8l4.5 9h-9L12 8z"/>
             </svg>
@@ -110,7 +168,7 @@
         <div class="flex flex-col">
           <span class="font-bold text-lg tracking-tight text-white flex items-center gap-2">
             Apexsions<span class="text-cyan-400">AI</span>
-            <span class="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">v2.4</span>
+            <span class="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">v2.4 LTS</span>
           </span>
           <span class="text-[10px] text-slate-400 font-medium tracking-wide">Enterprise Agentic Runtime</span>
         </div>
@@ -120,7 +178,10 @@
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
         <a href="#platform" class="hover:text-cyan-400 transition">Platform</a>
         <a href="#architecture" class="hover:text-cyan-400 transition">Architecture</a>
-        <a href="#sdk" class="hover:text-cyan-400 transition">SDK & Tools</a>
+        <a href="#simulator" class="hover:text-cyan-400 transition flex items-center gap-1.5">
+          <span>Live Sandbox</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+        </a>
         <a href="#benchmarks" class="hover:text-cyan-400 transition">Benchmarks</a>
         <a href="#pricing" class="hover:text-cyan-400 transition">Pricing</a>
         <a href="/docs" class="hover:text-cyan-400 transition">Documentation</a>
@@ -128,13 +189,13 @@
 
       <!-- Action Buttons -->
       <div class="flex items-center gap-3">
-        <a href="/docs" class="hidden sm:inline-flex items-center gap-2 text-xs font-semibold px-3 py-2 rounded-lg text-slate-300 hover:text-white border border-dark-border hover:border-slate-600 transition">
-          <svg class="w-3.5 h-3.5 text-slate-400" fill="currentColor" viewBox="0 0 24 24">
+        <a href="https://github.com/Nueeva/apexsions-ai" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center gap-2 text-xs font-semibold px-3 py-2 rounded-lg text-slate-300 hover:text-white border border-dark-border hover:border-slate-500 transition group">
+          <svg class="w-4 h-4 text-slate-400 group-hover:text-white transition" fill="currentColor" viewBox="0 0 24 24">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
           </svg>
-          SDK v2.4
+          <span class="font-mono">GitHub</span>
         </a>
-        <button onclick="openModal()" class="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition transform active:scale-95">
+        <button onclick="openModal()" class="inline-flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/50 transition transform hover:-translate-y-0.5 active:scale-95">
           <span>Get API Key</span>
           <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
@@ -149,12 +210,13 @@
     <!-- HERO SECTION -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-20 lg:pb-32">
       
-      <!-- Top Badge / Program Notice -->
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 text-xs font-medium mb-8 hover:border-cyan-400/60 transition cursor-default">
-        <span class="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse"></span>
-        <span class="text-slate-300">Powered by</span>
-        <span class="font-bold text-white tracking-wide">Anthropic Claude 3.5 Sonnet & Haiku</span>
-        <span class="text-cyan-400 font-mono text-[11px] ml-1 bg-cyan-500/20 px-2 py-0.5 rounded-full">Sub-85ms TTFT</span>
+      <!-- Top Announcement Pill -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 text-xs font-medium mb-8 hover:border-cyan-400/60 transition shadow-inner shadow-cyan-500/10 cursor-pointer" onclick="openModal()">
+        <span class="flex h-2 w-2 rounded-full bg-cyan-400 animate-ping"></span>
+        <span class="text-slate-300 font-medium">Frontier Intelligence</span>
+        <span class="text-slate-500">&bull;</span>
+        <span class="font-bold text-white tracking-wide">Anthropic Claude Sonnet & Haiku Pipeline</span>
+        <svg class="w-3.5 h-3.5 text-cyan-400 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
       </div>
 
       <!-- Main Headline -->
@@ -163,55 +225,282 @@
       </h1>
 
       <!-- Sub-headline -->
-      <p class="mt-6 sm:mt-8 text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto font-normal leading-relaxed">
-        The high-concurrency runtime uniting Claude 3.5's state-of-the-art frontier reasoning with stateful game-world simulation. Deploy non-playable entities with persistent memory, real-time tactical decisions, and zero-hallucination canon adherence.
+      <p class="mt-6 sm:mt-8 text-base sm:text-lg lg:text-xl text-slate-400 max-w-3xl mx-auto font-normal leading-relaxed">
+        The distributed runtime bridging Claude's frontier reasoning with real-time multiplayer simulation. Spawn living NPCs, emergent faction wars, and infinite lore with 200k persistent memory and sub-85ms streaming reflexes.
       </p>
 
       <!-- Dual Call to Actions -->
       <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <button onclick="openModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm tracking-wide shadow-xl shadow-cyan-500/25 transition transform hover:-translate-y-0.5 active:scale-95">
-          <span>Start Building with Claude SDK</span>
+        <button onclick="openModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-sm tracking-wide shadow-xl shadow-cyan-500/25 transition transform hover:-translate-y-0.5 active:scale-95">
+          <span>Start Building Free</span>
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
-        <a href="#interactive-demo" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-dark-card hover:bg-dark-cardHover border border-dark-border text-slate-200 font-semibold text-sm transition">
+        <a href="#simulator" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-dark-card hover:bg-dark-cardHover border border-dark-border text-slate-200 font-semibold text-sm transition transform hover:-translate-y-0.5">
           <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
           <span>Launch Live Simulator</span>
         </a>
       </div>
 
-      <!-- Key Metrics Strip -->
-      <div class="mt-16 sm:mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-        <div class="p-4 sm:p-6 rounded-2xl bg-dark-card/60 border border-dark-border backdrop-blur-sm">
-          <div class="text-2xl sm:text-3xl font-extrabold text-white font-mono">82<span class="text-cyan-400 text-lg">ms</span></div>
-          <div class="text-xs text-slate-400 font-medium mt-1">P95 Time to First Token</div>
+      <!-- Live Performance Metrics Cards -->
+      <div class="mt-16 sm:mt-24 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto text-left">
+        
+        <div class="glow-card p-5 sm:p-6 rounded-2xl bg-dark-card/70 border border-dark-border backdrop-blur-md">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono uppercase text-slate-400 font-semibold">Latency Reflex</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          </div>
+          <div class="text-3xl font-extrabold text-white font-mono mt-3">82<span class="text-cyan-400 text-lg">ms</span></div>
+          <p class="text-xs text-slate-400 mt-1">P95 Time to First Token via Edge Haiku streaming.</p>
         </div>
-        <div class="p-4 sm:p-6 rounded-2xl bg-dark-card/60 border border-dark-border backdrop-blur-sm">
-          <div class="text-2xl sm:text-3xl font-extrabold text-white font-mono">200<span class="text-cyan-400 text-lg">K</span></div>
-          <div class="text-xs text-slate-400 font-medium mt-1">Context Memory Horizon</div>
+
+        <div class="glow-card p-5 sm:p-6 rounded-2xl bg-dark-card/70 border border-dark-border backdrop-blur-md">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono uppercase text-slate-400 font-semibold">Memory Horizon</span>
+            <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/40 px-1.5 py-0.5 rounded">RAG + Vector</span>
+          </div>
+          <div class="text-3xl font-extrabold text-white font-mono mt-3">200<span class="text-cyan-400 text-lg">K</span></div>
+          <p class="text-xs text-slate-400 mt-1">Persistent world memory context per character.</p>
         </div>
-        <div class="p-4 sm:p-6 rounded-2xl bg-dark-card/60 border border-dark-border backdrop-blur-sm">
-          <div class="text-2xl sm:text-3xl font-extrabold text-white font-mono">99.98<span class="text-cyan-400 text-lg">%</span></div>
-          <div class="text-xs text-slate-400 font-medium mt-1">Deterministic Tool Precision</div>
+
+        <div class="glow-card p-5 sm:p-6 rounded-2xl bg-dark-card/70 border border-dark-border backdrop-blur-md">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono uppercase text-slate-400 font-semibold">Tool Precision</span>
+            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/40 px-1.5 py-0.5 rounded">Deterministic</span>
+          </div>
+          <div class="text-3xl font-extrabold text-white font-mono mt-3">99.98<span class="text-emerald-400 text-lg">%</span></div>
+          <p class="text-xs text-slate-400 mt-1">Strict JSON-schema validated function calling.</p>
         </div>
-        <div class="p-4 sm:p-6 rounded-2xl bg-dark-card/60 border border-dark-border backdrop-blur-sm">
-          <div class="text-2xl sm:text-3xl font-extrabold text-white font-mono">&lt;0.01<span class="text-cyan-400 text-lg">%</span></div>
-          <div class="text-xs text-slate-400 font-medium mt-1">Canon Hallucination Rate</div>
+
+        <div class="glow-card p-5 sm:p-6 rounded-2xl bg-dark-card/70 border border-dark-border backdrop-blur-md">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono uppercase text-slate-400 font-semibold">Canon Safety</span>
+            <span class="text-[10px] font-mono text-amber-400 bg-amber-950/40 px-1.5 py-0.5 rounded">Guardrails</span>
+          </div>
+          <div class="text-3xl font-extrabold text-white font-mono mt-3">&lt;0.01<span class="text-amber-400 text-lg">%</span></div>
+          <p class="text-xs text-slate-400 mt-1">Zero lore hallucination or prompt leakage.</p>
         </div>
+
       </div>
 
     </section>
 
-    <!-- SECTION: INTERACTIVE CODE SANDBOX & RUNTIME DEMO -->
-    <section id="sdk" class="py-20 bg-dark-card/40 border-y border-dark-border relative">
+    <!-- SECTION: LIVE INTERACTIVE AGENT SANDBOX -->
+    <section id="simulator" class="py-20 lg:py-28 relative bg-dark-card/30 border-y border-dark-border">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+          <div class="max-w-2xl">
+            <div class="inline-flex items-center gap-2 text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">
+              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+              Live Perception Sandbox
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+              Test Real-Time Canon Synthesis & Structured Actions
+            </h2>
+            <p class="mt-2 text-slate-400 text-sm">
+              Trigger live game perception events below. Notice how Claude generates internal tactical thoughts, queries long-term chronicles, and executes deterministic actions.
+            </p>
+          </div>
+
+          <!-- Active Model Switcher -->
+          <div class="flex items-center gap-2 bg-dark-bg p-1.5 rounded-xl border border-dark-border self-start">
+            <button onclick="setSimModel('sonnet')" id="btn-model-sonnet" class="px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 font-mono text-xs font-semibold transition">Claude 3.5 Sonnet (Reasoning)</button>
+            <button onclick="setSimModel('haiku')" id="btn-model-haiku" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-mono text-xs font-semibold transition">Claude 3.5 Haiku (60ms Reflex)</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Event Trigger Presets (Left 4 cols) -->
+          <div class="lg:col-span-4 space-y-3">
+            <div class="text-xs font-mono uppercase text-slate-400 tracking-wider mb-2 font-semibold">Choose Perception Event:</div>
+            
+            <button onclick="simulateEvent(1)" id="btn-scenario-1" class="w-full text-left p-4 rounded-xl border border-cyan-500/60 bg-dark-cardHover transition group active:scale-[0.98] shadow-lg shadow-cyan-500/10">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono text-cyan-400 font-bold">Event 01</span>
+                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 font-semibold">Diplomacy & Trade</span>
+              </div>
+              <div class="text-sm font-bold text-white mt-1 group-hover:text-cyan-300 transition">Valorian Vault Negotiation</div>
+              <p class="text-xs text-slate-400 mt-1">Player offers black-market Void Ore to obtain royal sanctuary clearance.</p>
+            </button>
+
+            <button onclick="simulateEvent(2)" id="btn-scenario-2" class="w-full text-left p-4 rounded-xl border border-dark-border bg-dark-card hover:bg-dark-cardHover transition group active:scale-[0.98]">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono text-slate-400 font-semibold">Event 02</span>
+                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 font-semibold">Combat Tag</span>
+              </div>
+              <div class="text-sm font-bold text-white mt-1 group-hover:text-cyan-300 transition">Bastion Perimeter Breach</div>
+              <p class="text-xs text-slate-400 mt-1">Hostile syndicate operative hacks outer anti-magic shield gate.</p>
+            </button>
+
+            <button onclick="simulateEvent(3)" id="btn-scenario-3" class="w-full text-left p-4 rounded-xl border border-dark-border bg-dark-card hover:bg-dark-cardHover transition group active:scale-[0.98]">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono text-slate-400 font-semibold">Event 03</span>
+                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-purple-500/15 text-purple-300 font-semibold">Epistemic Lore</span>
+              </div>
+              <div class="text-sm font-bold text-white mt-1 group-hover:text-cyan-300 transition">Monolith of the Ancestor</div>
+              <p class="text-xs text-slate-400 mt-1">Scholar queries the origin of the Tier V Ancestral monolith.</p>
+            </button>
+
+            <!-- Custom Input Box -->
+            <div class="pt-3 border-t border-dark-border">
+              <label class="block text-xs font-mono text-slate-400 mb-1.5">Or Dispatch Custom Player Whisper:</label>
+              <div class="flex gap-2">
+                <input type="text" id="custom-prompt" placeholder="e.g. Surrender the relic or face the Syndicate..." class="w-full px-3 py-2 text-xs rounded-lg bg-dark-bg border border-dark-border text-white focus:outline-none focus:border-cyan-400 font-mono">
+                <button onclick="simulateCustomPrompt()" class="px-3 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition">Send</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Output Stream Simulator (Right 8 cols) -->
+          <div class="lg:col-span-8 rounded-2xl border border-dark-border bg-dark-card p-6 shadow-2xl relative overflow-hidden">
+            
+            <!-- Character Header -->
+            <div class="flex items-center justify-between border-b border-dark-border pb-4 mb-4">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-600 to-blue-600 flex items-center justify-center font-bold text-white text-base shadow-lg shadow-cyan-500/20">
+                  Ω
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm font-bold text-white" id="sim-agent-name">Aurelius the Chronicler</span>
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30 font-semibold">Kingdom Warden</span>
+                  </div>
+                  <div class="text-[11px] text-slate-400 font-mono mt-0.5" id="sim-model-label">Engine: Claude 3.5 Sonnet &bull; 200k Context Horizon</div>
+                </div>
+              </div>
+
+              <!-- Live Audio Waveform & TTFT Indicator -->
+              <div class="flex items-center gap-4">
+                <div class="hidden sm:flex items-center gap-1 h-5 px-2 rounded-lg bg-dark-bg border border-dark-border" id="waveform-box">
+                  <span class="w-1 bg-cyan-400 rounded-full wave-bar" style="animation-delay: 0.1s"></span>
+                  <span class="w-1 bg-cyan-400 rounded-full wave-bar" style="animation-delay: 0.3s"></span>
+                  <span class="w-1 bg-cyan-400 rounded-full wave-bar" style="animation-delay: 0.2s"></span>
+                  <span class="w-1 bg-cyan-400 rounded-full wave-bar" style="animation-delay: 0.4s"></span>
+                  <span class="w-1 bg-cyan-400 rounded-full wave-bar" style="animation-delay: 0.15s"></span>
+                </div>
+                <div class="text-right font-mono text-xs">
+                  <div class="text-emerald-400 font-semibold flex items-center justify-end gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span id="sim-latency">TTFT: 78ms</span>
+                  </div>
+                  <div class="text-[10px] text-slate-500">Live SSE Stream</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ingested Spatial Context Badge -->
+            <div class="bg-dark-bg rounded-xl p-3 border border-dark-border mb-4 font-mono text-xs text-slate-300 flex items-start justify-between gap-3">
+              <div class="overflow-x-auto">
+                <span class="text-purple-400 font-semibold">INGESTED_WORLD_STATE:</span>
+                <span id="sim-context" class="text-slate-400 ml-1">{ faction: "Aetherion Guard", standing: "Suspicious", location: "Grand Sanctum Vault" }</span>
+              </div>
+              <span class="text-[10px] text-cyan-400 font-bold shrink-0">200k Vector RAG</span>
+            </div>
+
+            <!-- Deterministic Function Calling Box -->
+            <div class="bg-cyan-950/25 border border-cyan-500/25 rounded-xl p-3 mb-4 font-mono text-xs text-cyan-300 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                <span>TOOL DISPATCH: <span id="sim-tool" class="font-bold text-white">inspectContrabandRegistry(item="Void_Ore_T3")</span></span>
+              </div>
+              <span class="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">SCHEMA_VALIDATED</span>
+            </div>
+
+            <!-- Streaming Dialogue Bubble -->
+            <div class="min-h-[140px] text-sm text-slate-200 leading-relaxed font-sans bg-dark-bg/70 p-5 rounded-xl border border-dark-border relative" id="sim-dialogue">
+              "Hold your hand, stranger. The dark resonance of Void Ore is known to the High Council. You stand in the hallowed Sanctum of Aetherion offering cursed mineral for sanctuary? The Grand Warden would have your head on the outer ramparts for less. Speak your true allegiance before the Sentinels seal these iron gates."
+            </div>
+
+            <!-- Live Token Stream Telemetry -->
+            <div class="mt-4 pt-3 border-t border-dark-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-[11px] font-mono text-slate-500">
+              <div class="flex items-center gap-3">
+                <span id="sim-tokens">Tokens: 247 in / 89 out</span>
+                <span>&bull;</span>
+                <span class="text-cyan-400 font-semibold">Canon Score: 100%</span>
+              </div>
+              <div class="text-slate-400">Stream status: <span class="text-emerald-400 font-bold">COMPLETED</span></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: VISUAL ARCHITECTURE PIPELINE -->
+    <section id="architecture" class="py-20 lg:py-28 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <div class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">System Topology</div>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+            How Game Events Transform into Intelligent Actions
+          </h2>
+          <p class="mt-3 text-slate-400 text-sm sm:text-base">
+            Engineered from ground up with zero main-thread blocking. The full round-trip execution cycle operates in under 85ms.
+          </p>
+        </div>
+
+        <!-- Animated Pipeline Diagram (5 Stages) -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
+          
+          <!-- Stage 1 -->
+          <div class="glow-card p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-mono text-xs font-bold flex items-center justify-center mb-3">01</div>
+            <div class="text-sm font-bold text-white">Spatial Ingestion</div>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Player movement, combat tags, chat, and spatial proximity ingested via non-blocking async hooks.</p>
+            <div class="mt-4 text-[10px] font-mono text-cyan-400 bg-cyan-950/40 p-1.5 rounded">Delta: 2.1ms</div>
+          </div>
+
+          <!-- Stage 2 -->
+          <div class="glow-card p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden">
+            <div class="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 font-mono text-xs font-bold flex items-center justify-center mb-3">02</div>
+            <div class="text-sm font-bold text-white">200K Vector Memory</div>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Retrieves historical player relationship score, past quest outcomes, and regional lore chronicles.</p>
+            <div class="mt-4 text-[10px] font-mono text-purple-400 bg-purple-950/40 p-1.5 rounded">Recall: 14.8ms</div>
+          </div>
+
+          <!-- Stage 3 (Focal Core) -->
+          <div class="glow-card p-5 rounded-2xl bg-dark-card border-2 border-cyan-500 text-left relative overflow-hidden shadow-xl shadow-cyan-500/10">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500 text-slate-950 font-mono text-xs font-bold flex items-center justify-center mb-3">03</div>
+            <div class="text-sm font-bold text-white">Claude 3.5 Core</div>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Frontier reasoning synthesizes intent, tactical response, and validated function calls via SSE streaming.</p>
+            <div class="mt-4 text-[10px] font-mono text-cyan-300 bg-cyan-950/60 p-1.5 rounded font-bold">TTFT: 58.4ms</div>
+          </div>
+
+          <!-- Stage 4 -->
+          <div class="glow-card p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs font-bold flex items-center justify-center mb-3">04</div>
+            <div class="text-sm font-bold text-white">Canon Guardrail</div>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Strict JSON-schema verification ensures zero illegal game-state mutations or hallucinated exploits.</p>
+            <div class="mt-4 text-[10px] font-mono text-emerald-400 bg-emerald-950/40 p-1.5 rounded">Verify: 3.1ms</div>
+          </div>
+
+          <!-- Stage 5 -->
+          <div class="glow-card p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden">
+            <div class="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 font-mono text-xs font-bold flex items-center justify-center mb-3">05</div>
+            <div class="text-sm font-bold text-white">Game Engine Action</div>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Dispatches in-game animation, dialogue packet, quest grants, and combat AI state to clients.</p>
+            <div class="mt-4 text-[10px] font-mono text-amber-400 bg-amber-950/40 p-1.5 rounded">Execute: 4.2ms</div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: DEVELOPER SDK -->
+    <section id="sdk" class="py-20 bg-dark-card/30 border-y border-dark-border">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center max-w-3xl mx-auto mb-12">
-          <div class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">Developer Native</div>
+          <div class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">Developer Experience</div>
           <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-            Integrated in 3 Lines of Code. Tailored for Real-Time Virtual Realities.
+            Lightweight SDK. Drop-in for Any Game Stack.
           </h2>
-          <p class="mt-3 text-slate-400 text-sm sm:text-base">
-            Drop the Apexsions runtime into PaperMC, Unreal Engine, Unity, or headless backend servers. Native Anthropic Claude model orchestration with strict schema validation.
+          <p class="mt-3 text-slate-400 text-sm">
+            Native bindings for TypeScript, Python, C++, and Java PaperMC. Zero external runtime bloat.
           </p>
         </div>
 
@@ -224,7 +513,7 @@
               <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
               <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
               <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
-              <span class="text-xs font-mono text-slate-400 ml-2">agent_runtime_valoria.ts</span>
+              <span class="text-xs font-mono text-slate-400 ml-2" id="code-file-name">agent_runtime_valoria.ts</span>
             </div>
             
             <!-- Language Tabs -->
@@ -272,174 +561,12 @@ stream.<span class="text-blue-400">onChunk</span>((chunk) =&gt; process.stdout.<
           <div class="px-6 py-4 bg-dark-card border-t border-dark-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
             <div class="flex items-center gap-3">
               <span class="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
-              <span class="text-slate-300 font-mono">Stream status: <span class="text-emerald-400 font-semibold">200 OK — 384 tokens in 91ms</span></span>
+              <span class="text-slate-300 font-mono">Stream status: <span class="text-emerald-400 font-semibold">200 OK — 384 tokens in 82ms</span></span>
             </div>
             <button onclick="copyCode()" id="copy-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-dark-bg border border-dark-border hover:border-slate-500 text-slate-300 hover:text-white transition font-mono">
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               <span>Copy snippet</span>
             </button>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION: LIVE INTERACTIVE AGENT SIMULATOR -->
-    <section id="interactive-demo" class="py-20 lg:py-28 relative">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="max-w-3xl mb-12">
-          <div class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">Live Demonstration</div>
-          <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-            Witness Real-Time Canon Synthesis & Deterministic Tool Execution
-          </h2>
-          <p class="mt-3 text-slate-400 text-sm sm:text-base">
-            Select a world trigger below to simulate how an Apexsions entity synthesizes spatial context, queries world chronicles, and executes in-game decisions with Anthropic Claude.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          <!-- Trigger Options (Left 4 cols) -->
-          <div class="lg:col-span-4 space-y-3">
-            <div class="text-xs font-mono uppercase text-slate-400 tracking-wider mb-2 font-semibold">Select Event Scenario:</div>
-            
-            <button onclick="simulateEvent(1)" id="btn-scenario-1" class="w-full text-left p-4 rounded-xl border border-cyan-500/40 bg-dark-card hover:bg-dark-cardHover transition group active:scale-[0.98]">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-mono text-cyan-400 font-semibold">Scenario A</span>
-                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300">Diplomacy</span>
-              </div>
-              <div class="text-sm font-semibold text-white mt-1 group-hover:text-cyan-300 transition">Valorian Merchant Negotiation</div>
-              <p class="text-xs text-slate-400 mt-1">Player offers forbidden Void Ore in exchange for royal sanctuary documents.</p>
-            </button>
-
-            <button onclick="simulateEvent(2)" id="btn-scenario-2" class="w-full text-left p-4 rounded-xl border border-dark-border bg-dark-card hover:bg-dark-cardHover transition group active:scale-[0.98]">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-mono text-slate-400 font-semibold">Scenario B</span>
-                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300">Combat Tag</span>
-              </div>
-              <div class="text-sm font-semibold text-white mt-1 group-hover:text-cyan-300 transition">Intruder at Outer Bastion</div>
-              <p class="text-xs text-slate-400 mt-1">Syndicate operative spotted hacking high-tier kingdom shield gate.</p>
-            </button>
-
-            <button onclick="simulateEvent(3)" id="btn-scenario-3" class="w-full text-left p-4 rounded-xl border border-dark-border bg-dark-card hover:bg-dark-cardHover transition group active:scale-[0.98]">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-mono text-slate-400 font-semibold">Scenario C</span>
-                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-purple-500/10 text-purple-300">Dynamic Lore</span>
-              </div>
-              <div class="text-sm font-semibold text-white mt-1 group-hover:text-cyan-300 transition">Chronicles of Ancient Aetherion</div>
-              <p class="text-xs text-slate-400 mt-1">Scholar queries the origin of the Tier V Ancestral monolith.</p>
-            </button>
-          </div>
-
-          <!-- Live Output Stream Simulator (Right 8 cols) -->
-          <div class="lg:col-span-8 rounded-2xl border border-dark-border bg-dark-card p-6 shadow-2xl">
-            <div class="flex items-center justify-between border-b border-dark-border pb-4 mb-4">
-              <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center font-bold text-cyan-400">
-                  Ω
-                </div>
-                <div>
-                  <div class="text-sm font-bold text-white" id="sim-agent-name">Aurelius the Chronicler</div>
-                  <div class="text-[11px] text-slate-400 font-mono">Archetype: Lorekeeper &bull; Model: Claude 3.5 Sonnet</div>
-                </div>
-              </div>
-              <div class="text-right font-mono text-xs text-slate-400">
-                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>
-                <span id="sim-latency">TTFT: 78ms</span>
-              </div>
-            </div>
-
-            <!-- Ingested Context Badge -->
-            <div class="bg-dark-bg rounded-lg p-3 border border-dark-border mb-4 font-mono text-xs text-slate-300">
-              <span class="text-purple-400 font-semibold">WORLD_CONTEXT:</span> <span id="sim-context" class="text-slate-400">{ faction: "Aetherion Guard", standing: "Suspicious", location: "Grand Sanctum Vault" }</span>
-            </div>
-
-            <!-- Tool Call Invocation Bar -->
-            <div class="bg-cyan-950/30 border border-cyan-500/20 rounded-lg p-3 mb-4 font-mono text-xs text-cyan-300 flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                <span>EXECUTING TOOL: <span id="sim-tool" class="font-bold text-white">inspectContrabandRegistry(item="Void_Ore_T3")</span></span>
-              </div>
-              <span class="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded">PASSED VALIDATION</span>
-            </div>
-
-            <!-- Dialogue Output -->
-            <div class="min-h-[140px] text-sm text-slate-200 leading-relaxed font-sans bg-dark-bg/60 p-4 rounded-xl border border-dark-border" id="sim-dialogue">
-              "Hold your hand, stranger. The dark resonance of Void Ore is known to the High Council. You stand in the hallowed Sanctum of Aetherion offering cursed mineral for sanctuary? The Grand Warden would have your head on the outer ramparts for less. Speak your true allegiance before the Sentinels seal these iron gates."
-            </div>
-
-            <!-- Metadata footer -->
-            <div class="mt-4 pt-3 border-t border-dark-border flex items-center justify-between text-[11px] font-mono text-slate-500">
-              <span>Token usage: 247 prompt / 89 completion</span>
-              <span class="text-cyan-400 font-semibold">Canon integrity: 100% Deterministic</span>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION: CORE ENGINE ARCHITECTURE & PILLARS -->
-    <section id="architecture" class="py-20 bg-dark-card/30 border-t border-dark-border">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="text-center max-w-3xl mx-auto mb-16">
-          <div class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">Architectural Blueprint</div>
-          <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-            Engineered from Ground Zero for Infinite Game Realities
-          </h2>
-          <p class="mt-3 text-slate-400 text-sm sm:text-base">
-            Why off-the-shelf chatbot wrappers fail in virtual worlds, and how the Apexsions runtime achieves unbreakable character fidelity.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          
-          <!-- Pillar 1 -->
-          <div class="p-6 rounded-2xl bg-dark-card border border-dark-border hover:border-cyan-500/40 transition group">
-            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-5 group-hover:scale-110 transition">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-            </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-cyan-300 transition">200K Persistent Vector Memory</h3>
-            <p class="text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed">
-              Every player deed, dialogue choice, and battle outcome is written into high-speed vector embeddings and referenced through Claude's massive 200k token context window. NPCs never suffer from amnesia.
-            </p>
-          </div>
-
-          <!-- Pillar 2 -->
-          <div class="p-6 rounded-2xl bg-dark-card border border-dark-border hover:border-cyan-500/40 transition group">
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-5 group-hover:scale-110 transition">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
-            </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-emerald-300 transition">Strict Tool Calling (VALIDATED)</h3>
-            <p class="text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed">
-              Functions are executed with strict JSON-schema enforcement mode. AI agents cannot invent illegal currency values, teleport unauthorized players, or break the game's economic physics.
-            </p>
-          </div>
-
-          <!-- Pillar 3 -->
-          <div class="p-6 rounded-2xl bg-dark-card border border-dark-border hover:border-cyan-500/40 transition group">
-            <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-5 group-hover:scale-110 transition">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-purple-300 transition">Hybrid Dual-Tier Routing</h3>
-            <p class="text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed">
-              Ultra low-latency queries (chitchat, bark alerts, combat cries) route to Claude 3.5 Haiku at sub-85ms speeds. Deep faction politics, lore treatises, and war declarations route to Claude 3.5 Sonnet.
-            </p>
-          </div>
-
-          <!-- Pillar 4 -->
-          <div class="p-6 rounded-2xl bg-dark-card border border-dark-border hover:border-cyan-500/40 transition group">
-            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-5 group-hover:scale-110 transition">
-              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <h3 class="text-lg font-bold text-white group-hover:text-amber-300 transition">Canon & Prompt Injection Defense</h3>
-            <p class="text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed">
-              Multi-layered guardrails filter adversarial jailbreaks in player chat. Entities remain locked to their in-world personality, faction allegiance, and chronological era with 99.99% reliability.
-            </p>
           </div>
 
         </div>
@@ -521,12 +648,21 @@ stream.<span class="text-blue-400">onChunk</span>((chunk) =&gt; process.stdout.<
           <p class="mt-3 text-slate-400 text-sm sm:text-base">
             Start building for free with Anthropic Claude testbed quotas. Upgrade seamlessly as your virtual player base expands.
           </p>
+
+          <!-- Annual Discount Toggle -->
+          <div class="mt-8 inline-flex items-center gap-3 p-1 rounded-full bg-dark-bg border border-dark-border text-xs font-mono">
+            <button onclick="setBilling('monthly')" id="bill-monthly" class="px-4 py-1.5 rounded-full bg-cyan-500 text-slate-950 font-bold transition">Monthly</button>
+            <button onclick="setBilling('annual')" id="bill-annual" class="px-4 py-1.5 rounded-full text-slate-400 hover:text-white transition flex items-center gap-1.5">
+              <span>Annual</span>
+              <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-1.5 py-0.2 rounded font-bold">20% OFF</span>
+            </button>
+          </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           
           <!-- Tier 1: Developer -->
-          <div class="p-8 rounded-2xl bg-dark-card border border-dark-border flex flex-col justify-between">
+          <div class="glow-card p-8 rounded-2xl bg-dark-card border border-dark-border flex flex-col justify-between">
             <div>
               <div class="text-xs font-mono uppercase text-slate-400 font-semibold">Community</div>
               <h3 class="text-xl font-bold text-white mt-1">Developer Starter</h3>
@@ -550,7 +686,7 @@ stream.<span class="text-blue-400">onChunk</span>((chunk) =&gt; process.stdout.<
           </div>
 
           <!-- Tier 2: Startup Growth (Featured) -->
-          <div class="p-8 rounded-2xl bg-dark-card border-2 border-cyan-500 shadow-2xl shadow-cyan-500/10 flex flex-col justify-between relative">
+          <div class="glow-card p-8 rounded-2xl bg-dark-card border-2 border-cyan-500 shadow-2xl shadow-cyan-500/10 flex flex-col justify-between relative">
             <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-cyan-500 text-slate-950 font-bold text-[10px] uppercase font-mono tracking-wider shadow">
               Most Popular &bull; Startups
             </div>
@@ -559,8 +695,8 @@ stream.<span class="text-blue-400">onChunk</span>((chunk) =&gt; process.stdout.<
               <div class="text-xs font-mono uppercase text-cyan-400 font-semibold">Scale</div>
               <h3 class="text-xl font-bold text-white mt-1">Growth Studio</h3>
               <div class="mt-4 flex items-baseline gap-1">
-                <span class="text-4xl font-extrabold text-white font-mono">$79</span>
-                <span class="text-xs text-slate-400 font-mono">/ month</span>
+                <span class="text-4xl font-extrabold text-white font-mono" id="growth-price">$79</span>
+                <span class="text-xs text-slate-400 font-mono" id="growth-period">/ month</span>
               </div>
               <p class="text-xs text-slate-400 mt-3">Built for commercial multiplayer servers and venture-backed game studios.</p>
               
@@ -573,13 +709,13 @@ stream.<span class="text-blue-400">onChunk</span>((chunk) =&gt; process.stdout.<
               </ul>
             </div>
 
-            <button onclick="openModal()" class="mt-8 w-full py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 transition active:scale-95">
+            <button onclick="openModal()" class="mt-8 w-full py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 transition active:scale-95">
               Claim Startup Access
             </button>
           </div>
 
           <!-- Tier 3: Enterprise -->
-          <div class="p-8 rounded-2xl bg-dark-card border border-dark-border flex flex-col justify-between">
+          <div class="glow-card p-8 rounded-2xl bg-dark-card border border-dark-border flex flex-col justify-between">
             <div>
               <div class="text-xs font-mono uppercase text-slate-400 font-semibold">Custom Deployment</div>
               <h3 class="text-xl font-bold text-white mt-1">Enterprise Realm</h3>
@@ -663,10 +799,10 @@ stream.<span class="text-blue-400">onChunk</span>((chunk) =&gt; process.stdout.<
               Get started with 500,000 free tokens and full Claude 3.5 Sonnet access. Deploy in minutes with our open-source SDK.
             </p>
             <div class="mt-8 flex flex-col sm:flex-row justify-center gap-3">
-              <button onclick="openModal()" class="px-7 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm transition transform active:scale-95 shadow-lg shadow-cyan-500/20">
+              <button onclick="openModal()" class="px-8 py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-sm transition transform active:scale-95 shadow-lg shadow-cyan-500/20">
                 Request Developer Access
               </button>
-              <a href="/docs" class="px-6 py-3 rounded-xl bg-dark-bg border border-dark-border text-white font-semibold text-sm hover:border-slate-500 transition">
+              <a href="/docs" class="px-7 py-3.5 rounded-xl bg-dark-bg border border-dark-border text-white font-semibold text-sm hover:border-slate-500 transition">
                 Read API Documentation
               </a>
             </div>
@@ -713,10 +849,10 @@ stream.<span class="text-blue-400">onChunk</span>((chunk) =&gt; process.stdout.<
           <div class="text-xs font-mono uppercase text-white font-bold mb-3 tracking-wider">Developers</div>
           <ul class="space-y-2 text-xs text-slate-400">
             <li><a href="/docs" class="hover:text-cyan-400 transition">Documentation</a></li>
-            <li><a href="/docs#sdk-reference" class="hover:text-cyan-400 transition">TypeScript SDK</a></li>
+            <li><a href="/docs#typescript-sdk" class="hover:text-cyan-400 transition">TypeScript SDK</a></li>
             <li><a href="/docs#python-sdk" class="hover:text-cyan-400 transition">Python SDK</a></li>
-            <li><a href="/docs#api-reference" class="hover:text-cyan-400 transition">API Reference</a></li>
-            <li><a href="/docs#status" class="hover:text-cyan-400 transition">System Status (99.99%)</a></li>
+            <li><a href="/docs#rest-api" class="hover:text-cyan-400 transition">API Reference</a></li>
+            <li><a href="https://github.com/Nueeva/apexsions-ai" target="_blank" rel="noopener" class="hover:text-cyan-400 transition">GitHub Repo</a></li>
           </ul>
         </div>
 
@@ -744,9 +880,9 @@ stream.<span class="text-blue-400">onChunk</span>((chunk) =&gt; process.stdout.<
   </footer>
 
   <!-- MODAL: REQUEST ACCESS / API KEY -->
-  <div id="access-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-dark-card border border-dark-border rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
-      <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+  <div id="access-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4 transition-opacity">
+    <div class="bg-dark-card border border-dark-border rounded-2xl max-w-md w-full p-6 shadow-2xl relative transform transition-all scale-100 glow-cyan">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1">
         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
 
@@ -755,39 +891,118 @@ stream.<span class="text-blue-400">onChunk</span>((chunk) =&gt; process.stdout.<
       </div>
 
       <h3 class="text-xl font-bold text-white">Request Developer API Key</h3>
-      <p class="text-xs text-slate-400 mt-1">Get immediate testbed access to our Anthropic Claude 3.5 Sonnet agent runtime.</p>
+      <p class="text-xs text-slate-400 mt-1">Get immediate testbed access to our Anthropic Claude Sonnet & Haiku agent runtime.</p>
 
       <form id="access-form" onsubmit="handleFormSubmit(event)" class="mt-5 space-y-3">
         <div>
           <label class="block text-xs font-mono text-slate-300 mb-1">Company / Studio Name</label>
-          <input type="text" required placeholder="e.g. Chronos Interactive Labs" class="w-full px-3 py-2 text-xs rounded-lg bg-dark-bg border border-dark-border text-white focus:outline-none focus:border-cyan-400">
+          <input type="text" required placeholder="e.g. Chronos Interactive Labs" class="w-full px-3 py-2 text-xs rounded-lg bg-dark-bg border border-dark-border text-white focus:outline-none focus:border-cyan-400 font-mono">
         </div>
         <div>
           <label class="block text-xs font-mono text-slate-300 mb-1">Business Work Email</label>
-          <input type="email" required placeholder="founder@yourcompany.com" class="w-full px-3 py-2 text-xs rounded-lg bg-dark-bg border border-dark-border text-white focus:outline-none focus:border-cyan-400">
+          <input type="email" required placeholder="founder@yourcompany.com" class="w-full px-3 py-2 text-xs rounded-lg bg-dark-bg border border-dark-border text-white focus:outline-none focus:border-cyan-400 font-mono">
         </div>
         <div>
-          <label class="block text-xs font-mono text-slate-300 mb-1">Target Platform</label>
-          <select class="w-full px-3 py-2 text-xs rounded-lg bg-dark-bg border border-dark-border text-white focus:outline-none focus:border-cyan-400">
+          <label class="block text-xs font-mono text-slate-300 mb-1">Target Engine / Ecosystem</label>
+          <select class="w-full px-3 py-2 text-xs rounded-lg bg-dark-bg border border-dark-border text-white focus:outline-none focus:border-cyan-400 font-mono">
             <option>Minecraft / PaperMC Ecosystem</option>
             <option>Unreal Engine 5</option>
             <option>Unity 6</option>
             <option>Custom Server / Headless Node.js</option>
           </select>
         </div>
-        <button type="submit" class="w-full py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition mt-2">
+        <button type="submit" class="w-full py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs transition mt-2">
           Submit & Generate Test Token
         </button>
       </form>
 
-      <div id="form-success" class="hidden mt-4 p-3 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs">
-        ✅ <strong>Application Received!</strong> Verification credentials and testbed sandbox key will be dispatched to your business email within 5 minutes.
+      <div id="form-success" class="hidden mt-4 p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs">
+        ✅ <strong>Application Received!</strong> Testbed credentials and sandbox keys will be dispatched to your business email within 5 minutes.
       </div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT LOGIC -->
+  <!-- JAVASCRIPT: PARTICLE CANVAS + SPOTLIGHT + SIMULATOR -->
   <script>
+    // 1. NEURAL PARTICLE CANVAS BACKGROUND (60 FPS Lightweight)
+    (function initNeuralCanvas() {
+      const canvas = document.getElementById('neural-canvas');
+      const ctx = canvas.getContext('2d');
+      let w, h, particles = [];
+      
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      const numParticles = Math.min(Math.floor((w * h) / 22000), 55);
+      for (let i = 0; i < numParticles; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          radius: Math.random() * 1.5 + 1
+        });
+      }
+
+      let mouse = { x: null, y: null };
+      window.addEventListener('mousemove', e => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+
+      function animate() {
+        ctx.clearRect(0, 0, w, h);
+        
+        for (let i = 0; i < particles.length; i++) {
+          let p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(6, 182, 212, 0.45)';
+          ctx.fill();
+
+          for (let j = i + 1; j < particles.length; j++) {
+            let p2 = particles[j];
+            let dx = p.x - p2.x;
+            let dy = p.y - p2.y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 130) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(6, 182, 212, ${0.15 * (1 - dist / 130)})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+
+    // 2. CARD SPOTLIGHT EFFECT (Follow Mouse Position)
+    document.querySelectorAll('.glow-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
+    // 3. MODAL HANDLERS
     function openModal() {
       document.getElementById('access-modal').classList.remove('hidden');
     }
@@ -800,6 +1015,7 @@ stream.<span class="text-blue-400">onChunk</span>((chunk) =&gt; process.stdout.<
       document.getElementById('form-success').classList.remove('hidden');
     }
 
+    // 4. CODE TABS
     const codeSnippets = {
       ts: `import { ApexsionsRuntime, AgentEntity } from '@apexsions/ai-runtime';
 
@@ -881,6 +1097,7 @@ print(response.executed_actions)`,
       });
       document.getElementById('tab-' + lang).className = 'px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 font-semibold transition';
       document.querySelector('#code-content code').textContent = codeSnippets[lang];
+      document.getElementById('code-file-name').textContent = lang === 'ts' ? 'agent_runtime_valoria.ts' : lang === 'py' ? 'agent_runtime_valoria.py' : 'agent_request.sh';
     }
 
     function copyCode() {
@@ -893,35 +1110,56 @@ print(response.executed_actions)`,
       }, 2000);
     }
 
+    // 5. LIVE AGENT SIMULATOR LOGIC
+    let currentModel = 'sonnet';
+    function setSimModel(m) {
+      currentModel = m;
+      if (m === 'sonnet') {
+        document.getElementById('btn-model-sonnet').className = 'px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 font-mono text-xs font-semibold transition';
+        document.getElementById('btn-model-haiku').className = 'px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-mono text-xs font-semibold transition';
+        document.getElementById('sim-model-label').textContent = 'Engine: Claude 3.5 Sonnet • 200k Context Horizon';
+        document.getElementById('sim-latency').textContent = 'TTFT: 78ms';
+      } else {
+        document.getElementById('btn-model-haiku').className = 'px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 font-mono text-xs font-semibold transition';
+        document.getElementById('btn-model-sonnet').className = 'px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-mono text-xs font-semibold transition';
+        document.getElementById('sim-model-label').textContent = 'Engine: Claude 3.5 Haiku • Sub-85ms Reflex Edge';
+        document.getElementById('sim-latency').textContent = 'TTFT: 58ms';
+      }
+    }
+
     const scenarios = {
       1: {
         agent: "Aurelius the Chronicler",
         context: '{ faction: "Aetherion Guard", standing: "Suspicious", location: "Grand Sanctum Vault" }',
         tool: 'inspectContrabandRegistry(item="Void_Ore_T3")',
         dialogue: '"Hold your hand, stranger. The dark resonance of Void Ore is known to the High Council. You stand in the hallowed Sanctum of Aetherion offering cursed mineral for sanctuary? The Grand Warden would have your head on the outer ramparts for less. Speak your true allegiance before the Sentinels seal these iron gates."',
-        ttft: "78ms"
+        ttft: "78ms",
+        tokens: "247 in / 89 out"
       },
       2: {
         agent: "Commander Vael of the Iron Gate",
         context: '{ alertLevel: "CODE_CRIMSON", intruder: "Lord_Varian", perimeter: "Bastion_West_Gate" }',
         tool: 'engageCombatTag(target="Lord_Varian", duration=60, radius=45)',
         dialogue: '"Shield breach detected at Bastion West! Intruders of the Syndicate, drop your weapons or be dissolved in celestial ward-fire. Sentinels, lock the perimeter and activate the antimagic spires now!"',
-        ttft: "65ms"
+        ttft: "62ms",
+        tokens: "182 in / 54 out"
       },
       3: {
         agent: "Archon Scribe Eldrin",
         context: '{ queryType: "ANCIENT_LORE_INQUIRY", subject: "Tier_V_Ancestral_Monolith" }',
         tool: 'queryEpistemicVectorStore(domain="Creation_Mythos_Age_1")',
         dialogue: '"The Ancestral Monolith was forged in the First Convergence, long before the sundering of the realm. Five primordial kings poured their lifeforce into the bedrock to tether this plane. You seek the path of the Ancestor, yet few possess the resolve to endure the trials of the High Council."',
-        ttft: "89ms"
+        ttft: "89ms",
+        tokens: "312 in / 104 out"
       }
     };
 
+    let streamInterval = null;
     function simulateEvent(id) {
       for (let i = 1; i <= 3; i++) {
         const btn = document.getElementById('btn-scenario-' + i);
         if (i === id) {
-          btn.className = 'w-full text-left p-4 rounded-xl border border-cyan-500/40 bg-dark-card hover:bg-dark-cardHover transition group active:scale-[0.98]';
+          btn.className = 'w-full text-left p-4 rounded-xl border border-cyan-500/60 bg-dark-cardHover transition group active:scale-[0.98] shadow-lg shadow-cyan-500/10';
         } else {
           btn.className = 'w-full text-left p-4 rounded-xl border border-dark-border bg-dark-card hover:bg-dark-cardHover transition group active:scale-[0.98]';
         }
@@ -930,20 +1168,60 @@ print(response.executed_actions)`,
       document.getElementById('sim-agent-name').textContent = data.agent;
       document.getElementById('sim-context').textContent = data.context;
       document.getElementById('sim-tool').textContent = data.tool;
-      document.getElementById('sim-latency').textContent = 'TTFT: ' + data.ttft;
+      document.getElementById('sim-latency').textContent = 'TTFT: ' + (currentModel === 'haiku' ? '58ms' : data.ttft);
+      document.getElementById('sim-tokens').textContent = 'Tokens: ' + data.tokens;
       
       const el = document.getElementById('sim-dialogue');
       el.textContent = '';
+      if (streamInterval) clearInterval(streamInterval);
+      
       let i = 0;
       const text = data.dialogue;
-      const interval = setInterval(() => {
+      streamInterval = setInterval(() => {
         el.textContent += text.charAt(i);
         i++;
-        if (i >= text.length) clearInterval(interval);
-      }, 12);
+        if (i >= text.length) clearInterval(streamInterval);
+      }, 10);
+    }
+
+    function simulateCustomPrompt() {
+      const val = document.getElementById('custom-prompt').value.trim();
+      if (!val) return;
+      document.getElementById('sim-context').textContent = `{ playerWhisper: "${val}", reputation: 320, proximity: "1.8m" }`;
+      document.getElementById('sim-tool').textContent = `evaluateIntentAndTone(query="${val.slice(0, 24)}...")`;
+      
+      const el = document.getElementById('sim-dialogue');
+      el.textContent = '';
+      if (streamInterval) clearInterval(streamInterval);
+      
+      const reply = `"You speak boldly within the Grand Spire: '${val}'. The Sentinels are weighing every syllable. Know that the High Council hears through the stones themselves. Proceed carefully with your proposition."`;
+      let i = 0;
+      streamInterval = setInterval(() => {
+        el.textContent += reply.charAt(i);
+        i++;
+        if (i >= reply.length) clearInterval(streamInterval);
+      }, 10);
+    }
+
+    // 6. PRICING TOGGLE
+    function setBilling(plan) {
+      const p = document.getElementById('growth-price');
+      const period = document.getElementById('growth-period');
+      const bM = document.getElementById('bill-monthly');
+      const bA = document.getElementById('bill-annual');
+      if (plan === 'annual') {
+        p.textContent = '$63';
+        period.textContent = '/ month (billed annually)';
+        bA.className = 'px-4 py-1.5 rounded-full bg-cyan-500 text-slate-950 font-bold transition flex items-center gap-1.5';
+        bM.className = 'px-4 py-1.5 rounded-full text-slate-400 hover:text-white transition';
+      } else {
+        p.textContent = '$79';
+        period.textContent = '/ month';
+        bM.className = 'px-4 py-1.5 rounded-full bg-cyan-500 text-slate-950 font-bold transition';
+        bA.className = 'px-4 py-1.5 rounded-full text-slate-400 hover:text-white transition flex items-center gap-1.5';
+      }
     }
   </script>
 
 </body>
 </html>
-
