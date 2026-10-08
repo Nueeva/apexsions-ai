@@ -137,9 +137,137 @@
       0% { transform: translateX(-100%); }
       100% { transform: translateX(100%); }
     }
+
+    /* Ambient Cursor Follower Aura */
+    #cursor-aura {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 480px;
+      height: 480px;
+      margin-top: -240px;
+      margin-left: -240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(59, 130, 246, 0.05) 45%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+      filter: blur(50px);
+      transition: opacity 0.4s ease;
+      will-change: transform;
+    }
+
+    /* Scroll Motion Reveal Classes */
+    .motion-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .motion-reveal.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .motion-slide-left {
+      opacity: 0;
+      transform: translateX(-35px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .motion-slide-left.is-revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .motion-slide-right {
+      opacity: 0;
+      transform: translateX(35px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .motion-slide-right.is-revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .motion-scale {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .motion-scale.is-revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* 3D Card Tilt with Perspective */
+    .tilt-card {
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+      will-change: transform;
+    }
+
+    /* Continuous Text Shimmer */
+    .text-shimmer {
+      background: linear-gradient(90deg, #FFFFFF 0%, #38BDF8 25%, #FFFFFF 50%, #818CF8 75%, #FFFFFF 100%);
+      background-size: 200% auto;
+      color: #000;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textShimmer 6s linear infinite;
+    }
+    @keyframes textShimmer {
+      to {
+        background-position: 200% center;
+      }
+    }
+
+    /* Floating Micro-Badges */
+    .float-slow {
+      animation: floatSlow 5s ease-in-out infinite;
+    }
+    .float-delayed {
+      animation: floatSlow 5.5s ease-in-out 1.5s infinite;
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Accessibility: Respect Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .motion-reveal,
+      .motion-slide-left,
+      .motion-slide-right,
+      .motion-scale {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .tilt-card {
+        transform: none !important;
+        transition: none !important;
+      }
+      .float-slow,
+      .float-delayed,
+      .text-shimmer,
+      .wave-bar,
+      .conduit-flow {
+        animation: none !important;
+      }
+      #cursor-aura {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body class="selection:bg-cyan-500/30 selection:text-cyan-200 grid-pattern">
+
+  <!-- Interactive Cursor Follower Aura -->
+  <div id="cursor-aura"></div>
 
   <!-- Interactive Background Canvas (Neural Swarm Nodes) -->
   <canvas id="neural-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
@@ -208,10 +336,21 @@
   <main class="relative z-10 pt-28 sm:pt-36">
 
     <!-- HERO SECTION -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-20 lg:pb-32">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-20 lg:pb-32 relative">
       
+      <!-- Ambient Floating Micro-Badges for Depth & Motion -->
+      <div class="hidden xl:flex absolute top-6 -left-4 items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-dark-card/90 border border-cyan-500/30 text-cyan-300 text-xs font-mono backdrop-blur-md float-slow shadow-xl shadow-cyan-500/10 pointer-events-none z-10">
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+        <span>Claude 3.5 Haiku &bull; Sub-60ms Reflex</span>
+      </div>
+
+      <div class="hidden xl:flex absolute top-32 -right-4 items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-dark-card/90 border border-emerald-500/30 text-emerald-300 text-xs font-mono backdrop-blur-md float-delayed shadow-xl shadow-emerald-500/10 pointer-events-none z-10">
+        <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>100% Deterministic Tool Calls</span>
+      </div>
+
       <!-- Top Announcement Pill -->
-      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 text-xs font-medium mb-8 hover:border-cyan-400/60 transition shadow-inner shadow-cyan-500/10 cursor-pointer" onclick="openModal()">
+      <div class="motion-reveal inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 text-xs font-medium mb-8 hover:border-cyan-400/60 transition shadow-inner shadow-cyan-500/10 cursor-pointer" onclick="openModal()">
         <span class="flex h-2 w-2 rounded-full bg-cyan-400 animate-ping"></span>
         <span class="text-slate-300 font-medium">Frontier Intelligence</span>
         <span class="text-slate-500">&bull;</span>
@@ -219,18 +358,18 @@
         <svg class="w-3.5 h-3.5 text-cyan-400 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
       </div>
 
-      <!-- Main Headline -->
-      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl mx-auto leading-[1.12]">
-        Autonomous Agentic Intelligence for <span class="text-gradient-cyan">Virtual Realms</span> & Dynamic Worlds
+      <!-- Main Headline with Shimmer Motion -->
+      <h1 class="motion-reveal text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl mx-auto leading-[1.12]">
+        Autonomous Agentic Intelligence for <span class="text-shimmer">Virtual Realms</span> & Dynamic Worlds
       </h1>
 
       <!-- Sub-headline -->
-      <p class="mt-6 sm:mt-8 text-base sm:text-lg lg:text-xl text-slate-400 max-w-3xl mx-auto font-normal leading-relaxed">
+      <p class="motion-reveal mt-6 sm:mt-8 text-base sm:text-lg lg:text-xl text-slate-400 max-w-3xl mx-auto font-normal leading-relaxed">
         The distributed runtime bridging Claude's frontier reasoning with real-time multiplayer simulation. Spawn living NPCs, emergent faction wars, and infinite lore with 200k persistent memory and sub-85ms streaming reflexes.
       </p>
 
       <!-- Dual Call to Actions -->
-      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <div class="motion-reveal mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
         <button onclick="openModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-sm tracking-wide shadow-xl shadow-cyan-500/25 transition transform hover:-translate-y-0.5 active:scale-95">
           <span>Start Building Free</span>
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -241,37 +380,37 @@
         </a>
       </div>
 
-      <!-- Live Performance Metrics Cards -->
+      <!-- Live Performance Metrics Cards with 3D Tilt & Dynamic Number Counters -->
       <div class="mt-16 sm:mt-24 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto text-left">
         
-        <div class="glow-card p-5 sm:p-6 rounded-2xl bg-dark-card/70 border border-dark-border backdrop-blur-md">
+        <div class="glow-card tilt-card motion-reveal p-5 sm:p-6 rounded-2xl bg-dark-card/70 border border-dark-border backdrop-blur-md cursor-default">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono uppercase text-slate-400 font-semibold">Latency Reflex</span>
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           </div>
-          <div class="text-3xl font-extrabold text-white font-mono mt-3">82<span class="text-cyan-400 text-lg">ms</span></div>
+          <div class="text-3xl font-extrabold text-white font-mono mt-3"><span data-counter="82" data-suffix="ms">82ms</span></div>
           <p class="text-xs text-slate-400 mt-1">P95 Time to First Token via Edge Haiku streaming.</p>
         </div>
 
-        <div class="glow-card p-5 sm:p-6 rounded-2xl bg-dark-card/70 border border-dark-border backdrop-blur-md">
+        <div class="glow-card tilt-card motion-reveal p-5 sm:p-6 rounded-2xl bg-dark-card/70 border border-dark-border backdrop-blur-md cursor-default" style="transition-delay: 100ms;">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono uppercase text-slate-400 font-semibold">Memory Horizon</span>
             <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/40 px-1.5 py-0.5 rounded">RAG + Vector</span>
           </div>
-          <div class="text-3xl font-extrabold text-white font-mono mt-3">200<span class="text-cyan-400 text-lg">K</span></div>
+          <div class="text-3xl font-extrabold text-white font-mono mt-3"><span data-counter="200" data-suffix="K">200K</span></div>
           <p class="text-xs text-slate-400 mt-1">Persistent world memory context per character.</p>
         </div>
 
-        <div class="glow-card p-5 sm:p-6 rounded-2xl bg-dark-card/70 border border-dark-border backdrop-blur-md">
+        <div class="glow-card tilt-card motion-reveal p-5 sm:p-6 rounded-2xl bg-dark-card/70 border border-dark-border backdrop-blur-md cursor-default" style="transition-delay: 200ms;">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono uppercase text-slate-400 font-semibold">Tool Precision</span>
             <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/40 px-1.5 py-0.5 rounded">Deterministic</span>
           </div>
-          <div class="text-3xl font-extrabold text-white font-mono mt-3">99.98<span class="text-emerald-400 text-lg">%</span></div>
+          <div class="text-3xl font-extrabold text-white font-mono mt-3"><span data-counter="99.98" data-decimals="2" data-suffix="%">99.98%</span></div>
           <p class="text-xs text-slate-400 mt-1">Strict JSON-schema validated function calling.</p>
         </div>
 
-        <div class="glow-card p-5 sm:p-6 rounded-2xl bg-dark-card/70 border border-dark-border backdrop-blur-md">
+        <div class="glow-card tilt-card motion-reveal p-5 sm:p-6 rounded-2xl bg-dark-card/70 border border-dark-border backdrop-blur-md cursor-default" style="transition-delay: 300ms;">
           <div class="flex items-center justify-between">
             <span class="text-xs font-mono uppercase text-slate-400 font-semibold">Canon Safety</span>
             <span class="text-[10px] font-mono text-amber-400 bg-amber-950/40 px-1.5 py-0.5 rounded">Guardrails</span>
@@ -285,10 +424,10 @@
     </section>
 
     <!-- SECTION: LIVE INTERACTIVE AGENT SANDBOX -->
-    <section id="simulator" class="py-20 lg:py-28 relative bg-dark-card/30 border-y border-dark-border">
+    <section id="simulator" class="py-20 lg:py-28 relative bg-dark-card/30 border-y border-dark-border motion-reveal">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6 motion-reveal">
           <div class="max-w-2xl">
             <div class="inline-flex items-center gap-2 text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">
               <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
@@ -304,15 +443,15 @@
 
           <!-- Active Model Switcher -->
           <div class="flex items-center gap-2 bg-dark-bg p-1.5 rounded-xl border border-dark-border self-start">
-            <button onclick="setSimModel('sonnet')" id="btn-model-sonnet" class="px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 font-mono text-xs font-semibold transition">Claude 3.5 Sonnet (Reasoning)</button>
-            <button onclick="setSimModel('haiku')" id="btn-model-haiku" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-mono text-xs font-semibold transition">Claude 3.5 Haiku (60ms Reflex)</button>
+            <button onclick="setSimModel('sonnet')" id="btn-model-sonnet" class="px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 font-mono text-xs font-semibold transition active:scale-95">Claude 3.5 Sonnet (Reasoning)</button>
+            <button onclick="setSimModel('haiku')" id="btn-model-haiku" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-mono text-xs font-semibold transition active:scale-95">Claude 3.5 Haiku (60ms Reflex)</button>
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           <!-- Event Trigger Presets (Left 4 cols) -->
-          <div class="lg:col-span-4 space-y-3">
+          <div class="lg:col-span-4 space-y-3 motion-slide-left">
             <div class="text-xs font-mono uppercase text-slate-400 tracking-wider mb-2 font-semibold">Choose Perception Event:</div>
             
             <button onclick="simulateEvent(1)" id="btn-scenario-1" class="w-full text-left p-4 rounded-xl border border-cyan-500/60 bg-dark-cardHover transition group active:scale-[0.98] shadow-lg shadow-cyan-500/10">
@@ -346,14 +485,14 @@
             <div class="pt-3 border-t border-dark-border">
               <label class="block text-xs font-mono text-slate-400 mb-1.5">Or Dispatch Custom Player Whisper:</label>
               <div class="flex gap-2">
-                <input type="text" id="custom-prompt" placeholder="e.g. Surrender the relic or face the Syndicate..." class="w-full px-3 py-2 text-xs rounded-lg bg-dark-bg border border-dark-border text-white focus:outline-none focus:border-cyan-400 font-mono">
-                <button onclick="simulateCustomPrompt()" class="px-3 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition">Send</button>
+                <input type="text" id="custom-prompt" placeholder="e.g. Surrender the relic or face the Syndicate..." class="w-full px-3 py-2 text-xs rounded-lg bg-dark-bg border border-dark-border text-white focus:outline-none focus:border-cyan-400 font-mono transition">
+                <button onclick="simulateCustomPrompt()" class="px-3.5 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition active:scale-95">Send</button>
               </div>
             </div>
           </div>
 
           <!-- Live Output Stream Simulator (Right 8 cols) -->
-          <div class="lg:col-span-8 rounded-2xl border border-dark-border bg-dark-card p-6 shadow-2xl relative overflow-hidden">
+          <div class="lg:col-span-8 glow-card tilt-card motion-slide-right rounded-2xl border border-dark-border bg-dark-card p-6 shadow-2xl relative overflow-hidden" data-tilt>
             
             <!-- Character Header -->
             <div class="flex items-center justify-between border-b border-dark-border pb-4 mb-4">
@@ -429,10 +568,10 @@
     </section>
 
     <!-- SECTION: VISUAL ARCHITECTURE PIPELINE -->
-    <section id="architecture" class="py-20 lg:py-28 relative">
+    <section id="architecture" class="py-20 lg:py-28 relative motion-reveal">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-center max-w-3xl mx-auto mb-16 motion-reveal">
           <div class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">System Topology</div>
           <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
             How Game Events Transform into Intelligent Actions
@@ -442,11 +581,16 @@
           </p>
         </div>
 
+        <!-- Flowing Energy Conduit Line for Desktop -->
+        <div class="hidden md:block absolute top-[58%] inset-x-8 h-[2px] bg-dark-border -translate-y-12 z-0 pointer-events-none overflow-hidden">
+          <div class="h-full w-64 bg-gradient-to-r from-transparent via-cyan-400 to-transparent conduit-flow"></div>
+        </div>
+
         <!-- Animated Pipeline Diagram (5 Stages) -->
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative z-10">
           
           <!-- Stage 1 -->
-          <div class="glow-card p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden">
+          <div class="glow-card tilt-card motion-reveal p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden" data-tilt>
             <div class="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-mono text-xs font-bold flex items-center justify-center mb-3">01</div>
             <div class="text-sm font-bold text-white">Spatial Ingestion</div>
             <p class="text-xs text-slate-400 mt-2 leading-relaxed">Player movement, combat tags, chat, and spatial proximity ingested via non-blocking async hooks.</p>
@@ -454,7 +598,7 @@
           </div>
 
           <!-- Stage 2 -->
-          <div class="glow-card p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden">
+          <div class="glow-card tilt-card motion-reveal p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden" data-tilt style="transition-delay: 80ms;">
             <div class="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 font-mono text-xs font-bold flex items-center justify-center mb-3">02</div>
             <div class="text-sm font-bold text-white">200K Vector Memory</div>
             <p class="text-xs text-slate-400 mt-2 leading-relaxed">Retrieves historical player relationship score, past quest outcomes, and regional lore chronicles.</p>
@@ -462,7 +606,7 @@
           </div>
 
           <!-- Stage 3 (Focal Core) -->
-          <div class="glow-card p-5 rounded-2xl bg-dark-card border-2 border-cyan-500 text-left relative overflow-hidden shadow-xl shadow-cyan-500/10">
+          <div class="glow-card tilt-card motion-reveal p-5 rounded-2xl bg-dark-card border-2 border-cyan-500 text-left relative overflow-hidden shadow-xl shadow-cyan-500/10" data-tilt style="transition-delay: 160ms;">
             <div class="w-8 h-8 rounded-lg bg-cyan-500 text-slate-950 font-mono text-xs font-bold flex items-center justify-center mb-3">03</div>
             <div class="text-sm font-bold text-white">Claude 3.5 Core</div>
             <p class="text-xs text-slate-400 mt-2 leading-relaxed">Frontier reasoning synthesizes intent, tactical response, and validated function calls via SSE streaming.</p>
@@ -470,7 +614,7 @@
           </div>
 
           <!-- Stage 4 -->
-          <div class="glow-card p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden">
+          <div class="glow-card tilt-card motion-reveal p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden" data-tilt style="transition-delay: 240ms;">
             <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs font-bold flex items-center justify-center mb-3">04</div>
             <div class="text-sm font-bold text-white">Canon Guardrail</div>
             <p class="text-xs text-slate-400 mt-2 leading-relaxed">Strict JSON-schema verification ensures zero illegal game-state mutations or hallucinated exploits.</p>
@@ -478,7 +622,7 @@
           </div>
 
           <!-- Stage 5 -->
-          <div class="glow-card p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden">
+          <div class="glow-card tilt-card motion-reveal p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden" data-tilt style="transition-delay: 320ms;">
             <div class="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 font-mono text-xs font-bold flex items-center justify-center mb-3">05</div>
             <div class="text-sm font-bold text-white">Game Engine Action</div>
             <p class="text-xs text-slate-400 mt-2 leading-relaxed">Dispatches in-game animation, dialogue packet, quest grants, and combat AI state to clients.</p>
@@ -637,10 +781,10 @@ stream.<span class="text-blue-400">onChunk</span>((chunk) =&gt; process.stdout.<
     </section>
 
     <!-- SECTION: PRICING -->
-    <section id="pricing" class="py-20 bg-dark-card/30 border-y border-dark-border">
+    <section id="pricing" class="py-20 bg-dark-card/30 border-y border-dark-border motion-reveal">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div class="text-center max-w-3xl mx-auto mb-16">
+        <div class="text-center max-w-3xl mx-auto mb-16 motion-reveal">
           <div class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">Transparent Scale</div>
           <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
             Developer-Friendly Pricing. Built for Scaling Startups.
@@ -662,7 +806,7 @@ stream.<span class="text-blue-400">onChunk</span>((chunk) =&gt; process.stdout.<
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           
           <!-- Tier 1: Developer -->
-          <div class="glow-card p-8 rounded-2xl bg-dark-card border border-dark-border flex flex-col justify-between">
+          <div class="glow-card tilt-card motion-reveal p-8 rounded-2xl bg-dark-card border border-dark-border flex flex-col justify-between" data-tilt>
             <div>
               <div class="text-xs font-mono uppercase text-slate-400 font-semibold">Community</div>
               <h3 class="text-xl font-bold text-white mt-1">Developer Starter</h3>
@@ -686,7 +830,7 @@ stream.<span class="text-blue-400">onChunk</span>((chunk) =&gt; process.stdout.<
           </div>
 
           <!-- Tier 2: Startup Growth (Featured) -->
-          <div class="glow-card p-8 rounded-2xl bg-dark-card border-2 border-cyan-500 shadow-2xl shadow-cyan-500/10 flex flex-col justify-between relative">
+          <div class="glow-card tilt-card motion-reveal p-8 rounded-2xl bg-dark-card border-2 border-cyan-500 shadow-2xl shadow-cyan-500/10 flex flex-col justify-between relative" data-tilt style="transition-delay: 100ms;">
             <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-cyan-500 text-slate-950 font-bold text-[10px] uppercase font-mono tracking-wider shadow">
               Most Popular &bull; Startups
             </div>
@@ -715,7 +859,7 @@ stream.<span class="text-blue-400">onChunk</span>((chunk) =&gt; process.stdout.<
           </div>
 
           <!-- Tier 3: Enterprise -->
-          <div class="glow-card p-8 rounded-2xl bg-dark-card border border-dark-border flex flex-col justify-between">
+          <div class="glow-card tilt-card motion-reveal p-8 rounded-2xl bg-dark-card border border-dark-border flex flex-col justify-between" data-tilt style="transition-delay: 200ms;">
             <div>
               <div class="text-xs font-mono uppercase text-slate-400 font-semibold">Custom Deployment</div>
               <h3 class="text-xl font-bold text-white mt-1">Enterprise Realm</h3>
@@ -1221,6 +1365,100 @@ print(response.executed_actions)`,
         bA.className = 'px-4 py-1.5 rounded-full text-slate-400 hover:text-white transition flex items-center gap-1.5';
       }
     }
+
+    // 7. MOTION ENGINE: AMBIENT CURSOR AURA LERP
+    (function initCursorAura() {
+      const aura = document.getElementById('cursor-aura');
+      if (!aura) return;
+      let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+      let auraX = mouseX, auraY = mouseY;
+      
+      window.addEventListener('mousemove', e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function renderAura() {
+        auraX += (mouseX - auraX) * 0.08;
+        auraY += (mouseY - auraY) * 0.08;
+        aura.style.transform = `translate3d(${auraX}px, ${auraY}px, 0)`;
+        requestAnimationFrame(renderAura);
+      }
+      renderAura();
+    })();
+
+    // 8. MOTION ENGINE: SCROLL REVEAL OBSERVER
+    (function initScrollReveals() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.motion-reveal, .motion-slide-left, .motion-slide-right, .motion-scale').forEach(el => {
+          el.classList.add('is-revealed');
+        });
+        return;
+      }
+
+      const revealObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.motion-reveal, .motion-slide-left, .motion-slide-right, .motion-scale').forEach(el => {
+        revealObserver.observe(el);
+      });
+    })();
+
+    // 9. MOTION ENGINE: 3D CARD TILT PHYSICS
+    (function initCardTilt() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      document.querySelectorAll('.tilt-card, [data-tilt]').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          const rotX = -(y / (rect.height / 2)) * 6.5;
+          const rotY = (x / (rect.width / 2)) * 6.5;
+          card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.015, 1.015, 1.015)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        });
+      });
+    })();
+
+    // 10. MOTION ENGINE: DYNAMIC METRICS COUNTER TICKER
+    (function initCounterTicker() {
+      const counterObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseFloat(el.getAttribute('data-counter'));
+            const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+            const suffix = el.getAttribute('data-suffix') || '';
+            const duration = 1400;
+            const start = performance.now();
+
+            function step(now) {
+              const progress = Math.min((now - start) / duration, 1);
+              // Exponential easing out
+              const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+              const current = target * ease;
+              el.textContent = current.toFixed(decimals) + suffix;
+              if (progress < 1) {
+                requestAnimationFrame(step);
+              }
+            }
+            requestAnimationFrame(step);
+            obs.unobserve(el);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll('[data-counter]').forEach(el => counterObserver.observe(el));
+    })();
   </script>
 
 </body>
