@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation & Quickstart — Apexsions AI</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2306B6D4'><path d='M12 2L2 22h20L12 2zm0 4.5l6.5 13H5.5L12 6.5z'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: { 500: '#06B6D4', 400: '#22D3EE' },
+            dark: { bg: '#060911', card: '#0D1322', border: '#1E293B' }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-dark-bg text-slate-200 font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- Header -->
+  <header class="border-b border-dark-border bg-dark-bg/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center font-bold text-slate-950 text-sm">Ω</div>
+          <span class="font-bold text-white text-base">Apexsions<span class="text-cyan-400">Docs</span></span>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">v2.4.0</span>
+        </a>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-semibold">
+        <a href="index.html" class="text-slate-400 hover:text-white transition">&larr; Return to Home</a>
+        <a href="index.html#pricing" class="px-3 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition">Get API Key</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Docs Grid -->
+  <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-12 gap-8">
+    
+    <!-- Sidebar -->
+    <aside class="md:col-span-3 space-y-6 text-xs">
+      <div>
+        <div class="font-mono uppercase text-slate-400 font-bold mb-2 tracking-wider">Getting Started</div>
+        <ul class="space-y-1 text-slate-300 font-medium">
+          <li><a href="#overview" class="block px-2.5 py-1.5 rounded hover:bg-dark-card text-cyan-400 bg-dark-card font-bold">1. Architecture Overview</a></li>
+          <li><a href="#quickstart" class="block px-2.5 py-1.5 rounded hover:bg-dark-card hover:text-white">2. Quickstart Guide</a></li>
+          <li><a href="#models" class="block px-2.5 py-1.5 rounded hover:bg-dark-card hover:text-white">3. Supported Claude Models</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="font-mono uppercase text-slate-400 font-bold mb-2 tracking-wider">SDK Reference</div>
+        <ul class="space-y-1 text-slate-300 font-medium">
+          <li><a href="#typescript-sdk" class="block px-2.5 py-1.5 rounded hover:bg-dark-card hover:text-white">TypeScript / Node.js</a></li>
+          <li><a href="#python-sdk" class="block px-2.5 py-1.5 rounded hover:bg-dark-card hover:text-white">Python 3.11+</a></li>
+          <li><a href="#rest-api" class="block px-2.5 py-1.5 rounded hover:bg-dark-card hover:text-white">REST / Streaming API</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="font-mono uppercase text-slate-400 font-bold mb-2 tracking-wider">Advanced Core</div>
+        <ul class="space-y-1 text-slate-300 font-medium">
+          <li><a href="#memory-engine" class="block px-2.5 py-1.5 rounded hover:bg-dark-card hover:text-white">200K Vector Memory</a></li>
+          <li><a href="#guardrails" class="block px-2.5 py-1.5 rounded hover:bg-dark-card hover:text-white">Canon Guardrails</a></li>
+          <li><a href="#tool-calling" class="block px-2.5 py-1.5 rounded hover:bg-dark-card hover:text-white">Deterministic Tools</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="md:col-span-9 space-y-12 text-sm leading-relaxed text-slate-300">
+      
+      <!-- Section: Overview -->
+      <section id="overview" class="border-b border-dark-border pb-10">
+        <h1 class="text-3xl font-extrabold text-white">Apexsions Agentic Runtime</h1>
+        <p class="text-slate-400 mt-2">
+          Apexsions AI is a distributed runtime for spawning and orchestrating autonomous characters and dynamic world state in digital universes, gaming servers, and simulation engines. Powered by <strong>Anthropic Claude 3.5 Sonnet</strong> and <strong>Claude 3.5 Haiku</strong>.
+        </p>
+
+        <div class="mt-6 p-4 rounded-xl bg-dark-card border border-dark-border flex items-start gap-3">
+          <div class="text-cyan-400 font-bold mt-0.5">ℹ</div>
+          <div class="text-xs text-slate-300">
+            <strong>Inference Pipeline:</strong> Incoming game perception events are converted to high-dimensional spatial contexts, augmented with long-term vector episodic memory, and dispatched through Anthropic's Claude streaming API with strict tool validation.
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Quickstart -->
+      <section id="quickstart" class="border-b border-dark-border pb-10">
+        <h2 class="text-2xl font-bold text-white mb-4">Quickstart Installation</h2>
+
+        <h3 class="text-base font-semibold text-white mt-4 mb-2">1. Install Package</h3>
+        <div class="bg-[#050811] p-4 rounded-xl border border-dark-border font-mono text-xs text-cyan-300 flex items-center justify-between">
+          <span>npm install @apexsions/ai-runtime</span>
+          <span class="text-slate-500"># or pip install apexsions-runtime</span>
+        </div>
+
+        <h3 class="text-base font-semibold text-white mt-6 mb-2">2. Environment Configuration</h3>
+        <p class="text-xs text-slate-400 mb-2">Export your API authentication credentials:</p>
+        <div class="bg-[#050811] p-4 rounded-xl border border-dark-border font-mono text-xs text-slate-300 space-y-1">
+          <div><span class="text-purple-400">export</span> APEXSIONS_API_KEY=<span class="text-emerald-300">"apx_live_sec_99a81bc2"</span></div>
+          <div><span class="text-purple-400">export</span> APEXSIONS_WORLD_ID=<span class="text-emerald-300">"realm_aetherion_prime"</span></div>
+        </div>
+
+        <h3 class="text-base font-semibold text-white mt-6 mb-2">3. Initialize & Stream</h3>
+        <div class="bg-[#050811] p-4 rounded-xl border border-dark-border font-mono text-xs text-slate-300 overflow-x-auto">
+<pre><code><span class="text-purple-400">import</span> { <span class="text-cyan-400">ApexsionsRuntime</span> } <span class="text-purple-400">from</span> <span class="text-emerald-300">'@apexsions/ai-runtime'</span>;
+
+<span class="text-purple-400">const</span> runtime = <span class="text-purple-400">new</span> <span class="text-cyan-400">ApexsionsRuntime</span>();
+<span class="text-purple-400">const</span> agent = runtime.<span class="text-blue-400">registerEntity</span>({
+  <span class="text-slate-300">id</span>: <span class="text-emerald-300">'npc_gatekeeper'</span>,
+  <span class="text-slate-300">model</span>: <span class="text-emerald-300">'claude-3-5-sonnet-20241022'</span>
+});
+
+<span class="text-purple-400">const</span> stream = <span class="text-purple-400">await</span> agent.<span class="text-blue-400">perceiveAndAct</span>({
+  <span class="text-slate-300">event</span>: <span class="text-emerald-300">'PLAYER_GREETING'</span>,
+  <span class="text-slate-300">player</span>: { <span class="text-slate-300">username</span>: <span class="text-emerald-300">'Aria'</span>, <span class="text-slate-300">rank</span>: <span class="text-emerald-300">'Sovereign'</span> }
+});
+
+<span class="text-purple-400">for await</span> (<span class="text-purple-400">const</span> token <span class="text-purple-400">of</span> stream) {
+  process.stdout.<span class="text-blue-400">write</span>(token);
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Section: Supported Models -->
+      <section id="models" class="border-b border-dark-border pb-10">
+        <h2 class="text-2xl font-bold text-white mb-4">Supported Anthropic Claude Models</h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-5 rounded-xl bg-dark-card border border-dark-border">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-bold text-white text-sm">Claude 3.5 Sonnet</span>
+              <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 font-semibold">Tier 1 &bull; Reasoning</span>
+            </div>
+            <div class="font-mono text-xs text-slate-400 mb-2">claude-3-5-sonnet-20241022</div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Recommended for complex world chronicles, multi-character political negotiations, faction treaties, and deterministic multi-tool executions.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-dark-card border border-dark-border">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-bold text-white text-sm">Claude 3.5 Haiku</span>
+              <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-semibold">Sub-85ms &bull; Reflex</span>
+            </div>
+            <div class="font-mono text-xs text-slate-400 mb-2">claude-3-5-haiku-20241022</div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Engineered for high-frequency low-latency tasks: combat audio barks, quick spatial pathfinding decisions, merchant chitchat, and rapid crowd simulation.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: REST API -->
+      <section id="rest-api">
+        <h2 class="text-2xl font-bold text-white mb-4">REST API Reference</h2>
+        
+        <div class="space-y-4">
+          <div class="p-4 rounded-xl bg-dark-card border border-dark-border">
+            <div class="flex items-center gap-3 font-mono text-xs mb-2">
+              <span class="px-2 py-1 rounded bg-cyan-500 text-slate-950 font-bold">POST</span>
+              <span class="text-white">/v1/agents/{agent_id}/perceive</span>
+            </div>
+            <p class="text-xs text-slate-400 mb-3">Ingests world sensory data and initiates streaming agentic reasoning loop.</p>
+            
+            <div class="text-[11px] font-mono text-slate-400 bg-dark-bg p-3 rounded-lg border border-dark-border">
+              Headers:<br>
+              Authorization: Bearer &lt;YOUR_API_KEY&gt;<br>
+              Content-Type: application/json<br><br>
+              Response: text/event-stream (SSE)
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-border py-8 text-center text-xs text-slate-500">
+    &copy; 2026 Apexsions AI Inc. &bull; <a href="index.html" class="hover:text-cyan-400">Home</a> &bull; <a href="privacy.html" class="hover:text-cyan-400">Privacy Policy</a> &bull; <a href="terms.html" class="hover:text-cyan-400">Terms of Service</a>
+  </footer>
+
+</body>
+</html>

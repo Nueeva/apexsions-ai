@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — Apexsions AI</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2306B6D4'><path d='M12 2L2 22h20L12 2zm0 4.5l6.5 13H5.5L12 6.5z'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: { 500: '#06B6D4', 400: '#22D3EE' },
+            dark: { bg: '#060911', card: '#0D1322', border: '#1E293B' }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-dark-bg text-slate-200 font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- Header -->
+  <header class="border-b border-dark-border bg-dark-bg/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center font-bold text-slate-950 text-sm">Ω</div>
+        <span class="font-bold text-white text-base">Apexsions<span class="text-cyan-400">AI</span></span>
+      </a>
+      <a href="index.html" class="text-xs font-semibold text-slate-400 hover:text-white transition">&larr; Back to Platform</a>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="max-w-4xl mx-auto px-4 py-16">
+    <div class="border-b border-dark-border pb-8 mb-10">
+      <div class="text-xs font-mono uppercase text-cyan-400 font-semibold tracking-wider">Commercial Agreement</div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Enterprise Terms of Service</h1>
+      <p class="text-xs text-slate-400 mt-2 font-mono">Last Updated: October 8, 2026 &bull; Effective Date: Immediately</p>
+    </div>
+
+    <div class="prose prose-invert prose-slate max-w-none space-y-8 text-sm leading-relaxed text-slate-300">
+      
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3">1. Acceptance of Terms</h2>
+        <p>
+          By accessing or utilizing the API, SDKs, runtime endpoints, documentation, or developer portal provided by Apexsions AI Inc. ("Apexsions", "Platform"), you ("Customer" or "Developer") enter into a legally binding contract governed by these Terms of Service.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3">2. Service Provision & API Availability</h2>
+        <p>
+          Apexsions grants you a non-exclusive, non-transferable, revocable license to integrate and deploy autonomous agent runtimes in digital entertainment, virtual worlds, and software applications. We target a 99.9% uptime SLA for Developer tier and 99.99% for Growth and Enterprise tiers.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3">3. Acceptable Use Policy</h2>
+        <p>
+          Customers agree not to utilize the Platform to:
+        </p>
+        <ul class="list-disc pl-5 space-y-2 mt-2">
+          <li>Generate hateful, discriminatory, or harmful content violating Anthropic's Usage Policies.</li>
+          <li>Attempt reverse engineering, model distillation, or extraction of weights from upstream inference providers.</li>
+          <li>Conduct denial-of-service (DoS) or automated stress testing against public API conduits without prior authorization.</li>
+          <li>Deploy unauthorized surveillance or deanonymization agents on unsuspecting end-users.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3">4. Intellectual Property & Customer Ownership</h2>
+        <p>
+          <strong>Your Data & Output:</strong> As between you and Apexsions, you retain all ownership, intellectual property rights, and title to your custom world canon, character scripts, game states, and the generated conversational outputs produced by the model.
+        </p>
+        <p class="mt-2">
+          <strong>The Platform:</strong> Apexsions retains all intellectual property in the runtime engine, SDK source code, vector orchestration algorithms, and proprietary guardrail architectures.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3">5. Token Accounting, Subscriptions & Quotas</h2>
+        <p>
+          API consumption is metered per token processed (both input prompt tokens and output completion tokens). Monthly billing plans renew automatically unless cancelled via the developer console before the billing anniversary. Unused monthly allocations do not roll over.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3">6. Limitation of Liability</h2>
+        <p>
+          TO THE MAXIMUM EXTENT PERMITTED BY LAW, APEXSIONS AI INC. SHALL NOT BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES ARISING FROM SYSTEM LATENCY, NETWORK INTERRUPTIONS, OR UPSTREAM MODEL OUTAGES.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-white mb-3">7. Governing Law & Jurisdiction</h2>
+        <p>
+          These Terms are governed by and construed under the laws of the State of California, United States, without regard to its conflict of law principles.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-dark-border py-8 text-center text-xs text-slate-500">
+    &copy; 2026 Apexsions AI Inc. All rights reserved. &bull; <a href="privacy.html" class="hover:text-cyan-400">Privacy Policy</a> &bull; <a href="docs.html" class="hover:text-cyan-400">Documentation</a>
+  </footer>
+
+</body>
+</html>

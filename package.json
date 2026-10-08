@@ -1,0 +1,19 @@
+{
+  "name": "apexsions-ai-platform",
+  "version": "2.4.0",
+  "description": "Autonomous Agentic Intelligence & Generative World Engine powered by Anthropic Claude",
+  "private": true,
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "anthropic",
+    "claude-3-5-sonnet",
+    "ai-agents",
+    "game-engine",
+    "npc-runtime",
+    "generative-ai"
+  ],
+  "author": "Apexsions AI Inc.",
+  "license": "Apache-2.0"
+}
