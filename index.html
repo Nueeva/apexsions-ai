@@ -512,17 +512,16 @@
 </head>
 <body class="selection:bg-cyan-500/30 selection:text-cyan-200">
 
-  <!-- CINEMATIC QUANTUM PRELOADER (THE GLIMMERING STYLE) -->
+  <!-- CINEMATIC PRELOADER -->
   <div id="preloader">
     <div class="flex items-center gap-3 mb-6">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/30">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/20">
         <div class="w-full h-full bg-dark-bg rounded-[11px] flex items-center justify-center font-bold text-cyan-400 font-mono text-lg">
           Ω
         </div>
       </div>
       <div>
-        <div class="text-sm font-extrabold text-white tracking-wide font-mono">APEXSIONS AGENTIC RUNTIME</div>
-        <div class="text-[10px] text-cyan-400 font-mono" id="preloader-status">INITIALIZING QUANTUM PERCEPTION CORE...</div>
+        <div class="text-sm font-bold text-white tracking-wide font-mono">APEXSIONS AI</div>
       </div>
     </div>
     <div class="preloader-track mb-3">
@@ -557,7 +556,7 @@
       
       <!-- Brand Logo -->
       <a href="#" class="flex items-center gap-3 group" data-cursor="HOME">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/25 group-hover:shadow-cyan-500/50 group-hover:scale-105 transition transform">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/25 group-hover:scale-105 transition transform">
           <div class="w-full h-full bg-dark-bg rounded-[11px] flex items-center justify-center">
             <svg class="w-5 h-5 text-cyan-400 group-hover:rotate-12 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 2L2 22h20L12 2z"/>
@@ -566,26 +565,18 @@
           </div>
         </div>
         <div class="flex flex-col">
-          <span class="font-bold text-lg tracking-tight text-white flex items-center gap-2">
+          <span class="font-bold text-lg tracking-tight text-white flex items-center gap-1.5">
             Apexsions<span class="text-cyan-400">AI</span>
-            <span class="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">Claude 5.5 Core</span>
           </span>
-          <span class="text-[10px] text-slate-400 font-medium tracking-wide">Multi-Agent Civilization Engine</span>
         </div>
       </a>
 
       <!-- Desktop Navigation -->
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
         <a href="#purpose" class="hover:text-cyan-400 transition" data-cursor="EXPLORE">What is Apexsions?</a>
-        <a href="#entities" class="hover:text-cyan-400 transition flex items-center gap-1.5" data-cursor="DISCOVER">
-          <span>Living Cast</span>
-          <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 font-bold uppercase">New</span>
-        </a>
-        <a href="#simulator" class="hover:text-cyan-400 transition flex items-center gap-1.5" data-cursor="TEST">
-          <span>Tactical Sandbox</span>
-          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
-        </a>
-        <a href="#architecture" class="hover:text-cyan-400 transition" data-cursor="INSPECT">Topology</a>
+        <a href="#entities" class="hover:text-cyan-400 transition" data-cursor="DISCOVER">Living Cast</a>
+        <a href="#simulator" class="hover:text-cyan-400 transition" data-cursor="TEST">Sandbox</a>
+        <a href="#architecture" class="hover:text-cyan-400 transition" data-cursor="INSPECT">Architecture</a>
         <a href="#pricing" class="hover:text-cyan-400 transition" data-cursor="PRICING">Pricing</a>
         <a href="/docs" class="hover:text-cyan-400 transition" data-cursor="READ">Docs</a>
       </nav>
@@ -620,111 +611,81 @@
   <!-- MAIN CONTENT -->
   <main class="relative z-10 pt-28 sm:pt-36">
 
-    <!-- HERO SECTION: THE CORE VALUE PROPOSITION -->
+    <!-- HERO SECTION -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-20 lg:pb-32 relative">
-      
-      <!-- Floating Sci-Fi Badges with Parallax Bobbing -->
-      <div class="hidden xl:flex absolute top-4 -left-6 items-center gap-2.5 px-4 py-2 rounded-full bg-dark-card/90 border border-cyan-500/30 text-cyan-300 text-xs font-mono backdrop-blur-md float-slow shadow-2xl shadow-cyan-500/10 pointer-events-none z-10">
-        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
-        <span>Claude Sonnet 5.5 &bull; Adaptive Thinking (1M Context)</span>
+
+      <!-- Top Announcement Pill -->
+      <div class="motion-reveal inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 text-xs font-medium mb-8 hover:border-cyan-400/60 transition cursor-pointer" onclick="openModal()">
+        <span class="text-slate-300">Powered by</span>
+        <span class="font-bold text-white">Anthropic Claude 5.5</span>
+        <svg class="w-3.5 h-3.5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
       </div>
 
-      <div class="hidden xl:flex absolute top-28 -right-6 items-center gap-2.5 px-4 py-2 rounded-full bg-dark-card/90 border border-emerald-500/30 text-emerald-300 text-xs font-mono backdrop-blur-md float-delayed shadow-2xl shadow-emerald-500/10 pointer-events-none z-10">
-        <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        <span>Zero Main-Thread Lag (20 TPS Locked)</span>
-      </div>
-
-      <!-- Top Announcement Pill with Laser Beam Border -->
-      <div class="motion-reveal border-beam-box inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 text-xs font-medium mb-8 hover:border-cyan-400/60 transition shadow-inner shadow-cyan-500/10 cursor-pointer" onclick="openModal()">
-        <span class="flex h-2 w-2 rounded-full bg-cyan-400 animate-ping"></span>
-        <span class="text-slate-300 font-medium">Frontier 2026 Architecture</span>
-        <span class="text-slate-500">&bull;</span>
-        <span class="font-bold text-white tracking-wide">Anthropic Claude 5.5 Family (Sonnet 5.5, Haiku 5.5, Opus 5.5)</span>
-        <svg class="w-3.5 h-3.5 text-cyan-400 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-
-      <!-- Crystal-Clear Headline: WHAT IS APEXSIONS AI -->
+      <!-- Clean Headline -->
       <h1 class="motion-reveal text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl mx-auto leading-[1.12]">
-        Turn Scripted Game NPCs into <span class="text-shimmer">Autonomous Living Civilizations</span>
+        Give Game NPCs <span class="text-shimmer">Real Autonomy</span>
       </h1>
 
-      <!-- Crystal-Clear Value Proposition: WHY IT EXISTS & WHAT IT SOLVES -->
-      <p class="motion-reveal mt-6 sm:mt-8 text-base sm:text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto font-normal leading-relaxed">
-        Scripted dialogue trees and dead server worlds are obsolete. Apexsions AI is the multi-agent runtime bridging the <strong>Anthropic Claude 5.5 Model Family (Sonnet 5.5, Haiku 5.5, Opus 5.5)</strong> with game engines (Minecraft PaperMC, Unreal Engine, Unity). Spawn living NPCs with 1-million-token episodic memory, autonomous market-making agents that prevent server inflation, and dynamic procedural wars.
+      <!-- Grounded Subtitle -->
+      <p class="motion-reveal mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
+        Autonomous agents with persistent memory, dynamic market pricing, and in-game authority. Built for PaperMC and multiplayer game engines.
       </p>
 
-      <!-- Dual Call to Actions -->
-      <div class="motion-reveal mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <!-- Action Buttons -->
+      <div class="motion-reveal mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
         <button onclick="openModal()" class="magnetic-btn w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-sm tracking-wide shadow-xl shadow-cyan-500/25 transition transform active:scale-95">
-          <span>Deploy Plugin to Server (Free)</span>
+          <span>Get Server Plugin</span>
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
-        <a href="#simulator" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-dark-card hover:bg-dark-cardHover border border-dark-border text-slate-200 font-semibold text-sm transition transform hover:-translate-y-0.5">
-          <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-          <span>Launch Claude 5.5 Sandbox</span>
+        <a href="#simulator" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-dark-card hover:bg-dark-cardHover border border-dark-border text-slate-200 font-semibold text-sm transition">
+          <span>Try Interactive Sandbox</span>
         </a>
       </div>
 
-      <!-- 4 Tangible Key Metrics Cards (Real Game Server Terms) -->
+      <!-- 4 Clean Key Metrics -->
       <div class="mt-16 sm:mt-24 grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto text-left">
         
-        <div class="glow-card tilt-card motion-reveal p-5 sm:p-6 rounded-2xl bg-dark-card/80 border border-dark-border backdrop-blur-md cursor-default">
-          <div class="specular-sheen"></div>
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-mono uppercase text-slate-400 font-semibold">Edge Latency Reflex</span>
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          </div>
-          <div class="text-3xl font-extrabold text-white font-mono mt-3"><span data-counter="28" data-suffix="ms">28ms</span></div>
-          <p class="text-xs text-slate-400 mt-1">P95 Time-to-First-Token via Claude Haiku 5.5 edge streaming.</p>
+        <div class="glow-card tilt-card motion-reveal p-5 sm:p-6 rounded-2xl bg-dark-card/80 border border-dark-border">
+          <div class="text-xs uppercase text-slate-400 font-semibold font-mono">Response Latency</div>
+          <div class="text-3xl font-extrabold text-white font-mono mt-2"><span data-counter="28" data-suffix="ms">28ms</span></div>
+          <p class="text-xs text-slate-400 mt-1">P95 Time-to-First-Token via Claude Haiku 5.5.</p>
         </div>
 
-        <div class="glow-card tilt-card motion-reveal p-5 sm:p-6 rounded-2xl bg-dark-card/80 border border-dark-border backdrop-blur-md cursor-default" style="transition-delay: 100ms;">
-          <div class="specular-sheen"></div>
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-mono uppercase text-slate-400 font-semibold">Memory Horizon</span>
-            <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/40 px-1.5 py-0.5 rounded">1M Tokens</span>
-          </div>
-          <div class="text-3xl font-extrabold text-white font-mono mt-3"><span data-counter="1" data-suffix="M">1M</span></div>
-          <p class="text-xs text-slate-400 mt-1">1 Million token persistent horizon for cross-session lore & player memory.</p>
+        <div class="glow-card tilt-card motion-reveal p-5 sm:p-6 rounded-2xl bg-dark-card/80 border border-dark-border" style="transition-delay: 100ms;">
+          <div class="text-xs uppercase text-slate-400 font-semibold font-mono">Agent Memory</div>
+          <div class="text-3xl font-extrabold text-cyan-400 font-mono mt-2"><span data-counter="1" data-suffix="M">1M</span></div>
+          <p class="text-xs text-slate-400 mt-1">Persistent episodic context window per entity.</p>
         </div>
 
-        <div class="glow-card tilt-card motion-reveal p-5 sm:p-6 rounded-2xl bg-dark-card/80 border border-dark-border backdrop-blur-md cursor-default" style="transition-delay: 200ms;">
-          <div class="specular-sheen"></div>
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-mono uppercase text-slate-400 font-semibold">Server TPS Impact</span>
-            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/40 px-1.5 py-0.5 rounded">100% Async</span>
-          </div>
-          <div class="text-3xl font-extrabold text-white font-mono mt-3"><span data-counter="0.00" data-decimals="2" data-suffix=" TPS">0.00 TPS</span></div>
-          <p class="text-xs text-slate-400 mt-1">Zero main-thread blocking on Minecraft or Unreal engine.</p>
+        <div class="glow-card tilt-card motion-reveal p-5 sm:p-6 rounded-2xl bg-dark-card/80 border border-dark-border" style="transition-delay: 200ms;">
+          <div class="text-xs uppercase text-slate-400 font-semibold font-mono">Server TPS Impact</div>
+          <div class="text-3xl font-extrabold text-emerald-400 font-mono mt-2"><span data-counter="20" data-suffix=" TPS">20 TPS</span></div>
+          <p class="text-xs text-slate-400 mt-1">Zero tick loss. 100% async off-thread pipeline.</p>
         </div>
 
-        <div class="glow-card tilt-card motion-reveal p-5 sm:p-6 rounded-2xl bg-dark-card/80 border border-dark-border backdrop-blur-md cursor-default" style="transition-delay: 300ms;">
-          <div class="specular-sheen"></div>
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-mono uppercase text-slate-400 font-semibold">Action Reliability</span>
-            <span class="text-[10px] font-mono text-amber-400 bg-amber-950/40 px-1.5 py-0.5 rounded">Guardrail</span>
-          </div>
-          <div class="text-3xl font-extrabold text-white font-mono mt-3"><span data-counter="100" data-suffix="%">100%</span></div>
-          <p class="text-xs text-slate-400 mt-1">Strict JSON-schema verified in-game tool calls.</p>
+        <div class="glow-card tilt-card motion-reveal p-5 sm:p-6 rounded-2xl bg-dark-card/80 border border-dark-border" style="transition-delay: 300ms;">
+          <div class="text-xs uppercase text-slate-400 font-semibold font-mono">Tool Reliability</div>
+          <div class="text-3xl font-extrabold text-white font-mono mt-2"><span data-counter="100" data-suffix="%">100%</span></div>
+          <p class="text-xs text-slate-400 mt-1">Strict schema validation for in-game commands.</p>
         </div>
 
       </div>
 
     </section>
 
-    <!-- SECTION: WHAT IS APEXSIONS AI & WHY GAME SERVERS NEED IT -->
+    <!-- SECTION: WHAT IS APEXSIONS AI -->
     <section id="purpose" class="py-20 lg:py-28 relative bg-dark-surface/50 border-y border-dark-border">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center max-w-3xl mx-auto mb-16 motion-reveal">
-          <div class="inline-flex items-center gap-2 text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">
-            The Purpose
+          <div class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">
+            The Foundation
           </div>
           <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            How Apexsions AI Solves the Static World Problem
+            Built for Living Game Worlds
           </h2>
-          <p class="mt-4 text-slate-400 text-sm sm:text-base leading-relaxed">
-            Modern multiplayer servers suffer from three major player retention killers. Here is how our multi-agent architecture transforms gameplay:
+          <p class="mt-4 text-slate-400 text-sm sm:text-base">
+            Three core systems replace static scripts with autonomous gameplay.
           </p>
         </div>
 
@@ -737,14 +698,10 @@
             <div class="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center font-bold text-xl mb-6">
               01
             </div>
-            <h3 class="text-xl font-bold text-white tracking-tight">Living Sovereign NPCs</h3>
-            <p class="text-xs text-cyan-400 font-mono mt-1">No more repetitive 3-line dialogue trees</p>
-            <p class="mt-4 text-sm text-slate-300 leading-relaxed">
-              Every NPC has an autonomous identity powered by <strong>Claude Sonnet 5.5</strong>. They remember player betrayals, debts, and heroic deeds across months. When approached, they generate real-time voice synthesis and can execute real in-game actions: give bounties, open vault doors, or call royal guards.
+            <h3 class="text-xl font-bold text-white tracking-tight">Persistent NPCs</h3>
+            <p class="mt-3 text-sm text-slate-300 leading-relaxed">
+              Characters remember past interactions, player alliances, and debts across months. No repetitive dialogue trees.
             </p>
-            <div class="mt-6 pt-4 border-t border-dark-border text-xs font-mono text-slate-400">
-              <span class="text-emerald-400 font-bold">&check;</span> 1 Million Token Episodic Vector Memory
-            </div>
           </div>
 
           <!-- Pillar 2: Dynamic Economy -->
@@ -753,14 +710,10 @@
             <div class="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center font-bold text-xl mb-6">
               02
             </div>
-            <h3 class="text-xl font-bold text-white tracking-tight">Self-Balancing In-Game Economy</h3>
-            <p class="text-xs text-amber-400 font-mono mt-1">Prevents server hyperinflation</p>
-            <p class="mt-4 text-sm text-slate-300 leading-relaxed">
-              Server economies crash when players farm unlimited materials. Apexsions deploys autonomous Merchant AI agents that monitor server supply & demand in real-time, dynamically adjusting shop prices, taxing wealthy cartels, and stimulating resource scarcity to keep economies alive indefinitely.
+            <h3 class="text-xl font-bold text-white tracking-tight">Self-Regulating Economy</h3>
+            <p class="mt-3 text-sm text-slate-300 leading-relaxed">
+              Merchant agents automatically balance prices and tax rates based on real-time player supply and demand to stop inflation.
             </p>
-            <div class="mt-6 pt-4 border-t border-dark-border text-xs font-mono text-slate-400">
-              <span class="text-emerald-400 font-bold">&check;</span> Real-Time Algorithmic Market Maker
-            </div>
           </div>
 
           <!-- Pillar 3: Emergent Wars & Quests -->
@@ -769,14 +722,10 @@
             <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center font-bold text-xl mb-6">
               03
             </div>
-            <h3 class="text-xl font-bold text-white tracking-tight">Emergent Procedural Quests</h3>
-            <p class="text-xs text-purple-400 font-mono mt-1">Quests spawned from player actions</p>
-            <p class="mt-4 text-sm text-slate-300 leading-relaxed">
-              Instead of hand-writing 50 boring quests in a config file, world events trigger procedural storylines. When a player syndicate assassinates a kingdom envoy, kingdom agents autonomously draft war contracts, post dynamic bounties, and alter realm borders through genuine geopolitical deliberation.
+            <h3 class="text-xl font-bold text-white tracking-tight">Emergent Factions</h3>
+            <p class="mt-3 text-sm text-slate-300 leading-relaxed">
+              Rival factions declare wars, post bounties, and shift realm borders in response to real player actions.
             </p>
-            <div class="mt-6 pt-4 border-t border-dark-border text-xs font-mono text-slate-400">
-              <span class="text-emerald-400 font-bold">&check;</span> Faction Geopolitics Simulation
-            </div>
           </div>
 
         </div>
@@ -803,15 +752,14 @@
         <!-- Header with Awwwards style mask reveal & controls -->
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 motion-reveal">
           <div>
-            <div class="inline-flex items-center gap-2 text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">
-              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-              Autonomous Citizens Showcase
+            <div class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">
+              Living Characters
             </div>
             <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
               Sovereign Agents of the Realm
             </h2>
             <p class="mt-3 text-slate-400 text-sm max-w-xl">
-              Drag or swipe through live autonomous characters. Powered by Claude 5.5 with persistent memory, real-time voice synthesis, and in-game tool authority.
+              Drag or swipe through active autonomous characters. Listen to real-time voice samples powered by Claude 5.5.
             </p>
           </div>
 
@@ -839,37 +787,22 @@
             <article class="carousel-card glow-card tilt-card p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between" data-tilt data-cursor="INSPECT">
               <div class="specular-sheen"></div>
               <div>
-                <div class="flex items-center justify-between mb-4">
-                  <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30 font-bold uppercase">Tier IV &bull; Royal Sovereign</span>
-                  <div class="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span>ACTIVE</span>
-                  </div>
-                </div>
-
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-bold text-white text-2xl mb-4 shadow-lg shadow-cyan-500/25">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-bold text-white text-2xl mb-5 shadow-lg shadow-cyan-500/20">
                   Ω
                 </div>
 
                 <h3 class="text-xl font-bold text-white tracking-tight">Aurelius the Chronicler</h3>
                 <div class="text-xs text-cyan-400 font-mono mt-0.5">Kingdom Warden of Aetherion</div>
                 <p class="text-xs text-slate-300 mt-3 leading-relaxed">
-                  Authoritative lawkeeper guarding the Royal Sanctum. Enforces penal treaties, evaluates contraband bribes, and issues sovereign ultimatums.
+                  Authoritative lawkeeper guarding the Royal Sanctum. Enforces treaties, evaluates contraband bribes, and issues sovereign ultimatums.
                 </p>
-
-                <div class="mt-4 p-3 rounded-xl bg-dark-surface border border-dark-border font-mono text-[11px] text-slate-400">
-                  <span class="text-indigo-400 font-semibold">Engine:</span> Claude Sonnet 5.5<br>
-                  <span class="text-purple-400 font-semibold">Memory:</span> 1M Vector Episodic Horizon<br>
-                  <span class="text-cyan-400 font-semibold">Tool:</span> inspectContrabandRegistry()
-                </div>
               </div>
 
               <div class="mt-6 pt-4 border-t border-dark-border flex items-center justify-between">
                 <button onclick="playVoiceBark('aurelius')" class="inline-flex items-center gap-2 text-xs font-mono text-cyan-300 hover:text-white transition group/btn" data-cursor="LISTEN">
                   <span class="w-6 h-6 rounded-lg bg-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover/btn:bg-cyan-500 group-hover/btn:text-slate-950 transition">▶</span>
-                  <span>Audio Bark</span>
+                  <span>Voice Sample</span>
                 </button>
-                <span class="text-[10px] font-mono text-slate-500">32ms TTFT</span>
               </div>
             </article>
 
@@ -877,37 +810,22 @@
             <article class="carousel-card glow-card tilt-card p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between" data-tilt data-cursor="INSPECT">
               <div class="specular-sheen"></div>
               <div>
-                <div class="flex items-center justify-between mb-4">
-                  <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-rose-950/60 text-rose-300 border border-rose-500/30 font-bold uppercase">Vanguard Commander</span>
-                  <div class="flex items-center gap-1.5 text-[10px] font-mono text-rose-400">
-                    <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
-                    <span>COMBAT_ALERT</span>
-                  </div>
-                </div>
-
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-rose-500 to-amber-600 flex items-center justify-center font-bold text-white text-2xl mb-4 shadow-lg shadow-rose-500/25">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-rose-500 to-amber-600 flex items-center justify-center font-bold text-white text-2xl mb-5 shadow-lg shadow-rose-500/20">
                   ⚔
                 </div>
 
                 <h3 class="text-xl font-bold text-white tracking-tight">Commander Vael</h3>
                 <div class="text-xs text-rose-400 font-mono mt-0.5">Sentinel of the Iron Gate</div>
                 <p class="text-xs text-slate-300 mt-3 leading-relaxed">
-                  Perimeter battle commander with sub-24ms reflex speed. Issues instant anti-teleport combat tags, summons antimagic ward-fire, and locks borders.
+                  Perimeter battle commander with sub-25ms reflex speed. Issues instant combat tags, summons antimagic barriers, and locks borders.
                 </p>
-
-                <div class="mt-4 p-3 rounded-xl bg-dark-surface border border-dark-border font-mono text-[11px] text-slate-400">
-                  <span class="text-indigo-400 font-semibold">Engine:</span> Claude Haiku 5.5 Reflex<br>
-                  <span class="text-purple-400 font-semibold">Reflex Latency:</span> 24ms TTFT<br>
-                  <span class="text-rose-400 font-semibold">Tool:</span> engageCombatTag(duration=60)
-                </div>
               </div>
 
               <div class="mt-6 pt-4 border-t border-dark-border flex items-center justify-between">
                 <button onclick="playVoiceBark('vael')" class="inline-flex items-center gap-2 text-xs font-mono text-rose-300 hover:text-white transition group/btn" data-cursor="LISTEN">
                   <span class="w-6 h-6 rounded-lg bg-rose-500/20 flex items-center justify-center text-rose-400 group-hover/btn:bg-rose-500 group-hover/btn:text-slate-950 transition">▶</span>
-                  <span>Audio Bark</span>
+                  <span>Voice Sample</span>
                 </button>
-                <span class="text-[10px] font-mono text-slate-500">24ms TTFT</span>
               </div>
             </article>
 
@@ -915,37 +833,22 @@
             <article class="carousel-card glow-card tilt-card p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between" data-tilt data-cursor="INSPECT">
               <div class="specular-sheen"></div>
               <div>
-                <div class="flex items-center justify-between mb-4">
-                  <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-purple-950/60 text-purple-300 border border-purple-500/30 font-bold uppercase">High Lorekeeper</span>
-                  <div class="flex items-center gap-1.5 text-[10px] font-mono text-purple-400">
-                    <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
-                    <span>DEEP_RECALL</span>
-                  </div>
-                </div>
-
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-500 to-indigo-600 flex items-center justify-center font-bold text-white text-2xl mb-4 shadow-lg shadow-purple-500/25">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-500 to-indigo-600 flex items-center justify-center font-bold text-white text-2xl mb-5 shadow-lg shadow-purple-500/20">
                   ✦
                 </div>
 
                 <h3 class="text-xl font-bold text-white tracking-tight">Archon Scribe Eldrin</h3>
                 <div class="text-xs text-purple-400 font-mono mt-0.5">Codex Scholar of Convergence</div>
                 <p class="text-xs text-slate-300 mt-3 leading-relaxed">
-                  Holds 1,000,000 tokens of server lore and mythos. Engages players with reverent poetic prose, verifies ancestral bloodlines, and crafts relics.
+                  Preserves centuries of server lore and mythos. Engages players with dignified poetic prose and verifies ancestral bloodlines.
                 </p>
-
-                <div class="mt-4 p-3 rounded-xl bg-dark-surface border border-dark-border font-mono text-[11px] text-slate-400">
-                  <span class="text-indigo-400 font-semibold">Engine:</span> Claude Opus 5.5 Pinnacle<br>
-                  <span class="text-purple-400 font-semibold">Context:</span> 1M Token Vector RAG<br>
-                  <span class="text-purple-400 font-semibold">Tool:</span> queryEpistemicVectorStore()
-                </div>
               </div>
 
               <div class="mt-6 pt-4 border-t border-dark-border flex items-center justify-between">
                 <button onclick="playVoiceBark('eldrin')" class="inline-flex items-center gap-2 text-xs font-mono text-purple-300 hover:text-white transition group/btn" data-cursor="LISTEN">
                   <span class="w-6 h-6 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 group-hover/btn:bg-purple-500 group-hover/btn:text-slate-950 transition">▶</span>
-                  <span>Audio Bark</span>
+                  <span>Voice Sample</span>
                 </button>
-                <span class="text-[10px] font-mono text-slate-500">Pinnacle Reasoning</span>
               </div>
             </article>
 
@@ -953,37 +856,22 @@
             <article class="carousel-card glow-card tilt-card p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between" data-tilt data-cursor="INSPECT">
               <div class="specular-sheen"></div>
               <div>
-                <div class="flex items-center justify-between mb-4">
-                  <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-amber-950/60 text-amber-300 border border-amber-500/30 font-bold uppercase">Economy Governor</span>
-                  <div class="flex items-center gap-1.5 text-[10px] font-mono text-amber-400">
-                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                    <span>BALANCING_MARKET</span>
-                  </div>
-                </div>
-
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 to-emerald-600 flex items-center justify-center font-bold text-white text-2xl mb-4 shadow-lg shadow-amber-500/25">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 to-emerald-600 flex items-center justify-center font-bold text-white text-2xl mb-5 shadow-lg shadow-amber-500/20">
                   ◈
                 </div>
 
                 <h3 class="text-xl font-bold text-white tracking-tight">Lord Chancellor Kaelen</h3>
                 <div class="text-xs text-amber-400 font-mono mt-0.5">Imperial Treasury Governor</div>
                 <p class="text-xs text-slate-300 mt-3 leading-relaxed">
-                  Algorithmic market maker. Analyzes real-time server transaction telemetry, counters diamond inflation, taxes monopolies, and creates scarcity events.
+                  Algorithmic merchant governor. Analyzes real-time server transactions, taxes monopolies, and counters item hyperinflation.
                 </p>
-
-                <div class="mt-4 p-3 rounded-xl bg-dark-surface border border-dark-border font-mono text-[11px] text-slate-400">
-                  <span class="text-indigo-400 font-semibold">Engine:</span> Claude Sonnet 5.5 Adaptive<br>
-                  <span class="text-purple-400 font-semibold">Telemetry:</span> Real-time Tick Sync<br>
-                  <span class="text-amber-400 font-semibold">Tool:</span> adjustDynamicTaxRate()
-                </div>
               </div>
 
               <div class="mt-6 pt-4 border-t border-dark-border flex items-center justify-between">
                 <button onclick="playVoiceBark('kaelen')" class="inline-flex items-center gap-2 text-xs font-mono text-amber-300 hover:text-white transition group/btn" data-cursor="LISTEN">
                   <span class="w-6 h-6 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 group-hover/btn:bg-amber-500 group-hover/btn:text-slate-950 transition">▶</span>
-                  <span>Audio Bark</span>
+                  <span>Voice Sample</span>
                 </button>
-                <span class="text-[10px] font-mono text-slate-500">Zero Hyperinflation</span>
               </div>
             </article>
 
@@ -991,37 +879,22 @@
             <article class="carousel-card glow-card tilt-card p-6 rounded-3xl bg-dark-card border border-dark-border relative flex flex-col justify-between" data-tilt data-cursor="INSPECT">
               <div class="specular-sheen"></div>
               <div>
-                <div class="flex items-center justify-between mb-4">
-                  <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-500/30 font-bold uppercase">Syndicate Broker</span>
-                  <div class="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span>STEALTH_PROXIMITY</span>
-                  </div>
-                </div>
-
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-cyan-600 flex items-center justify-center font-bold text-white text-2xl mb-4 shadow-lg shadow-emerald-500/25">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-cyan-600 flex items-center justify-center font-bold text-white text-2xl mb-5 shadow-lg shadow-emerald-500/20">
                   ⚡
                 </div>
 
                 <h3 class="text-xl font-bold text-white tracking-tight">Nyx the Shadow Broker</h3>
                 <div class="text-xs text-emerald-400 font-mono mt-0.5">Void Syndicate Informant</div>
                 <p class="text-xs text-slate-300 mt-3 leading-relaxed">
-                  Operates within the criminal underworld. Sells faction espionage whispers, brokers contraband contracts, and triggers emergent territory wars.
+                  Operates within the criminal underworld. Sells faction espionage intel, brokers contraband contracts, and coordinates bounties.
                 </p>
-
-                <div class="mt-4 p-3 rounded-xl bg-dark-surface border border-dark-border font-mono text-[11px] text-slate-400">
-                  <span class="text-indigo-400 font-semibold">Engine:</span> Claude Haiku 5.5 Edge<br>
-                  <span class="text-purple-400 font-semibold">Reflex:</span> 22ms TTFT<br>
-                  <span class="text-emerald-400 font-semibold">Tool:</span> issueUndergroundBounty()
-                </div>
               </div>
 
               <div class="mt-6 pt-4 border-t border-dark-border flex items-center justify-between">
                 <button onclick="playVoiceBark('nyx')" class="inline-flex items-center gap-2 text-xs font-mono text-emerald-300 hover:text-white transition group/btn" data-cursor="LISTEN">
                   <span class="w-6 h-6 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover/btn:bg-emerald-500 group-hover/btn:text-slate-950 transition">▶</span>
-                  <span>Audio Bark</span>
+                  <span>Voice Sample</span>
                 </button>
-                <span class="text-[10px] font-mono text-slate-500">Underworld Broker</span>
               </div>
             </article>
 
@@ -1043,31 +916,30 @@
       </div>
     </div>
 
-    <!-- SECTION: TACTICAL SANDBOX (LIVE CLAUDE 5.5 REASONING SIMULATOR) -->
+    <!-- SECTION: TACTICAL SANDBOX -->
     <section id="simulator" class="py-20 lg:py-28 relative motion-reveal">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6 motion-reveal">
           <div class="max-w-2xl">
-            <div class="inline-flex items-center gap-2 text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">
-              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-              Live Perception Sandbox
+            <div class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">
+              Interactive Sandbox
             </div>
             <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-              Test Claude 5.5 Adaptive Thinking & In-Game Tool Execution
+              Test Real-Time Cognition & In-Game Actions
             </h2>
             <p class="mt-2 text-slate-400 text-sm">
-              Experience the 2026 cognitive engine. Notice how <strong>Claude Sonnet 5.5</strong> produces internal tactical thoughts via Adaptive Thinking before synthesizing spoken dialogue and issuing validated server tool dispatches.
+              See how autonomous agents deliberate internally before replying and executing verified server commands.
             </p>
           </div>
 
-          <!-- Model Switcher: Claude Sonnet 5.5 vs Claude Haiku 5.5 -->
+          <!-- Model Switcher -->
           <div class="flex items-center gap-2 bg-dark-surface p-1.5 rounded-xl border border-dark-border self-start">
             <button onclick="setSimModel('sonnet-55')" id="btn-model-sonnet" class="px-3.5 py-1.5 rounded-lg bg-cyan-500/25 text-cyan-300 font-mono text-xs font-bold transition active:scale-95 shadow">
-              Claude Sonnet 5.5 (Adaptive Thinking)
+              Claude Sonnet 5.5
             </button>
             <button onclick="setSimModel('haiku-55')" id="btn-model-haiku" class="px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white font-mono text-xs font-semibold transition active:scale-95">
-              Claude Haiku 5.5 (Sub-30ms Reflex)
+              Claude Haiku 5.5
             </button>
           </div>
         </div>
@@ -1135,69 +1007,55 @@
               </div>
 
               <!-- Live Audio Waveform & TTFT Indicator -->
-              <div class="flex items-center gap-4">
-                <div class="hidden sm:flex items-center gap-1 h-5 px-2.5 rounded-lg bg-dark-surface border border-dark-border">
-                  <span class="w-1 bg-cyan-400 rounded-full spectral-bar" style="animation-delay: 0.1s"></span>
-                  <span class="w-1 bg-cyan-400 rounded-full spectral-bar" style="animation-delay: 0.3s"></span>
-                  <span class="w-1 bg-cyan-400 rounded-full spectral-bar" style="animation-delay: 0.2s"></span>
-                  <span class="w-1 bg-cyan-400 rounded-full spectral-bar" style="animation-delay: 0.4s"></span>
-                  <span class="w-1 bg-cyan-400 rounded-full spectral-bar" style="animation-delay: 0.15s"></span>
+            <!-- Agent Identity Header -->
+            <div class="flex items-center justify-between border-b border-dark-border pb-4 mb-4">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center font-bold text-white text-base shadow-md shadow-cyan-500/20">
+                  Ω
                 </div>
-                <div class="text-right font-mono text-xs">
-                  <div class="text-emerald-400 font-semibold flex items-center justify-end gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                    <span id="sim-latency">TTFT: 32ms</span>
-                  </div>
-                  <div class="text-[10px] text-slate-500">Live SSE Stream</div>
+                <div>
+                  <div class="text-sm font-bold text-white" id="sim-agent-name">Aurelius the Chronicler</div>
+                  <div class="text-xs text-slate-400 font-mono" id="sim-model-label">Claude Sonnet 5.5 Core</div>
                 </div>
+              </div>
+
+              <!-- Latency Indicator -->
+              <div class="text-right font-mono text-xs">
+                <span class="text-emerald-400 font-semibold" id="sim-latency">32ms</span>
               </div>
             </div>
 
-            <!-- Ingested Spatial Context Badge -->
-            <div class="bg-dark-surface rounded-xl p-3 border border-dark-border mb-3 font-mono text-xs text-slate-300 flex items-start justify-between gap-3">
-              <div class="overflow-x-auto">
-                <span class="text-purple-400 font-semibold">INGESTED_WORLD_STATE:</span>
-                <span id="sim-context" class="text-slate-400 ml-1">{ faction: "Aetherion Guard", standing: "Suspicious", location: "Grand Sanctum Vault" }</span>
-              </div>
-              <span class="text-[10px] text-cyan-400 font-bold shrink-0">1M Vector Memory Horizon</span>
+            <!-- Ingested Context -->
+            <div class="bg-dark-surface rounded-xl p-3 border border-dark-border mb-3 font-mono text-xs text-slate-300">
+              <span class="text-purple-400 font-semibold">Event:</span>
+              <span id="sim-context" class="text-slate-400 ml-1">{ faction: "Aetherion Guard", standing: "Suspicious", location: "Grand Sanctum Vault" }</span>
             </div>
 
-            <!-- Claude 5.5 Adaptive Thinking Accordion -->
+            <!-- Internal Reasoning Accordion -->
             <div class="bg-indigo-950/20 border border-indigo-500/25 rounded-xl p-3 mb-3 text-xs font-mono" id="thinking-container">
               <div class="flex items-center justify-between text-indigo-300 font-semibold cursor-pointer" onclick="toggleThinking()">
-                <div class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
-                  <span>CLAUDE_5.5_ADAPTIVE_THINKING (Internal Cognitive Trace)</span>
-                </div>
+                <span>Internal Reasoning</span>
                 <span class="text-[10px] text-indigo-400 hover:underline" id="thinking-toggle-text">Hide trace &minus;</span>
               </div>
               <div id="thinking-trace" class="mt-2 text-indigo-200/80 text-[11px] leading-relaxed border-t border-indigo-500/20 pt-2 font-mono">
-                [COGNITION] Ingested player trespass. Player holds Void_Ore_T3 (Contraband Tier 3). Checking faction treaty: Aetherion penal code article 4 forbids contraband in sanctum. Faction standing is currently Suspicious (score: -14). Synthesizing defensive response: Reject contraband bribe, query contraband registry via tool call, and issue ultimatum before alerting sentinels.
+                Player presents contraband Void Ore inside Grand Sanctum. Faction standing is Suspicious (-14). Deny sanctuary pass and issue ultimatum.
               </div>
             </div>
 
-            <!-- Deterministic Function Calling Box -->
-            <div class="bg-cyan-950/25 border border-cyan-500/25 rounded-xl p-3 mb-4 font-mono text-xs text-cyan-300 flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                <span>TOOL DISPATCH: <span id="sim-tool" class="font-bold text-white">inspectContrabandRegistry(item="Void_Ore_T3")</span></span>
-              </div>
-              <span class="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">SCHEMA_VERIFIED</span>
+            <!-- Action Box -->
+            <div class="bg-cyan-950/25 border border-cyan-500/25 rounded-xl p-3 mb-4 font-mono text-xs text-cyan-300">
+              <span class="text-slate-400">Action:</span> <span id="sim-tool" class="font-bold text-white">inspectContrabandRegistry("Void_Ore_T3")</span>
             </div>
 
             <!-- Streaming Dialogue Bubble -->
-            <div class="min-h-[130px] text-sm text-slate-200 leading-relaxed font-sans bg-dark-surface p-5 rounded-xl border border-dark-border relative" id="sim-dialogue">
-              "Hold your hand, stranger. The dark resonance of Void Ore is known to the High Council. You stand in the hallowed Sanctum of Aetherion offering cursed mineral for sanctuary? The Grand Warden would have your head on the outer ramparts for less. Speak your true allegiance before the Sentinels seal these iron gates."
+            <div class="min-h-[110px] text-sm text-slate-200 leading-relaxed font-sans bg-dark-surface p-4 rounded-xl border border-dark-border relative" id="sim-dialogue">
+              "Hold your hand, stranger. The dark resonance of Void Ore is forbidden in this Sanctum. Speak your allegiance before the Sentinels seal these iron gates."
             </div>
 
-            <!-- Live Token Stream Telemetry -->
-            <div class="mt-4 pt-3 border-t border-dark-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-[11px] font-mono text-slate-500">
-              <div class="flex items-center gap-3">
-                <span id="sim-tokens">Tokens: 247 in / 89 out</span>
-                <span>&bull;</span>
-                <span class="text-cyan-400 font-semibold">Canon Adherence: 100%</span>
-              </div>
-              <div class="text-slate-400">Stream status: <span class="text-emerald-400 font-bold">COMPLETED</span></div>
+            <!-- Telemetry Footer -->
+            <div class="mt-4 pt-3 border-t border-dark-border flex items-center justify-between text-xs font-mono text-slate-500">
+              <span id="sim-tokens">Tokens: 247 in / 89 out</span>
+              <span>100% Deterministic</span>
             </div>
           </div>
 
@@ -1206,17 +1064,17 @@
       </div>
     </section>
 
-    <!-- SECTION: SYSTEM TOPOLOGY (5-STAGE ZERO-LAG ENGINE) -->
+    <!-- SECTION: SYSTEM TOPOLOGY -->
     <section id="architecture" class="py-20 lg:py-28 relative bg-dark-surface/40 border-y border-dark-border motion-reveal">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center max-w-3xl mx-auto mb-16 motion-reveal">
-          <div class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">Engine Topology</div>
+          <div class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold mb-2">Engine Architecture</div>
           <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-            How Game Events Transform into Intelligent Actions
+            From Game Event to Action
           </h2>
           <p class="mt-3 text-slate-400 text-sm sm:text-base">
-            Engineered specifically for Minecraft PaperMC, Unreal Engine, and Unity with zero main-thread lag.
+            Engineered for high-traffic Minecraft PaperMC, Unreal Engine, and Unity with zero main-thread lag.
           </p>
         </div>
 
@@ -1225,47 +1083,42 @@
           <div class="h-full w-64 bg-gradient-to-r from-transparent via-cyan-400 to-transparent conduit-flow"></div>
         </div>
 
-        <!-- 5 Interactive Architecture Stages -->
+        <!-- 5 Architecture Stages -->
         <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative z-10">
           
           <div class="glow-card tilt-card motion-reveal p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden" data-tilt>
             <div class="specular-sheen"></div>
             <div class="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 font-mono text-xs font-bold flex items-center justify-center mb-3">01</div>
-            <div class="text-sm font-bold text-white">Spatial Ingestion</div>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Player movement, combat tags, chat, and proximity ingested asynchronously without touching main tick loop.</p>
-            <div class="mt-4 text-[10px] font-mono text-cyan-400 bg-cyan-950/40 p-1.5 rounded">Delta: 1.8ms</div>
+            <div class="text-sm font-bold text-white">Event Ingestion</div>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Player movement, combat tags, and proximity are queued asynchronously off-thread.</p>
           </div>
 
           <div class="glow-card tilt-card motion-reveal p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden" data-tilt style="transition-delay: 80ms;">
             <div class="specular-sheen"></div>
             <div class="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400 font-mono text-xs font-bold flex items-center justify-center mb-3">02</div>
-            <div class="text-sm font-bold text-white">1M Vector Memory Horizon</div>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Full 1,000,000 token persistent horizon retrieves historical player relationship score, past quest outcomes, and regional lore chronicles.</p>
-            <div class="mt-4 text-[10px] font-mono text-purple-400 bg-purple-950/40 p-1.5 rounded">Recall: 11.2ms</div>
+            <div class="text-sm font-bold text-white">Memory Recall</div>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Retrieves historical player relationship score, past quest outcomes, and regional lore.</p>
           </div>
 
           <div class="glow-card tilt-card motion-reveal p-5 rounded-2xl bg-dark-card border-2 border-cyan-500 text-left relative overflow-hidden shadow-xl shadow-cyan-500/10" data-tilt style="transition-delay: 160ms;">
             <div class="specular-sheen"></div>
             <div class="w-8 h-8 rounded-lg bg-cyan-500 text-slate-950 font-mono text-xs font-bold flex items-center justify-center mb-3">03</div>
-            <div class="text-sm font-bold text-white">Claude Sonnet 5.5 Adaptive Core</div>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Frontier reasoning with Adaptive Thinking synthesizes intent, tactical response, and validated function calls via SSE streaming.</p>
-            <div class="mt-4 text-[10px] font-mono text-cyan-300 bg-cyan-950/60 p-1.5 rounded font-bold">TTFT: 28.4ms</div>
+            <div class="text-sm font-bold text-white">Claude 5.5 Core</div>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Deliberates on player context, synthesizes speech, and generates verified commands.</p>
           </div>
 
           <div class="glow-card tilt-card motion-reveal p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden" data-tilt style="transition-delay: 240ms;">
             <div class="specular-sheen"></div>
             <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs font-bold flex items-center justify-center mb-3">04</div>
-            <div class="text-sm font-bold text-white">Canon Guardrail</div>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Strict JSON-schema verification ensures zero illegal game-state mutations or hallucinated exploits.</p>
-            <div class="mt-4 text-[10px] font-mono text-emerald-400 bg-emerald-950/40 p-1.5 rounded">Verify: 2.4ms</div>
+            <div class="text-sm font-bold text-white">Schema Verification</div>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Ensures strict game-state constraints. No invalid actions or unauthorized commands.</p>
           </div>
 
           <div class="glow-card tilt-card motion-reveal p-5 rounded-2xl bg-dark-card border border-dark-border text-left relative overflow-hidden" data-tilt style="transition-delay: 320ms;">
             <div class="specular-sheen"></div>
             <div class="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 font-mono text-xs font-bold flex items-center justify-center mb-3">05</div>
-            <div class="text-sm font-bold text-white">Game Server Action</div>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Dispatches in-game animation packets, dialogue audio, quest grants, and combat AI state to connected clients.</p>
-            <div class="mt-4 text-[10px] font-mono text-amber-400 bg-amber-950/40 p-1.5 rounded">Execute: 3.1ms</div>
+            <div class="text-sm font-bold text-white">Server Execution</div>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Dispatches in-game animation packets, dialogue audio, quest grants, and combat state.</p>
           </div>
 
         </div>
@@ -1322,12 +1175,11 @@
               </div>
               <p class="text-xs text-slate-400 mt-3">Ideal for small private SMPs, creator realms, and prototyping.</p>
               
-              <ul class="mt-6 space-y-3.5 text-xs text-slate-300 font-medium">
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>1 Server Realm</strong> (Minecraft / Unity)</li>
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Up to 10 Living NPCs</strong></li>
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Up to 250 Daily Active Players</li>
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Claude Haiku 5.5 + Sonnet 5.5 Engine</li>
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Drop-in PaperMC Plugin (`.jar`)</li>
+              <ul class="mt-6 space-y-3 text-xs text-slate-300 font-medium">
+                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1 Server Realm (PaperMC)</li>
+                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 10 Autonomous NPCs</li>
+                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Up to 250 Daily Players</li>
+                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Drop-in Server Plugin (.jar)</li>
               </ul>
             </div>
 
@@ -1352,13 +1204,11 @@
               </div>
               <p class="text-xs text-slate-400 mt-3">Built for active public Minecraft servers, RP servers, and indie studios.</p>
               
-              <ul class="mt-6 space-y-3.5 text-xs text-slate-300 font-medium">
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Up to 5 Server Realms / Worlds</strong></li>
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>50 Living NPCs & Sovereign Factions</strong></li>
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Up to 3,000 Daily Active Players</li>
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Claude Sonnet 5.5 Adaptive Thinking</li>
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Dynamic Economy Governor Agent</strong></li>
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 1M Episodic Vector Memory Sync</li>
+              <ul class="mt-6 space-y-3 text-xs text-slate-300 font-medium">
+                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 5 Server Realms / Worlds</li>
+                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 50 Autonomous NPCs</li>
+                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Dynamic Economy Governor</li>
+                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Up to 3,000 Daily Players</li>
               </ul>
             </div>
 
@@ -1379,13 +1229,11 @@
               </div>
               <p class="text-xs text-slate-400 mt-3">For high-traffic Minecraft networks (1,000+ CCU) and commercial MMOs.</p>
               
-              <ul class="mt-6 space-y-3.5 text-xs text-slate-300 font-medium">
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Unlimited Server Realms & Bungee/Velocity</strong></li>
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> <strong>Unlimited Living NPCs & Civilization Wars</strong></li>
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 25,000+ Daily Active Players</li>
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Claude Opus 5.5 + Sonnet 5.5 Dedicated Edge VPC</li>
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Custom Server Lore Fine-Tuning</li>
-                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 24/7 Dedicated Discord Architect Support</li>
+              <ul class="mt-6 space-y-3 text-xs text-slate-300 font-medium">
+                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Unlimited Realms & Proxy Networks</li>
+                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Unlimited Autonomous NPCs</li>
+                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Dedicated Claude 5.5 Edge VPC</li>
+                <li class="flex items-center gap-2.5"><svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Custom World Lore Fine-Tuning</li>
               </ul>
             </div>
 
@@ -2028,29 +1876,29 @@ print("Tool Dispatches:", response.executed_actions)`
       1: {
         agent: "Aurelius the Chronicler",
         context: '{ faction: "Aetherion Guard", standing: "Suspicious", location: "Grand Sanctum Vault" }',
-        thinking: "[COGNITION] Ingested player trespass. Player holds Void_Ore_T3 (Contraband Tier 3). Checking faction treaty: Aetherion penal code article 4 forbids contraband in sanctum. Faction standing is currently Suspicious (score: -14). Synthesizing defensive response: Reject contraband bribe, query contraband registry via tool call, and issue ultimatum before alerting sentinels.",
+        thinking: "Player presents contraband Void Ore inside the Grand Sanctum. Faction standing is Suspicious (-14). Deny sanctuary pass and issue ultimatum before alerting sentinels.",
         tool: 'inspectContrabandRegistry(item="Void_Ore_T3")',
-        dialogue: '"Hold your hand, stranger. The dark resonance of Void Ore is known to the High Council. You stand in the hallowed Sanctum of Aetherion offering cursed mineral for sanctuary? The Grand Warden would have your head on the outer ramparts for less. Speak your true allegiance before the Sentinels seal these iron gates."',
-        ttft: "48ms",
-        tokens: "247 in / 89 out"
+        dialogue: '"Hold your hand, stranger. The dark resonance of Void Ore is forbidden in this Sanctum. Speak your allegiance before the Sentinels seal these iron gates."',
+        ttft: "28ms",
+        tokens: "184 in / 52 out"
       },
       2: {
-        agent: "Commander Vael of the Iron Gate",
-        context: '{ alertLevel: "CODE_CRIMSON", intruder: "Lord_Varian", perimeter: "Bastion_West_Gate" }',
-        thinking: "[COGNITION] Threat evaluation: Lord_Varian detonated ender-charge at West Gate. Perimeter integrity down to 42%. Faction allegiance confirmed: Crimson Syndicate (Enemy of State). Action priority: Issue combat tag to prevent teleportation, activate ward-fire barrier, command sentinels to engage.",
-        tool: 'engageCombatTag(target="Lord_Varian", duration=60, radius=45)',
-        dialogue: '"Shield breach detected at Bastion West! Intruders of the Syndicate, drop your weapons or be dissolved in celestial ward-fire. Sentinels, lock the perimeter and activate the antimagic spires now!"',
-        ttft: "42ms",
-        tokens: "182 in / 54 out"
+        agent: "Commander Vael",
+        context: '{ alertLevel: "HIGH", intruder: "Lord_Varian", perimeter: "Bastion_West_Gate" }',
+        thinking: "Bastion West breach detected. Lord Varian detonated ender-charge. Engage combat tag to prevent teleport escape and command sentinels to engage.",
+        tool: 'engageCombatTag(target="Lord_Varian", duration=60)',
+        dialogue: '"Shield breach at Bastion West! Syndicate raiders, drop your weapons or face celestial ward-fire. Sentinels, lock the perimeter!"',
+        ttft: "22ms",
+        tokens: "142 in / 44 out"
       },
       3: {
         agent: "Archon Scribe Eldrin",
-        context: '{ queryType: "ANCIENT_LORE_INQUIRY", subject: "Tier_V_Ancestral_Monolith" }',
-        thinking: "[COGNITION] Epistemic lore lookup initiated. User querying First Convergence mythos. Querying long-term vector database 'Creation_Mythos_Age_1'. Found 3 relevant historical nodes. Tone parameters: Archaic, dignified, reverent.",
-        tool: 'queryEpistemicVectorStore(domain="Creation_Mythos_Age_1")',
-        dialogue: '"The Ancestral Monolith was forged in the First Convergence, long before the sundering of the realm. Five primordial kings poured their lifeforce into the bedrock to tether this plane. You seek the path of the Ancestor, yet few possess the resolve to endure the trials of the High Council."',
-        ttft: "56ms",
-        tokens: "312 in / 104 out"
+        context: '{ query: "MONOLITH_ORIGINS", subject: "Ancestral_Monolith" }',
+        thinking: "Player queries First Convergence mythos. Query lore codex for Ancestral Monolith origins.",
+        tool: 'queryLoreCodex(topic="Ancestral_Monolith")',
+        dialogue: '"The Ancestral Monolith was forged in the First Convergence. Five kings bound their lifeforce to the bedrock to tether this realm."',
+        ttft: "32ms",
+        tokens: "196 in / 48 out"
       }
     };
 
@@ -2069,7 +1917,7 @@ print("Tool Dispatches:", response.executed_actions)`
       document.getElementById('sim-context').textContent = data.context;
       document.getElementById('thinking-trace').textContent = data.thinking;
       document.getElementById('sim-tool').textContent = data.tool;
-      document.getElementById('sim-latency').textContent = 'TTFT: ' + (currentModel === 'haiku-55' ? '24ms' : data.ttft);
+      document.getElementById('sim-latency').textContent = currentModel === 'haiku-55' ? '22ms' : data.ttft;
       document.getElementById('sim-tokens').textContent = 'Tokens: ' + data.tokens;
       
       const el = document.getElementById('sim-dialogue');
@@ -2088,15 +1936,15 @@ print("Tool Dispatches:", response.executed_actions)`
     function simulateCustomPrompt() {
       const val = document.getElementById('custom-prompt').value.trim();
       if (!val) return;
-      document.getElementById('sim-context').textContent = `{ playerWhisper: "${val}", reputation: -14, proximity: "1.8m" }`;
-      document.getElementById('thinking-trace').textContent = `[COGNITION] Custom whisper intercepted: '${val}'. Analyzing sentiment and threat level. Threat score: 7.8/10. Synthesizing authoritative defensive counter-speech while notifying kingdom wardens.`;
-      document.getElementById('sim-tool').textContent = `evaluateIntentAndTone(query="${val.slice(0, 24)}...")`;
+      document.getElementById('sim-context').textContent = `{ playerWhisper: "${val}", proximity: "1.8m" }`;
+      document.getElementById('thinking-trace').textContent = `Player whispers: '${val}'. Tone is challenging. Maintain realm authority and issue warning.`;
+      document.getElementById('sim-tool').textContent = `evaluateIntent("${val.slice(0, 24)}...")`;
       
       const el = document.getElementById('sim-dialogue');
       el.textContent = '';
       if (streamInterval) clearInterval(streamInterval);
       
-      const reply = `"You speak boldly within the Grand Spire: '${val}'. The Sentinels are weighing every syllable. Know that the High Council hears through the stones themselves. Stand down or face banishment."`;
+      const reply = `"You speak boldly in the Grand Spire. The High Council hears through the stones themselves. Stand down or face banishment."`;
       let i = 0;
       streamInterval = setInterval(() => {
         el.textContent += reply.charAt(i);
@@ -2132,31 +1980,20 @@ print("Tool Dispatches:", response.executed_actions)`
     }
 
     // ==========================================
-    // 11. CINEMATIC QUANTUM PRELOADER (THE GLIMMERING STYLE)
+    // 11. PRELOADER
     // ==========================================
     (function initPreloader() {
       const preloader = document.getElementById('preloader');
       const fill = document.getElementById('preloader-fill');
       const percentEl = document.getElementById('preloader-percent');
-      const statusEl = document.getElementById('preloader-status');
       if (!preloader) return;
 
-      const steps = [
-        { pct: 24, status: "INITIALIZING QUANTUM PERCEPTION CORE..." },
-        { pct: 58, status: "HYDRATING CLAUDE 5.5 ADAPTIVE MATRIX..." },
-        { pct: 84, status: "SYNCHRONIZING PERSISTENT REALM MEMORY..." },
-        { pct: 100, status: "SOVEREIGN AGENTS READY." }
-      ];
-
-      let currentStep = 0;
+      let pct = 0;
       const interval = setInterval(() => {
-        if (currentStep < steps.length) {
-          const s = steps[currentStep];
-          if (fill) fill.style.width = s.pct + '%';
-          if (percentEl) percentEl.textContent = s.pct + '%';
-          if (statusEl) statusEl.textContent = s.status;
-          currentStep++;
-        } else {
+        pct += 25;
+        if (fill) fill.style.width = pct + '%';
+        if (percentEl) percentEl.textContent = pct + '%';
+        if (pct >= 100) {
           clearInterval(interval);
           setTimeout(() => {
             preloader.classList.add('loaded');
@@ -2164,9 +2001,9 @@ print("Tool Dispatches:", response.executed_actions)`
               const r = el.getBoundingClientRect();
               if (r.top < window.innerHeight) el.classList.add('is-revealed');
             });
-          }, 160);
+          }, 140);
         }
-      }, 110);
+      }, 60);
     })();
 
     // ==========================================
