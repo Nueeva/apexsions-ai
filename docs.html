@@ -86,13 +86,13 @@
       <section id="overview" class="border-b border-dark-border pb-10">
         <h1 class="text-3xl font-extrabold text-white">Apexsions Agentic Runtime</h1>
         <p class="text-slate-400 mt-2">
-          Apexsions AI is a distributed runtime for spawning and orchestrating autonomous characters and dynamic world state in digital universes, gaming servers, and simulation engines. Powered by <strong>Anthropic Claude 3.7 Sonnet (Hybrid Extended Thinking)</strong> and <strong>Claude 3.5 Haiku</strong>.
+          Apexsions AI is a distributed runtime for spawning and orchestrating autonomous characters and dynamic world state in digital universes, gaming servers, and simulation engines. Powered by the <strong>Anthropic Claude 5.5 Model Family (Claude Sonnet 5.5, Haiku 5.5, and Opus 5.5)</strong> with 1 Million token persistent memory and Adaptive Thinking.
         </p>
 
         <div class="mt-6 p-4 rounded-xl bg-dark-card border border-dark-border flex items-start gap-3">
           <div class="text-cyan-400 font-bold mt-0.5">ℹ</div>
           <div class="text-xs text-slate-300">
-            <strong>Inference Pipeline:</strong> Incoming game perception events are converted to high-dimensional spatial contexts, augmented with long-term vector episodic memory, and dispatched through Anthropic's Claude 3.7 streaming API with hybrid reasoning and strict tool validation.
+            <strong>Inference Pipeline:</strong> Incoming game perception events are converted to high-dimensional spatial contexts, augmented with 1M-token episodic vector memory, and dispatched through Anthropic's Claude 5.5 streaming API with adaptive thinking and strict tool validation.
           </div>
         </div>
       </section>
@@ -121,8 +121,9 @@
 <span class="text-purple-400">const</span> runtime = <span class="text-purple-400">new</span> <span class="text-cyan-400">ApexsionsRuntime</span>();
 <span class="text-purple-400">const</span> agent = runtime.<span class="text-blue-400">registerEntity</span>({
   <span class="text-slate-300">id</span>: <span class="text-emerald-300">'npc_gatekeeper'</span>,
-  <span class="text-slate-300">model</span>: <span class="text-emerald-300">'claude-3-7-sonnet-latest'</span>,
-  <span class="text-slate-300">thinking</span>: { <span class="text-slate-300">type</span>: <span class="text-emerald-300">'enabled'</span>, <span class="text-slate-300">budget_tokens</span>: <span class="text-amber-400">4096</span> }
+  <span class="text-slate-300">model</span>: <span class="text-emerald-300">'claude-sonnet-5-5-20260928'</span>,
+  <span class="text-slate-300">adaptiveThinking</span>: { <span class="text-slate-300">effort</span>: <span class="text-emerald-300">'high'</span>, <span class="text-slate-300">budgetTokens</span>: <span class="text-amber-400">8192</span> },
+  <span class="text-slate-300">contextWindow</span>: <span class="text-amber-400">1_000_000</span>
 });
 
 <span class="text-purple-400">const</span> stream = <span class="text-purple-400">await</span> agent.<span class="text-blue-400">perceiveAndAct</span>({
@@ -138,28 +139,39 @@
 
       <!-- Section: Supported Models -->
       <section id="models" class="border-b border-dark-border pb-10">
-        <h2 class="text-2xl font-bold text-white mb-4">Supported Anthropic Claude Models</h2>
+        <h2 class="text-2xl font-bold text-white mb-4">Supported Anthropic Claude 5.5 Model Family (2026 Lineup)</h2>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div class="p-5 rounded-xl bg-dark-card border border-dark-border">
             <div class="flex items-center justify-between mb-2">
-              <span class="font-bold text-white text-sm">Claude 3.7 Sonnet</span>
-              <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 font-semibold">Frontier &bull; Extended Thinking</span>
+              <span class="font-bold text-white text-sm">Claude Sonnet 5.5</span>
+              <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 font-semibold">Flagship Reasoning</span>
             </div>
-            <div class="font-mono text-xs text-slate-400 mb-2">claude-3-7-sonnet-latest</div>
+            <div class="font-mono text-xs text-slate-400 mb-2">claude-sonnet-5-5-20260928</div>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Recommended for complex world chronicles, geopolitical faction treaties, economic balancing, and deep strategic reasoning with native Extended Thinking traces.
+              Released Sept 28, 2026. Perfect balance of speed and intelligence. Adaptive thinking with 1M context window for multi-faction geopolitics and complex game systems.
             </p>
           </div>
 
           <div class="p-5 rounded-xl bg-dark-card border border-dark-border">
             <div class="flex items-center justify-between mb-2">
-              <span class="font-bold text-white text-sm">Claude 3.5 Haiku</span>
-              <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-semibold">Sub-45ms &bull; Reflex</span>
+              <span class="font-bold text-white text-sm">Claude Haiku 5.5</span>
+              <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-semibold">Sub-30ms Reflex</span>
             </div>
-            <div class="font-mono text-xs text-slate-400 mb-2">claude-3-5-haiku-latest</div>
+            <div class="font-mono text-xs text-slate-400 mb-2">claude-haiku-5-5-20261007</div>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Engineered for high-frequency low-latency reflex tasks: combat audio barks, quick spatial pathfinding decisions, merchant chatter, and crowd simulation.
+              Released Oct 7, 2026. Extreme throughput and low latency. Ideal for instant combat audio barks, crowd simulation, and sub-second merchant dialogue.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-dark-card border border-dark-border">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-bold text-white text-sm">Claude Opus 5.5</span>
+              <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 font-semibold">Pinnacle Intelligence</span>
+            </div>
+            <div class="font-mono text-xs text-slate-400 mb-2">claude-opus-5-5-20260922</div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Released Sept 22, 2026. Maximum reasoning capability for kingdom-wide economic governance, autonomous quest synthesis, and deep world simulation.
             </p>
           </div>
         </div>
