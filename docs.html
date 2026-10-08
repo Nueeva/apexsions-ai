@@ -86,13 +86,13 @@
       <section id="overview" class="border-b border-dark-border pb-10">
         <h1 class="text-3xl font-extrabold text-white">Apexsions Agentic Runtime</h1>
         <p class="text-slate-400 mt-2">
-          Apexsions AI is a distributed runtime for spawning and orchestrating autonomous characters and dynamic world state in digital universes, gaming servers, and simulation engines. Powered by <strong>Anthropic Claude 3.5 Sonnet</strong> and <strong>Claude 3.5 Haiku</strong>.
+          Apexsions AI is a distributed runtime for spawning and orchestrating autonomous characters and dynamic world state in digital universes, gaming servers, and simulation engines. Powered by <strong>Anthropic Claude 3.7 Sonnet (Hybrid Extended Thinking)</strong> and <strong>Claude 3.5 Haiku</strong>.
         </p>
 
         <div class="mt-6 p-4 rounded-xl bg-dark-card border border-dark-border flex items-start gap-3">
           <div class="text-cyan-400 font-bold mt-0.5">ℹ</div>
           <div class="text-xs text-slate-300">
-            <strong>Inference Pipeline:</strong> Incoming game perception events are converted to high-dimensional spatial contexts, augmented with long-term vector episodic memory, and dispatched through Anthropic's Claude streaming API with strict tool validation.
+            <strong>Inference Pipeline:</strong> Incoming game perception events are converted to high-dimensional spatial contexts, augmented with long-term vector episodic memory, and dispatched through Anthropic's Claude 3.7 streaming API with hybrid reasoning and strict tool validation.
           </div>
         </div>
       </section>
@@ -121,7 +121,8 @@
 <span class="text-purple-400">const</span> runtime = <span class="text-purple-400">new</span> <span class="text-cyan-400">ApexsionsRuntime</span>();
 <span class="text-purple-400">const</span> agent = runtime.<span class="text-blue-400">registerEntity</span>({
   <span class="text-slate-300">id</span>: <span class="text-emerald-300">'npc_gatekeeper'</span>,
-  <span class="text-slate-300">model</span>: <span class="text-emerald-300">'claude-3-5-sonnet-20241022'</span>
+  <span class="text-slate-300">model</span>: <span class="text-emerald-300">'claude-3-7-sonnet-latest'</span>,
+  <span class="text-slate-300">thinking</span>: { <span class="text-slate-300">type</span>: <span class="text-emerald-300">'enabled'</span>, <span class="text-slate-300">budget_tokens</span>: <span class="text-amber-400">4096</span> }
 });
 
 <span class="text-purple-400">const</span> stream = <span class="text-purple-400">await</span> agent.<span class="text-blue-400">perceiveAndAct</span>({
@@ -142,23 +143,23 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div class="p-5 rounded-xl bg-dark-card border border-dark-border">
             <div class="flex items-center justify-between mb-2">
-              <span class="font-bold text-white text-sm">Claude 3.5 Sonnet</span>
-              <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 font-semibold">Tier 1 &bull; Reasoning</span>
+              <span class="font-bold text-white text-sm">Claude 3.7 Sonnet</span>
+              <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 font-semibold">Frontier &bull; Extended Thinking</span>
             </div>
-            <div class="font-mono text-xs text-slate-400 mb-2">claude-3-5-sonnet-20241022</div>
+            <div class="font-mono text-xs text-slate-400 mb-2">claude-3-7-sonnet-latest</div>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Recommended for complex world chronicles, multi-character political negotiations, faction treaties, and deterministic multi-tool executions.
+              Recommended for complex world chronicles, geopolitical faction treaties, economic balancing, and deep strategic reasoning with native Extended Thinking traces.
             </p>
           </div>
 
           <div class="p-5 rounded-xl bg-dark-card border border-dark-border">
             <div class="flex items-center justify-between mb-2">
               <span class="font-bold text-white text-sm">Claude 3.5 Haiku</span>
-              <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-semibold">Sub-85ms &bull; Reflex</span>
+              <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-semibold">Sub-45ms &bull; Reflex</span>
             </div>
-            <div class="font-mono text-xs text-slate-400 mb-2">claude-3-5-haiku-20241022</div>
+            <div class="font-mono text-xs text-slate-400 mb-2">claude-3-5-haiku-latest</div>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Engineered for high-frequency low-latency tasks: combat audio barks, quick spatial pathfinding decisions, merchant chitchat, and rapid crowd simulation.
+              Engineered for high-frequency low-latency reflex tasks: combat audio barks, quick spatial pathfinding decisions, merchant chatter, and crowd simulation.
             </p>
           </div>
         </div>
