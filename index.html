@@ -497,17 +497,30 @@
       </a>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
         <a href="#purpose" class="hover:text-cyan-400 transition" data-cursor="EXPLORE">What is Apexsions?</a>
         <a href="#entities" class="hover:text-cyan-400 transition" data-cursor="DISCOVER">Living Cast</a>
         <a href="#simulator" class="hover:text-cyan-400 transition" data-cursor="TEST">Sandbox</a>
         <a href="#architecture" class="hover:text-cyan-400 transition" data-cursor="INSPECT">Architecture</a>
         <a href="#pricing" class="hover:text-cyan-400 transition" data-cursor="PRICING">Pricing</a>
-        <a href="/docs" class="hover:text-cyan-400 transition" data-cursor="READ">Docs</a>
+        <a href="https://web.apexsions.com" target="_blank" rel="noopener" class="text-amber-400/90 hover:text-amber-300 transition flex items-center gap-1" data-cursor="WEBSTORE">
+          <span>Web Platform</span>
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
       </nav>
 
       <!-- Action Buttons -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <!-- Live Server Status Pill -->
+        <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-dark-surface border border-emerald-500/30 text-xs font-mono text-emerald-300 shadow-sm" title="Apexsions Minecraft Server (PaperMC 1.20+ / Java 21)">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-slate-300">play.apexsions.com</span>
+          <button onclick="copyServerIP(this)" class="px-2 py-0.5 rounded bg-emerald-500/20 hover:bg-emerald-500/40 text-emerald-200 transition active:scale-95 text-[10px] font-sans font-semibold flex items-center gap-1">
+            <svg class="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy IP</span>
+          </button>
+        </div>
+
         <!-- Interactive Soundscape Synthesizer Toggle -->
         <button id="audio-toggle" onclick="toggleAudio()" class="inline-flex items-center gap-2 text-xs font-mono px-3 py-2 rounded-lg text-cyan-300 border border-cyan-500/30 bg-cyan-950/30 hover:border-cyan-400 transition" data-cursor="AUDIO" title="Toggle Generative Ambience & UI Soundscape">
           <div class="flex items-center gap-0.5 h-3">
@@ -539,11 +552,23 @@
     <!-- HERO SECTION -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pb-20 lg:pb-32 relative">
 
-      <!-- Top Announcement Pill -->
-      <div class="motion-reveal inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 text-xs font-medium mb-8 hover:border-cyan-400/60 transition cursor-pointer" onclick="openModal()">
-        <span class="text-slate-300">Powered by</span>
-        <span class="font-bold text-white">Anthropic Claude 5.5</span>
-        <svg class="w-3.5 h-3.5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      <!-- Top Announcement Pills -->
+      <div class="motion-reveal flex flex-wrap items-center justify-center gap-3 mb-8">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 text-xs font-medium hover:border-cyan-400/60 transition cursor-pointer" onclick="openModal()">
+          <span class="text-slate-300">Powered by</span>
+          <span class="font-bold text-white">Anthropic Claude 5.5</span>
+          <svg class="w-3.5 h-3.5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-950/30 text-emerald-300 text-xs font-mono">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-slate-400">Realm:</span>
+          <span class="font-bold text-white tracking-wide">play.apexsions.com</span>
+          <button onclick="copyServerIP(this)" class="px-2 py-0.5 rounded bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-200 transition active:scale-95 text-[10px] font-sans font-medium flex items-center gap-1">
+            <svg class="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy IP</span>
+          </button>
+        </div>
       </div>
 
       <!-- Clean Headline -->
@@ -552,8 +577,8 @@
       </h1>
 
       <!-- Grounded Subtitle -->
-      <p class="motion-reveal mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
-        Autonomous agents with persistent memory, dynamic market pricing, and in-game authority. Built for PaperMC and multiplayer game engines.
+      <p class="motion-reveal mt-6 text-base sm:text-lg text-slate-300 max-w-3xl mx-auto font-normal leading-relaxed">
+        The official multi-agent cognitive architecture for <span class="text-white font-semibold">Apexsions: The Peak Civilizations</span>. Sovereign entities with persistent lore memory, dynamic marketplace pricing, and real-time PaperMC authority.
       </p>
 
       <!-- Action Buttons -->
@@ -748,9 +773,9 @@
                 </div>
 
                 <h3 class="text-xl font-bold text-white tracking-tight">Aurelius the Chronicler</h3>
-                <div class="text-xs text-cyan-400 font-mono mt-0.5">Kingdom Warden of Aetherion</div>
+                <div class="text-xs text-cyan-400 font-mono mt-0.5">Kingdom Warden of Aetherion &bull; ApexsionsCore</div>
                 <p class="text-xs text-slate-300 mt-3 leading-relaxed">
-                  Authoritative lawkeeper guarding the Royal Sanctum. Enforces treaties, evaluates contraband bribes, and issues sovereign ultimatums.
+                  Imperial chronicler of the Ancestral Monolith. Evaluates player diplomatic standing across 11 official server ranks, records realm treaties, and awards progression XP via PaperMC APIs.
                 </p>
               </div>
 
@@ -777,9 +802,9 @@
                 </div>
 
                 <h3 class="text-xl font-bold text-white tracking-tight">Commander Vael</h3>
-                <div class="text-xs text-rose-400 font-mono mt-0.5">Sentinel of the Iron Gate</div>
+                <div class="text-xs text-rose-400 font-mono mt-0.5">High Warden of Realm Defense &bull; ApexsionsCore War</div>
                 <p class="text-xs text-slate-300 mt-3 leading-relaxed">
-                  Perimeter battle commander with sub-25ms reflex speed. Issues instant combat tags, summons antimagic barriers, and locks borders.
+                  Perimeter battle commander with sub-25ms reflex speed. Issues anti-combat-log tags, triggers bastion shields, and orchestrates kingdom siege defense in real time.
                 </p>
               </div>
 
@@ -806,9 +831,9 @@
                 </div>
 
                 <h3 class="text-xl font-bold text-white tracking-tight">Archon Scribe Eldrin</h3>
-                <div class="text-xs text-purple-400 font-mono mt-0.5">Codex Scholar of Convergence</div>
+                <div class="text-xs text-purple-400 font-mono mt-0.5">Master of Arcane Lore &bull; ApexsionsCustomEnchants</div>
                 <p class="text-xs text-slate-300 mt-3 leading-relaxed">
-                  Preserves centuries of server lore and mythos. Engages players with dignified poetic prose and verifies ancestral bloodlines.
+                  Preserves centuries of server lore and mythos. Crafts custom dual-currency soul enchantments, evaluates rare catches from the fishing vault, and guards ancestral grimoires.
                 </p>
               </div>
 
@@ -835,9 +860,9 @@
                 </div>
 
                 <h3 class="text-xl font-bold text-white tracking-tight">Lord Chancellor Kaelen</h3>
-                <div class="text-xs text-amber-400 font-mono mt-0.5">Imperial Treasury Governor</div>
+                <div class="text-xs text-amber-400 font-mono mt-0.5">Imperial Treasury Governor &bull; ApexsionsEconomy & Shop</div>
                 <p class="text-xs text-slate-300 mt-3 leading-relaxed">
-                  Algorithmic merchant governor. Analyzes real-time server transactions, taxes monopolies, and counters item hyperinflation.
+                  Algorithmic governor of the royal marketplace. Balances server currency rates, mitigates hyperinflation, and executes atomic escrow trades without currency duplication.
                 </p>
               </div>
 
@@ -864,9 +889,9 @@
                 </div>
 
                 <h3 class="text-xl font-bold text-white tracking-tight">Nyx the Shadow Broker</h3>
-                <div class="text-xs text-emerald-400 font-mono mt-0.5">Void Syndicate Informant</div>
+                <div class="text-xs text-emerald-400 font-mono mt-0.5">Void Syndicate Informant &bull; ApexsionsChat & Crates</div>
                 <p class="text-xs text-slate-300 mt-3 leading-relaxed">
-                  Operates within the criminal underworld. Sells faction espionage intel, brokers contraband contracts, and coordinates bounties.
+                  Operates within the criminal underworld. Sells faction espionage intel, routes encrypted mail whispers, and tracks cosmic crate drop anomalies across the realm.
                 </p>
               </div>
 
@@ -913,56 +938,121 @@
             </p>
           </div>
 
-          <!-- Model Switcher -->
-          <div class="flex items-center gap-2 bg-dark-surface p-1.5 rounded-xl border border-dark-border self-start">
-            <button onclick="setSimModel('sonnet-55')" id="btn-model-sonnet" class="px-3.5 py-1.5 rounded-lg bg-cyan-500/25 text-cyan-300 font-mono text-xs font-bold transition active:scale-95 shadow">
-              Claude Sonnet 5.5
-            </button>
-            <button onclick="setSimModel('haiku-55')" id="btn-model-haiku" class="px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white font-mono text-xs font-semibold transition active:scale-95">
-              Claude Haiku 5.5
-            </button>
+          <!-- Controls: Model Switcher & In-Game View Toggle -->
+          <div class="flex flex-wrap items-center gap-2.5 self-start">
+            <div class="flex items-center gap-1.5 bg-dark-surface p-1 rounded-xl border border-dark-border">
+              <button onclick="setSimModel('sonnet-55')" id="btn-model-sonnet" class="px-3 py-1.5 rounded-lg bg-cyan-500/25 text-cyan-300 font-mono text-xs font-bold transition active:scale-95 shadow">
+                Claude Sonnet 5.5
+              </button>
+              <button onclick="setSimModel('haiku-55')" id="btn-model-haiku" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-mono text-xs font-semibold transition active:scale-95">
+                Claude Haiku 5.5
+              </button>
+            </div>
+
+            <div class="flex items-center gap-1 bg-dark-surface p-1 rounded-xl border border-dark-border">
+              <button onclick="setSimView('hud')" id="btn-view-hud" class="px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 font-mono text-xs font-semibold transition active:scale-95 flex items-center gap-1">
+                <span>🖥️ Neural HUD</span>
+              </button>
+              <button onclick="setSimView('minecraft')" id="btn-view-minecraft" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-mono text-xs font-semibold transition active:scale-95 flex items-center gap-1">
+                <span>🎮 PaperMC Chat</span>
+              </button>
+            </div>
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          <!-- Event Trigger Presets (Left 4 cols) -->
+          <!-- Event Trigger Presets & Entity Picker (Left 4 cols) -->
           <div class="lg:col-span-4 space-y-3 motion-slide-left">
-            <div class="text-xs font-mono uppercase text-slate-400 tracking-wider mb-2 font-semibold">Select Game World Event:</div>
-            
-            <button onclick="simulateEvent(1)" id="btn-scenario-1" class="w-full text-left p-4 rounded-xl border border-cyan-500/60 bg-dark-cardHover transition group active:scale-[0.98] shadow-lg shadow-cyan-500/10">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-mono text-cyan-400 font-bold">Scenario 01</span>
-                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 font-semibold">Diplomacy & Trade</span>
+            <!-- Sovereign Entity Quick Picker -->
+            <div class="p-3 rounded-xl bg-dark-surface border border-dark-border">
+              <div class="text-[11px] font-mono uppercase text-slate-400 tracking-wider mb-2 font-semibold flex items-center justify-between">
+                <span>Active Sovereign:</span>
+                <span class="text-cyan-400" id="picker-active-name">Aurelius</span>
               </div>
-              <div class="text-sm font-bold text-white mt-1 group-hover:text-cyan-300 transition">Valorian Vault Contraband Smuggling</div>
-              <p class="text-xs text-slate-400 mt-1">Player offers forbidden Void Ore to bribe royal warden for sanctuary pass.</p>
+              <div class="grid grid-cols-5 gap-1.5">
+                <button onclick="selectAgentEntity('aurelius')" id="pick-aurelius" class="p-1 rounded-lg border border-cyan-500/60 bg-cyan-950/40 hover:scale-105 transition" title="Aurelius (ApexsionsCore)">
+                  <img src="assets/images/char_aurelius.jpg" class="w-full aspect-square rounded object-cover object-top">
+                </button>
+                <button onclick="selectAgentEntity('vael')" id="pick-vael" class="p-1 rounded-lg border border-dark-border bg-dark-card hover:scale-105 transition" title="Commander Vael (War & Defense)">
+                  <img src="assets/images/char_vael.jpg" class="w-full aspect-square rounded object-cover object-top">
+                </button>
+                <button onclick="selectAgentEntity('eldrin')" id="pick-eldrin" class="p-1 rounded-lg border border-dark-border bg-dark-card hover:scale-105 transition" title="Archon Eldrin (Custom Enchants)">
+                  <img src="assets/images/char_eldrin.jpg" class="w-full aspect-square rounded object-cover object-top">
+                </button>
+                <button onclick="selectAgentEntity('kaelen')" id="pick-kaelen" class="p-1 rounded-lg border border-dark-border bg-dark-card hover:scale-105 transition" title="Lord Kaelen (Economy & Treasury)">
+                  <img src="assets/images/char_kaelen.jpg" class="w-full aspect-square rounded object-cover object-top">
+                </button>
+                <button onclick="selectAgentEntity('nyx')" id="pick-nyx" class="p-1 rounded-lg border border-dark-border bg-dark-card hover:scale-105 transition" title="Nyx (Underworld & Crates)">
+                  <img src="assets/images/char_nyx.jpg" class="w-full aspect-square rounded object-cover object-top">
+                </button>
+              </div>
+            </div>
+
+            <div class="text-xs font-mono uppercase text-slate-400 tracking-wider mt-4 mb-2 font-semibold">Live Server Scenarios:</div>
+            
+            <button onclick="simulateEvent(1)" id="btn-scenario-1" class="w-full text-left p-3.5 rounded-xl border border-cyan-500/60 bg-dark-cardHover transition group active:scale-[0.98] shadow-lg shadow-cyan-500/10">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono text-cyan-400 font-bold">Aurelius &bull; Core</span>
+                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 font-semibold">Treaty & XP</span>
+              </div>
+              <div class="text-sm font-bold text-white mt-1 group-hover:text-cyan-300 transition">Sanctum Contraband Ultimatums</div>
+              <p class="text-xs text-slate-400 mt-1">Player offers forbidden Void Ore to bribe royal warden for a sanctuary pass.</p>
             </button>
 
-            <button onclick="simulateEvent(2)" id="btn-scenario-2" class="w-full text-left p-4 rounded-xl border border-dark-border bg-dark-card hover:bg-dark-cardHover transition group active:scale-[0.98]">
+            <button onclick="simulateEvent(2)" id="btn-scenario-2" class="w-full text-left p-3.5 rounded-xl border border-dark-border bg-dark-card hover:bg-dark-cardHover transition group active:scale-[0.98]">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-mono text-slate-400 font-semibold">Scenario 02</span>
-                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 font-semibold">Territory War</span>
+                <span class="text-xs font-mono text-rose-400 font-bold">Vael &bull; Combat Tag</span>
+                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-rose-500/15 text-rose-300 font-semibold">Siege Defense</span>
               </div>
-              <div class="text-sm font-bold text-white mt-1 group-hover:text-cyan-300 transition">Bastion Perimeter Shield Breach</div>
+              <div class="text-sm font-bold text-white mt-1 group-hover:text-cyan-300 transition">Bastion Shield Anti-Log Trigger</div>
               <p class="text-xs text-slate-400 mt-1">Syndicate raider detonates ender-charge at the outer kingdom anti-magic gate.</p>
             </button>
 
-            <button onclick="simulateEvent(3)" id="btn-scenario-3" class="w-full text-left p-4 rounded-xl border border-dark-border bg-dark-card hover:bg-dark-cardHover transition group active:scale-[0.98]">
+            <button onclick="simulateEvent(3)" id="btn-scenario-3" class="w-full text-left p-3.5 rounded-xl border border-dark-border bg-dark-card hover:bg-dark-cardHover transition group active:scale-[0.98]">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-mono text-slate-400 font-semibold">Scenario 03</span>
-                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-purple-500/15 text-purple-300 font-semibold">Epistemic Lore</span>
+                <span class="text-xs font-mono text-purple-400 font-bold">Eldrin &bull; Enchants</span>
+                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-purple-500/15 text-purple-300 font-semibold">Arcane Relics</span>
               </div>
-              <div class="text-sm font-bold text-white mt-1 group-hover:text-cyan-300 transition">Codex of the First Convergence</div>
-              <p class="text-xs text-slate-400 mt-1">Scholar queries the historical origin of the Tier V Ancestral Monolith.</p>
+              <div class="text-sm font-bold text-white mt-1 group-hover:text-cyan-300 transition">Dual-Currency Soul Catalyst</div>
+              <p class="text-xs text-slate-400 mt-1">Player crafts Tier V Astral Reaper enchantment using souls and fishing vault relics.</p>
+            </button>
+
+            <button onclick="simulateEvent(4)" id="btn-scenario-4" class="w-full text-left p-3.5 rounded-xl border border-dark-border bg-dark-card hover:bg-dark-cardHover transition group active:scale-[0.98]">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono text-amber-400 font-bold">Kaelen &bull; Economy</span>
+                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 font-semibold">Dynamic Market</span>
+              </div>
+              <div class="text-sm font-bold text-white mt-1 group-hover:text-cyan-300 transition">Emerald Dump & Escrow Tariff</div>
+              <p class="text-xs text-slate-400 mt-1">Player sells 256 deepslate emeralds into royal exchange; governor calculates tariffs.</p>
+            </button>
+
+            <button onclick="simulateEvent(5)" id="btn-scenario-5" class="w-full text-left p-3.5 rounded-xl border border-dark-border bg-dark-card hover:bg-dark-cardHover transition group active:scale-[0.98]">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono text-emerald-400 font-bold">Nyx &bull; Chat & Crates</span>
+                <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 font-semibold">Underworld Intel</span>
+              </div>
+              <div class="text-sm font-bold text-white mt-1 group-hover:text-cyan-300 transition">Encrypted Crate Key Whispers</div>
+              <p class="text-xs text-slate-400 mt-1">Shadow broker leaks encrypted coordinates for rare cosmic crate drops for void shards.</p>
             </button>
 
             <!-- Custom Whisper Dispatch Input -->
             <div class="pt-3 border-t border-dark-border">
-              <label class="block text-xs font-mono text-slate-400 mb-1.5">Or Dispatch Custom In-Game Player Whisper:</label>
+              <label class="block text-xs font-mono text-slate-400 mb-1.5 flex items-center justify-between">
+                <span>Dispatch In-Game Player Whisper:</span>
+                <span class="text-[10px] text-cyan-400">EN / ID Supported</span>
+              </label>
               <div class="flex gap-2">
-                <input type="text" id="custom-prompt" placeholder="e.g. Surrender the relic or your kingdom burns..." class="w-full px-3 py-2 text-xs rounded-lg bg-dark-surface border border-dark-border text-white focus:outline-none focus:border-cyan-400 font-mono transition">
+                <input type="text" id="custom-prompt" placeholder="e.g. Berapa harga diamond sekarang? / Surrender now!" class="w-full px-3 py-2 text-xs rounded-lg bg-dark-surface border border-dark-border text-white focus:outline-none focus:border-cyan-400 font-mono transition" onkeydown="if(event.key==='Enter') simulateCustomPrompt()">
                 <button onclick="simulateCustomPrompt()" class="px-3.5 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition active:scale-95">Send</button>
+              </div>
+
+              <!-- Quick Prompt Suggestion Chips -->
+              <div class="flex flex-wrap gap-1.5 mt-2">
+                <button onclick="setQuickPrompt('Berapa harga diamond sekarang?')" class="text-[10px] font-mono px-2 py-0.5 rounded bg-dark-surface border border-dark-border hover:border-slate-500 text-slate-400 hover:text-white transition">💎 Harga Pasar</button>
+                <button onclick="setQuickPrompt('Bantu aku enchant pedangku!')" class="text-[10px] font-mono px-2 py-0.5 rounded bg-dark-surface border border-dark-border hover:border-slate-500 text-slate-400 hover:text-white transition">✨ Enchant Relik</button>
+                <button onclick="setQuickPrompt('Serang benteng musuh sekarang!')" class="text-[10px] font-mono px-2 py-0.5 rounded bg-dark-surface border border-dark-border hover:border-slate-500 text-slate-400 hover:text-white transition">⚔️ Deklarasi Perang</button>
+                <button onclick="setQuickPrompt('Ada info rahasia crate langka?')" class="text-[10px] font-mono px-2 py-0.5 rounded bg-dark-surface border border-dark-border hover:border-slate-500 text-slate-400 hover:text-white transition">🗝️ Bocoran Crate</button>
               </div>
             </div>
           </div>
@@ -978,7 +1068,7 @@
                 <div>
                   <div class="flex items-center gap-2">
                     <span class="text-sm font-bold text-white" id="sim-agent-name">Aurelius the Chronicler</span>
-                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30 font-semibold">Kingdom Warden</span>
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30 font-semibold" id="sim-agent-badge">ApexsionsCore &bull; Warden</span>
                   </div>
                   <div class="text-[11px] text-slate-400 font-mono mt-0.5" id="sim-model-label">Engine: Claude Sonnet 5.5 &bull; Adaptive Thinking Active (1M Context)</div>
                 </div>
@@ -986,42 +1076,87 @@
 
               <!-- Latency Indicator -->
               <div class="text-right font-mono text-xs">
-                <span class="text-emerald-400 font-semibold" id="sim-latency">32ms</span>
+                <span class="text-emerald-400 font-semibold" id="sim-latency">28ms TTFT</span>
               </div>
             </div>
 
-            <!-- Ingested Context -->
-            <div class="bg-dark-surface rounded-xl p-3 border border-dark-border mb-3 font-mono text-xs text-slate-300">
-              <span class="text-purple-400 font-semibold">Event:</span>
-              <span id="sim-context" class="text-slate-400 ml-1">{ faction: "Aetherion Guard", standing: "Suspicious", location: "Grand Sanctum Vault" }</span>
-            </div>
-
-            <!-- Internal Reasoning Accordion -->
-            <div class="bg-indigo-950/20 border border-indigo-500/25 rounded-xl p-3 mb-3 text-xs font-mono" id="thinking-container">
-              <div class="flex items-center justify-between text-indigo-300 font-semibold cursor-pointer" onclick="toggleThinking()">
-                <span>Internal Reasoning</span>
-                <span class="text-[10px] text-indigo-400 hover:underline" id="thinking-toggle-text">Hide trace &minus;</span>
+            <!-- VIEW 1: NEURAL HUD -->
+            <div id="sim-view-hud" class="space-y-3">
+              <!-- Ingested Context -->
+              <div class="bg-dark-surface rounded-xl p-3 border border-dark-border font-mono text-xs text-slate-300">
+                <span class="text-purple-400 font-semibold">Event:</span>
+                <span id="sim-context" class="text-slate-400 ml-1">{ faction: "Aetherion Guard", standing: "Suspicious", location: "Grand Sanctum Vault" }</span>
               </div>
-              <div id="thinking-trace" class="mt-2 text-indigo-200/80 text-[11px] leading-relaxed border-t border-indigo-500/20 pt-2 font-mono">
-                Player presents contraband Void Ore inside Grand Sanctum. Faction standing is Suspicious (-14). Deny sanctuary pass and issue ultimatum.
+
+              <!-- Internal Reasoning Accordion -->
+              <div class="bg-indigo-950/20 border border-indigo-500/25 rounded-xl p-3 text-xs font-mono" id="thinking-container">
+                <div class="flex items-center justify-between text-indigo-300 font-semibold cursor-pointer" onclick="toggleThinking()">
+                  <span>Internal Reasoning</span>
+                  <span class="text-[10px] text-indigo-400 hover:underline" id="thinking-toggle-text">Hide trace &minus;</span>
+                </div>
+                <div id="thinking-trace" class="mt-2 text-indigo-200/80 text-[11px] leading-relaxed border-t border-indigo-500/20 pt-2 font-mono">
+                  Player presents contraband Void Ore inside Grand Sanctum. Faction standing is Suspicious (-14). Deny sanctuary pass and issue ultimatum.
+                </div>
+              </div>
+
+              <!-- Action Box -->
+              <div class="bg-cyan-950/25 border border-cyan-500/25 rounded-xl p-3 font-mono text-xs text-cyan-300">
+                <span class="text-slate-400">Action:</span> <span id="sim-tool" class="font-bold text-white">inspectContrabandRegistry("Void_Ore_T3")</span>
+              </div>
+
+              <!-- Streaming Dialogue Bubble -->
+              <div class="min-h-[110px] text-sm text-slate-200 leading-relaxed font-sans bg-dark-surface p-4 rounded-xl border border-dark-border relative" id="sim-dialogue">
+                "Hold your hand, stranger. The dark resonance of Void Ore is forbidden in this Sanctum. Speak your allegiance before the Sentinels seal these iron gates."
+              </div>
+
+              <!-- Telemetry Footer -->
+              <div class="pt-3 border-t border-dark-border flex items-center justify-between text-xs font-mono text-slate-500">
+                <span id="sim-tokens">Tokens: 184 in / 52 out</span>
+                <span class="text-cyan-400/80">0.00 TPS Impact &bull; Fully Async</span>
               </div>
             </div>
 
-            <!-- Action Box -->
-            <div class="bg-cyan-950/25 border border-cyan-500/25 rounded-xl p-3 mb-4 font-mono text-xs text-cyan-300">
-              <span class="text-slate-400">Action:</span> <span id="sim-tool" class="font-bold text-white">inspectContrabandRegistry("Void_Ore_T3")</span>
+            <!-- VIEW 2: PAPERMC IN-GAME CHAT STREAM -->
+            <div id="sim-view-minecraft" class="hidden">
+              <div class="p-4 rounded-xl font-mono text-xs sm:text-sm leading-relaxed border border-slate-700/60 bg-[#0d0f17]/95 backdrop-blur shadow-2xl">
+                <div class="text-[11px] text-slate-400 mb-3 pb-2 border-b border-slate-800 flex items-center justify-between">
+                  <span class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span class="text-emerald-300 font-bold">PaperMC 1.20+ Chat Stream</span>
+                    <span class="text-slate-500">&bull; Kyori Adventure MiniMessage</span>
+                  </span>
+                  <span class="text-slate-500 text-[10px]">play.apexsions.com</span>
+                </div>
+
+                <div class="space-y-2 py-1 font-mono text-xs">
+                  <div id="mc-player-line" class="text-slate-300">
+                    <span class="text-slate-500">[12:44:02]</span> <span class="text-amber-400 font-bold">[Wanderer] You:</span> <span class="text-white" id="mc-player-text">Halt, what is this place?</span>
+                  </div>
+                  <div class="text-slate-200">
+                    <span class="text-slate-500">[12:44:02]</span> <span class="text-cyan-400 font-bold" id="mc-agent-prefix">[Warden] Aurelius:</span> <span class="text-cyan-100" id="mc-dialogue-text">"Hold your hand, stranger. The dark resonance of Void Ore is forbidden in this Sanctum..."</span>
+                  </div>
+                </div>
+
+                <!-- Interactive MiniMessage Click Actions -->
+                <div class="mt-4 pt-3 border-t border-slate-800 flex flex-wrap items-center gap-2 text-xs">
+                  <span class="text-slate-500 text-[10px]">In-Game Click Actions:</span>
+                  <button onclick="mcActionClick('ACCEPT')" class="px-2.5 py-1 rounded bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-900 transition active:scale-95 text-[11px]">
+                    [✔ Pledge Allegiance]
+                  </button>
+                  <button onclick="mcActionClick('REJECT')" class="px-2.5 py-1 rounded bg-rose-950/80 border border-rose-500/40 text-rose-300 hover:bg-rose-900 transition active:scale-95 text-[11px]">
+                    [✖ Challenge Warden]
+                  </button>
+                  <button onclick="mcActionClick('LORE')" class="px-2.5 py-1 rounded bg-dark-card border border-dark-border text-slate-300 hover:bg-slate-800 transition active:scale-95 text-[11px]">
+                    [📜 Query Monolith Lore]
+                  </button>
+                </div>
+              </div>
+
+              <div class="mt-3 text-right text-[11px] font-mono text-slate-500">
+                <span>Rendered via Kyori Adventure Component Pipeline</span>
+              </div>
             </div>
 
-            <!-- Streaming Dialogue Bubble -->
-            <div class="min-h-[110px] text-sm text-slate-200 leading-relaxed font-sans bg-dark-surface p-4 rounded-xl border border-dark-border relative" id="sim-dialogue">
-              "Hold your hand, stranger. The dark resonance of Void Ore is forbidden in this Sanctum. Speak your allegiance before the Sentinels seal these iron gates."
-            </div>
-
-            <!-- Telemetry Footer -->
-            <div class="mt-4 pt-3 border-t border-dark-border flex items-center justify-between text-xs font-mono text-slate-500">
-              <span id="sim-tokens">Tokens: 247 in / 89 out</span>
-              <span>100% Deterministic</span>
-            </div>
           </div>
 
         </div>
@@ -1837,90 +1972,317 @@ print("Tool Dispatches:", response.executed_actions)`
       }
     }
 
+    // SERVER TELEMETRY: COPY IP FUNCTION
+    function copyServerIP(btn) {
+      navigator.clipboard.writeText('play.apexsions.com');
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = '<span class="text-emerald-200 font-bold">Copied!</span>';
+      setTimeout(() => {
+        btn.innerHTML = originalHTML;
+      }, 2000);
+    }
+
+    // SIMULATOR VIEW SWITCHER: NEURAL HUD VS MINECRAFT CHAT
+    let currentSimView = 'hud';
+    function setSimView(view) {
+      currentSimView = view;
+      const hudEl = document.getElementById('sim-view-hud');
+      const mcEl = document.getElementById('sim-view-minecraft');
+      const btnHud = document.getElementById('btn-view-hud');
+      const btnMc = document.getElementById('btn-view-minecraft');
+
+      if (view === 'hud') {
+        hudEl.classList.remove('hidden');
+        mcEl.classList.add('hidden');
+        btnHud.className = 'px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 font-mono text-xs font-semibold transition active:scale-95 flex items-center gap-1';
+        btnMc.className = 'px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-mono text-xs font-semibold transition active:scale-95 flex items-center gap-1';
+      } else {
+        hudEl.classList.add('hidden');
+        mcEl.classList.remove('hidden');
+        btnMc.className = 'px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 font-mono text-xs font-semibold transition active:scale-95 flex items-center gap-1';
+        btnHud.className = 'px-3 py-1.5 rounded-lg text-slate-400 hover:text-white font-mono text-xs font-semibold transition active:scale-95 flex items-center gap-1';
+      }
+    }
+
+    // ACTIVE AGENT SOVEREIGN PICKER
+    let activeAgentKey = 'aurelius';
+    const sovereignProfiles = {
+      aurelius: {
+        name: "Aurelius the Chronicler",
+        badge: "ApexsionsCore • Warden",
+        avatar: "assets/images/char_aurelius.jpg",
+        color: "text-cyan-400",
+        mcPrefix: "[Warden] Aurelius",
+        tool: "ApexsionsCoreAPI.getKingdomStanding()",
+        greeting: "Greetings, Wanderer. I record the treaties of the Ancestral Monolith. What brings you before the High Sanctum?"
+      },
+      vael: {
+        name: "Commander Vael",
+        badge: "ApexsionsCore • Sentinel",
+        avatar: "assets/images/char_vael.jpg",
+        color: "text-rose-400",
+        mcPrefix: "[Sentinel] Vael",
+        tool: "ApexsionsCoreAPI.getWarZoneStatus()",
+        greeting: "State your business quickly. The bastions are fortified and my sentinels are on high alert."
+      },
+      eldrin: {
+        name: "Archon Scribe Eldrin",
+        badge: "ApexsionsCustomEnchants • Scholar",
+        avatar: "assets/images/char_eldrin.jpg",
+        color: "text-purple-400",
+        mcPrefix: "[Archon] Eldrin",
+        tool: "ApexsionsCustomEnchantsAPI.queryGrimoire()",
+        greeting: "The stars align across the Astral Spire. Seek you ancient enchantments or celestial vault wisdom?"
+      },
+      kaelen: {
+        name: "Lord Chancellor Kaelen",
+        badge: "ApexsionsEconomy • Governor",
+        avatar: "assets/images/char_kaelen.jpg",
+        color: "text-amber-400",
+        mcPrefix: "[Governor] Kaelen",
+        tool: "ApexsionsEconomyAPI.queryMarketIndex()",
+        greeting: "Welcome to the Imperial Treasury. The market fluctuates by the second. Are you buying, selling, or balancing escrow?"
+      },
+      nyx: {
+        name: "Nyx the Shadow Broker",
+        badge: "ApexsionsChat & Crates • Informant",
+        avatar: "assets/images/char_nyx.jpg",
+        color: "text-emerald-400",
+        mcPrefix: "[Shadow] Nyx",
+        tool: "ApexsionsChatAPI.queryEncryptedBounties()",
+        greeting: "Lower your voice. In the alleyways of Apexsions, information costs void shards. What whispers do you seek?"
+      }
+    };
+
+    function selectAgentEntity(key) {
+      activeAgentKey = key;
+      const profile = sovereignProfiles[key];
+      ['aurelius', 'vael', 'eldrin', 'kaelen', 'nyx'].forEach(k => {
+        const btn = document.getElementById('pick-' + k);
+        if (btn) {
+          if (k === key) {
+            btn.className = 'p-1 rounded-lg border border-cyan-500/80 bg-cyan-950/60 scale-105 transition shadow-sm';
+          } else {
+            btn.className = 'p-1 rounded-lg border border-dark-border bg-dark-card hover:scale-105 transition';
+          }
+        }
+      });
+      document.getElementById('picker-active-name').textContent = profile.name.split(' ')[0];
+      document.getElementById('sim-agent-name').textContent = profile.name;
+      document.getElementById('sim-agent-badge').textContent = profile.badge;
+      document.getElementById('sim-agent-avatar').src = profile.avatar;
+      document.getElementById('sim-context').textContent = `{ targetNPC: "${profile.name}", system: "${profile.badge.split(' • ')[0]}", playerRank: "Wanderer" }`;
+      document.getElementById('thinking-trace').textContent = `Agent ${profile.name} initialized. Analyzing player proximity (2.1m) and active realm standing. Ready for interaction.`;
+      document.getElementById('sim-tool').textContent = profile.tool;
+      document.getElementById('mc-agent-prefix').textContent = profile.mcPrefix + ':';
+      
+      streamDialogueText(profile.greeting);
+    }
+
+    function setQuickPrompt(text) {
+      const input = document.getElementById('custom-prompt');
+      if (input) {
+        input.value = text;
+        simulateCustomPrompt();
+      }
+    }
+
+    function mcActionClick(action) {
+      const el = document.getElementById('mc-player-text');
+      if (action === 'ACCEPT') {
+        el.textContent = '[Pledge Allegiance to Aetherion]';
+        simulateCustomPrompt('I pledge my allegiance and blade to the Sovereign Realm of Aetherion.');
+      } else if (action === 'REJECT') {
+        el.textContent = '[Challenge Realm Authority]';
+        simulateCustomPrompt('I bow to no warden! Stand down or face my wrath!');
+      } else if (action === 'LORE') {
+        el.textContent = '[Query Monolith Lore]';
+        simulateCustomPrompt('What is the mythos behind the Ancestral Monolith?');
+      }
+    }
+
     const scenarios = {
       1: {
+        agentKey: "aurelius",
         agent: "Aurelius the Chronicler",
+        badge: "ApexsionsCore • Warden",
         avatar: "assets/images/char_aurelius.jpg",
+        mcPrefix: "[Warden] Aurelius:",
         context: '{ faction: "Aetherion Guard", standing: "Suspicious", location: "Grand Sanctum Vault" }',
         thinking: "Player presents contraband Void Ore inside the Grand Sanctum. Faction standing is Suspicious (-14). Deny sanctuary pass and issue ultimatum before alerting sentinels.",
-        tool: 'inspectContrabandRegistry(item="Void_Ore_T3")',
+        tool: 'ApexsionsCoreAPI.inspectContrabandRegistry("Void_Ore_T3")',
         dialogue: '"Hold your hand, stranger. The dark resonance of Void Ore is forbidden in this Sanctum. Speak your allegiance before the Sentinels seal these iron gates."',
         ttft: "28ms",
         tokens: "184 in / 52 out"
       },
       2: {
+        agentKey: "vael",
         agent: "Commander Vael",
+        badge: "ApexsionsCore • Sentinel",
         avatar: "assets/images/char_vael.jpg",
+        mcPrefix: "[Sentinel] Vael:",
         context: '{ alertLevel: "HIGH", intruder: "Lord_Varian", perimeter: "Bastion_West_Gate" }',
         thinking: "Bastion West breach detected. Lord Varian detonated ender-charge. Engage combat tag to prevent teleport escape and command sentinels to engage.",
-        tool: 'engageCombatTag(target="Lord_Varian", duration=60)',
+        tool: 'ApexsionsCoreAPI.engageCombatTag(target="Lord_Varian", duration=60)',
         dialogue: '"Shield breach at Bastion West! Syndicate raiders, drop your weapons or face celestial ward-fire. Sentinels, lock the perimeter!"',
         ttft: "22ms",
         tokens: "142 in / 44 out"
       },
       3: {
+        agentKey: "eldrin",
         agent: "Archon Scribe Eldrin",
+        badge: "ApexsionsCustomEnchants • Scholar",
         avatar: "assets/images/char_eldrin.jpg",
+        mcPrefix: "[Archon] Eldrin:",
         context: '{ query: "MONOLITH_ORIGINS", subject: "Ancestral_Monolith" }',
         thinking: "Player queries First Convergence mythos. Query lore codex for Ancestral Monolith origins.",
-        tool: 'queryLoreCodex(topic="Ancestral_Monolith")',
-        dialogue: '"The Ancestral Monolith was forged in the First Convergence. Five kings bound their lifeforce to the bedrock to tether this realm."',
+        tool: 'ApexsionsCustomEnchantsAPI.queryLoreCodex("Ancestral_Monolith")',
+        dialogue: '"The Ancestral Monolith was forged in the First Convergence. Five kings bound their lifeforce to the bedrock to tether this realm across eternity."',
         ttft: "32ms",
         tokens: "196 in / 48 out"
+      },
+      4: {
+        agentKey: "kaelen",
+        agent: "Lord Chancellor Kaelen",
+        badge: "ApexsionsEconomy • Governor",
+        avatar: "assets/images/char_kaelen.jpg",
+        mcPrefix: "[Governor] Kaelen:",
+        context: '{ transactionType: "BULK_SELL", item: "DEEPSLATE_EMERALD_ORE", qty: 256, playerRank: "Archon" }',
+        thinking: "Player dumping 256 deepslate emeralds into royal exchange. Query dynamic market trend index to prevent hyperinflation. Calculate royal tariff at 4.5% and execute atomic transaction.",
+        tool: 'ApexsionsEconomyAPI.executeAtomicExchange(uuid, "EMERALD", 256, tariff=0.045)',
+        dialogue: '"The Royal Treasury acknowledges your haul, Archon. However, influx from eastern mines has saturated the market by 12%. I can offer 14,200 silver with standard imperial tariff applied. Do you sign the escrow?"',
+        ttft: "26ms",
+        tokens: "165 in / 54 out"
+      },
+      5: {
+        agentKey: "nyx",
+        agent: "Nyx the Shadow Broker",
+        badge: "ApexsionsChat & Crates • Informant",
+        avatar: "assets/images/char_nyx.jpg",
+        mcPrefix: "[Shadow] Nyx:",
+        context: '{ query: "SHADOW_BOUNTY_INTEL", targetGuild: "Crimson_Order", channel: "ENCRYPTED_WHISPER" }',
+        thinking: "Player seeks clandestine intelligence on Crimson Order guild stash. Faction reputation is Neutral (+2). Encrypt transmission via ApexsionsChat and require 3 Void Shards before releasing coordinates.",
+        tool: 'ApexsionsChatAPI.dispatchEncryptedWhisper(target, "VOIDAURA_COORDS", cost=3)',
+        dialogue: '"Keep your voice low in the shadows. The Crimson Order hid their ancestral crate key deep beneath the basalt crags. Pay the 3 Void Shards fee, and the cipher is yours."',
+        ttft: "25ms",
+        tokens: "178 in / 49 out"
       }
     };
 
     let streamInterval = null;
-    function simulateEvent(id) {
-      for (let i = 1; i <= 3; i++) {
-        const btn = document.getElementById('btn-scenario-' + i);
-        if (i === id) {
-          btn.className = 'w-full text-left p-4 rounded-xl border border-cyan-500/60 bg-dark-cardHover transition group active:scale-[0.98] shadow-lg shadow-cyan-500/10';
-        } else {
-          btn.className = 'w-full text-left p-4 rounded-xl border border-dark-border bg-dark-card hover:bg-dark-cardHover transition group active:scale-[0.98]';
-        }
-      }
-      const data = scenarios[id];
-      const avatarEl = document.getElementById('sim-agent-avatar');
-      if (avatarEl && data.avatar) avatarEl.src = data.avatar;
-      document.getElementById('sim-agent-name').textContent = data.agent;
-      document.getElementById('sim-context').textContent = data.context;
-      document.getElementById('thinking-trace').textContent = data.thinking;
-      document.getElementById('sim-tool').textContent = data.tool;
-      document.getElementById('sim-latency').textContent = currentModel === 'haiku-55' ? '22ms' : data.ttft;
-      document.getElementById('sim-tokens').textContent = 'Tokens: ' + data.tokens;
-      
+    function streamDialogueText(text) {
       const el = document.getElementById('sim-dialogue');
-      el.textContent = '';
+      const mcEl = document.getElementById('mc-dialogue-text');
+      if (el) el.textContent = '';
+      if (mcEl) mcEl.textContent = '';
       if (streamInterval) clearInterval(streamInterval);
       
       let i = 0;
-      const text = data.dialogue;
       streamInterval = setInterval(() => {
-        el.textContent += text.charAt(i);
+        if (el) el.textContent += text.charAt(i);
+        if (mcEl) mcEl.textContent += text.charAt(i);
         i++;
         if (i >= text.length) clearInterval(streamInterval);
       }, 10);
     }
 
-    function simulateCustomPrompt() {
-      const val = document.getElementById('custom-prompt').value.trim();
+    function simulateEvent(id) {
+      for (let i = 1; i <= 5; i++) {
+        const btn = document.getElementById('btn-scenario-' + i);
+        if (btn) {
+          if (i === id) {
+            btn.className = 'w-full text-left p-3.5 rounded-xl border border-cyan-500/60 bg-dark-cardHover transition group active:scale-[0.98] shadow-lg shadow-cyan-500/10';
+          } else {
+            btn.className = 'w-full text-left p-3.5 rounded-xl border border-dark-border bg-dark-card hover:bg-dark-cardHover transition group active:scale-[0.98]';
+          }
+        }
+      }
+      const data = scenarios[id];
+      if (!data) return;
+
+      activeAgentKey = data.agentKey;
+      ['aurelius', 'vael', 'eldrin', 'kaelen', 'nyx'].forEach(k => {
+        const btn = document.getElementById('pick-' + k);
+        if (btn) {
+          btn.className = (k === data.agentKey) 
+            ? 'p-1 rounded-lg border border-cyan-500/80 bg-cyan-950/60 scale-105 transition shadow-sm'
+            : 'p-1 rounded-lg border border-dark-border bg-dark-card hover:scale-105 transition';
+        }
+      });
+      document.getElementById('picker-active-name').textContent = data.agent.split(' ')[0];
+
+      const avatarEl = document.getElementById('sim-agent-avatar');
+      if (avatarEl && data.avatar) avatarEl.src = data.avatar;
+      document.getElementById('sim-agent-name').textContent = data.agent;
+      document.getElementById('sim-agent-badge').textContent = data.badge;
+      document.getElementById('sim-context').textContent = data.context;
+      document.getElementById('thinking-trace').textContent = data.thinking;
+      document.getElementById('sim-tool').textContent = data.tool;
+      document.getElementById('sim-latency').textContent = (currentModel === 'haiku-55' ? '20ms TTFT' : data.ttft);
+      document.getElementById('sim-tokens').textContent = 'Tokens: ' + data.tokens;
+      document.getElementById('mc-agent-prefix').textContent = data.mcPrefix;
+      
+      streamDialogueText(data.dialogue);
+    }
+
+    function simulateCustomPrompt(overrideText) {
+      const input = document.getElementById('custom-prompt');
+      const val = (overrideText || (input ? input.value : '')).trim();
       if (!val) return;
-      document.getElementById('sim-context').textContent = `{ playerWhisper: "${val}", proximity: "1.8m" }`;
-      document.getElementById('thinking-trace').textContent = `Player whispers: '${val}'. Tone is challenging. Maintain realm authority and issue warning.`;
-      document.getElementById('sim-tool').textContent = `evaluateIntent("${val.slice(0, 24)}...")`;
-      
-      const el = document.getElementById('sim-dialogue');
-      el.textContent = '';
-      if (streamInterval) clearInterval(streamInterval);
-      
-      const reply = `"You speak boldly in the Grand Spire. The High Council hears through the stones themselves. Stand down or face banishment."`;
-      let i = 0;
-      streamInterval = setInterval(() => {
-        el.textContent += reply.charAt(i);
-        i++;
-        if (i >= reply.length) clearInterval(streamInterval);
-      }, 10);
+
+      const lower = val.toLowerCase();
+      const mcPlayer = document.getElementById('mc-player-text');
+      if (mcPlayer) mcPlayer.textContent = `"${val}"`;
+
+      // Auto-detect intent & persona if user asks about specific domain
+      let agentKey = activeAgentKey;
+      if (lower.includes('harga') || lower.includes('market') || lower.includes('price') || lower.includes('jual') || lower.includes('beli') || lower.includes('coin') || lower.includes('rupiah') || lower.includes('uang')) {
+        agentKey = 'kaelen';
+      } else if (lower.includes('perang') || lower.includes('war') || lower.includes('serang') || lower.includes('attack') || lower.includes('kill') || lower.includes('bastion') || lower.includes('shield')) {
+        agentKey = 'vael';
+      } else if (lower.includes('enchant') || lower.includes('sihir') || lower.includes('rune') || lower.includes('relic') || lower.includes('mancing') || lower.includes('fish') || lower.includes('grimoire')) {
+        agentKey = 'eldrin';
+      } else if (lower.includes('rahasia') || lower.includes('crate') || lower.includes('key') || lower.includes('bounty') || lower.includes('black') || lower.includes('whisper')) {
+        agentKey = 'nyx';
+      }
+
+      selectAgentEntity(agentKey);
+
+      let contextStr = `{ playerInput: "${val}", activeSystem: "${sovereignProfiles[agentKey].badge}", latency: "26ms" }`;
+      let thinkingStr = "";
+      let toolStr = "";
+      let replyStr = "";
+
+      if (agentKey === 'kaelen') {
+        thinkingStr = `Player queries economy/trading: '${val}'. Query dynamic commodity index for ApexsionsShop. Check market volatility and calculate imperial tariff rate.`;
+        toolStr = `ApexsionsShopAPI.getMarketTrend("DIAMOND_INDEX") -> tariff=4.2%`;
+        replyStr = `"Regarding the marketplace: diamond indexes currently trade at 1,450 coins per unit, reflecting a +3.8% surge. The royal treasury guarantees atomic escrow transactions with zero slippage."`;
+      } else if (agentKey === 'vael') {
+        thinkingStr = `Combat/Hostile intent detected: '${val}'. Verify realm defense perimeter. Ready combat tag telemetry and sentinel ward-fire constraints.`;
+        toolStr = `ApexsionsCoreAPI.engageCombatTag(target="Player", timeout=30)`;
+        replyStr = `"You speak of warfare at our citadel gates? Know that our anti-teleport combat tags activate in under 20ms. The Bastions of Apexsions do not yield to hollow threats."`;
+      } else if (agentKey === 'eldrin') {
+        thinkingStr = `Arcane/Enchanting query: '${val}'. Query celestial grimoire codex for custom enchant recipes. Check dual-currency soul essence requirements.`;
+        toolStr = `ApexsionsCustomEnchantsAPI.getEnchantmentRecipe("ASTRAL_REAPER_V")`;
+        replyStr = `"The arcane energies stir to your call. High-tier runes demand both soul essence and celestial catalysts from the deep fishing vault. Speak the incantation when your vessel is prepared."`;
+      } else if (agentKey === 'nyx') {
+        thinkingStr = `Clandestine inquiry: '${val}'. Route transmission through encrypted ApexsionsChat channels. Filter out royal sentinels and query crate anomaly registry.`;
+        toolStr = `ApexsionsChatAPI.dispatchEncryptedWhisper("BLACK_MARKET_RELIC")`;
+        replyStr = `"Keep your hands where I can see them. I have coordinates for an anomaly near the obsidian rift. Bring 5 void shards to the dark tavern if you want the unsealed cipher."`;
+      } else {
+        // Aurelius
+        thinkingStr = `Player approaches High Sanctum: '${val}'. Assess player rank standing across 11 official server tiers (Wanderer to Ancestor). Enforce realm treaties.`;
+        toolStr = `ApexsionsCoreAPI.getKingdomStanding("AETHERION_VALORIA_PACT")`;
+        replyStr = `"The Ancestral Monolith records all who walk these lands, Wanderer. Honor our realm laws, build your faction glory, and the gates of the High Spire shall open to your name."`;
+      }
+
+      document.getElementById('sim-context').textContent = contextStr;
+      document.getElementById('thinking-trace').textContent = thinkingStr;
+      document.getElementById('sim-tool').textContent = toolStr;
+      document.getElementById('sim-latency').textContent = (currentModel === 'haiku-55' ? '19ms TTFT' : '26ms TTFT');
+      document.getElementById('sim-tokens').textContent = `Tokens: ${val.length + 120} in / 68 out`;
+
+      streamDialogueText(replyStr);
     }
 
     // 10. PRICING TOGGLE: ANNUAL VS MONTHLY

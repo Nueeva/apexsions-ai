@@ -63,6 +63,7 @@
       <div>
         <div class="font-mono uppercase text-slate-400 font-bold mb-2 tracking-wider">SDK Reference</div>
         <ul class="space-y-1 text-slate-300 font-medium">
+          <li><a href="#papermc-sdk" class="block px-2.5 py-1.5 rounded hover:bg-dark-card text-emerald-400 font-bold">PaperMC Java 21</a></li>
           <li><a href="#typescript-sdk" class="block px-2.5 py-1.5 rounded hover:bg-dark-card hover:text-white">TypeScript / Node.js</a></li>
           <li><a href="#python-sdk" class="block px-2.5 py-1.5 rounded hover:bg-dark-card hover:text-white">Python 3.11+</a></li>
           <li><a href="#rest-api" class="block px-2.5 py-1.5 rounded hover:bg-dark-card hover:text-white">REST / Streaming API</a></li>
@@ -133,6 +134,55 @@
 
 <span class="text-purple-400">for await</span> (<span class="text-purple-400">const</span> token <span class="text-purple-400">of</span> stream) {
   process.stdout.<span class="text-blue-400">write</span>(token);
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- Section: PaperMC Java Integration -->
+      <section id="papermc-sdk" class="border-b border-dark-border pb-10">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+          <span class="text-xs uppercase font-mono tracking-widest text-emerald-400 font-bold">Minecraft Ecosystem</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white mb-2">PaperMC Java Plugin Integration (Java 21 LTS)</h2>
+        <p class="text-xs text-slate-400 mb-6">
+          Direct drop-in integration with <span class="text-white font-semibold">ApexsionsCore</span>, <span class="text-white font-semibold">ApexsionsEconomy</span>, and PaperMC servers. All perception events and Claude 5.5 reasoning loops execute asynchronously off-thread via <code>CompletableFuture</code> to guarantee <strong>20.00 TPS locked</strong> with zero main-thread tick lag.
+        </p>
+
+        <h3 class="text-sm font-semibold text-white mb-2">1. Maven Dependency</h3>
+        <div class="bg-[#050811] p-4 rounded-xl border border-dark-border font-mono text-xs text-slate-300 overflow-x-auto">
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;com.apexsions&lt;/groupId&gt;
+  &lt;artifactId&gt;apexsions-ai-bridge&lt;/artifactId&gt;
+  &lt;version&gt;2.4.0&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;</code></pre>
+        </div>
+
+        <h3 class="text-sm font-semibold text-white mt-6 mb-2">2. Asynchronous Event Hook & MiniMessage Stream</h3>
+        <div class="bg-[#050811] p-4 rounded-xl border border-dark-border font-mono text-xs text-slate-300 overflow-x-auto">
+<pre><code><span class="text-purple-400">package</span> com.apexsions.core.listeners;
+
+<span class="text-purple-400">import</span> com.apexsions.core.api.ApexsionsCoreAPI;
+<span class="text-purple-400">import</span> com.apexsions.ai.ApexsionsAI;
+<span class="text-purple-400">import</span> org.bukkit.event.EventHandler;
+<span class="text-purple-400">import</span> org.bukkit.event.Listener;
+<span class="text-purple-400">import</span> org.bukkit.event.player.PlayerInteractEntityEvent;
+
+<span class="text-purple-400">public class</span> LivingSentinelListener <span class="text-purple-400">implements</span> Listener {
+
+    <span class="text-slate-500">// Non-blocking async event hook: 0.00 TPS loss on PaperMC</span>
+    <span class="text-amber-400">@EventHandler</span>
+    <span class="text-purple-400">public void</span> onNPCDialogue(PlayerInteractEntityEvent event) {
+        <span class="text-purple-400">var</span> player = event.getPlayer();
+        <span class="text-purple-400">var</span> kingdom = ApexsionsCoreAPI.get().getKingdom(player);
+
+        ApexsionsAI.agent(<span class="text-emerald-300">"aurelius"</span>)
+            .withPlayer(player)
+            .withContext(<span class="text-emerald-300">"faction"</span>, kingdom.getName())
+            .withModel(<span class="text-emerald-300">"claude-sonnet-5-5-20260928"</span>)
+            .streamToPlayer(player); <span class="text-slate-500">// Rendered via Kyori Adventure MiniMessage</span>
+    }
 }</code></pre>
         </div>
       </section>
