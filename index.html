@@ -12,10 +12,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- External 3D WebGL & Motion Libraries -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
-
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -177,36 +173,13 @@
       }
     }
 
-    /* Scroll Motion Reveal Classes */
-    .motion-reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
-    }
-    .motion-reveal.is-revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .motion-slide-left {
-      opacity: 0;
-      transform: translateX(-32px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
-    }
-    .motion-slide-left.is-revealed {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    /* Motion Classes - Safe defaults preventing blank screen issues */
+    .motion-reveal,
+    .motion-slide-left,
     .motion-slide-right {
-      opacity: 0;
-      transform: translateX(32px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
-    }
-    .motion-slide-right.is-revealed {
       opacity: 1;
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     /* Shimmer Text */
@@ -447,41 +420,6 @@
       100% { height: 6px; }
     }
 
-    /* 5. CINEMATIC QUANTUM PRELOADER */
-    #preloader {
-      position: fixed;
-      inset: 0;
-      background: #03060E;
-      z-index: 100000;
-      display: flex;
-      flex-direction: column;
-      items-center: center;
-      justify-content: center;
-      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
-    }
-    #preloader.loaded {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-    .preloader-track {
-      width: 220px;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.1);
-      overflow: hidden;
-      position: relative;
-      border-radius: 999px;
-    }
-    .preloader-fill {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #06B6D4, #A855F7);
-      box-shadow: 0 0 12px #06B6D4;
-      transition: width 0.15s linear;
-    }
 
     /* 6. EDITORIAL MASK REVEAL */
     .text-reveal-mask {
@@ -516,23 +454,6 @@
 </head>
 <body class="selection:bg-cyan-500/30 selection:text-cyan-200">
 
-  <!-- CINEMATIC PRELOADER -->
-  <div id="preloader">
-    <div class="flex items-center gap-3 mb-6">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-400 to-indigo-500 p-[1px] shadow-lg shadow-cyan-500/20">
-        <div class="w-full h-full bg-dark-bg rounded-[11px] flex items-center justify-center font-bold text-cyan-400 font-mono text-lg">
-          Ω
-        </div>
-      </div>
-      <div>
-        <div class="text-sm font-bold text-white tracking-wide font-mono">APEXSIONS AI</div>
-      </div>
-    </div>
-    <div class="preloader-track mb-3">
-      <div class="preloader-fill" id="preloader-fill"></div>
-    </div>
-    <div class="text-xs font-mono text-slate-400" id="preloader-percent">0%</div>
-  </div>
 
   <!-- CUSTOM FLUID MAGNETIC CURSOR (O-CURSOR) -->
   <div class="o-cursor" id="custom-cursor">
@@ -655,9 +576,6 @@
             <!-- Vignette & Atmospheric Overlays -->
             <div class="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-black/30 pointer-events-none"></div>
             <div class="absolute inset-0 bg-gradient-to-r from-dark-bg/60 via-transparent to-dark-bg/60 pointer-events-none"></div>
-            
-            <!-- Three.js 3D Celestial Core & Floating Embers Canvas Overlay -->
-            <canvas id="hero-3d-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-10"></canvas>
             
             <!-- Bottom Realm Caption & Live Badge -->
             <div class="absolute bottom-4 sm:bottom-6 inset-x-4 sm:inset-x-8 flex items-end justify-between z-20 pointer-events-none">
@@ -2032,31 +1950,21 @@ print("Tool Dispatches:", response.executed_actions)`
     }
 
     // ==========================================
-    // 11. PRELOADER
+    // 11. INSTANT VIEWPORT REVEAL
     // ==========================================
-    (function initPreloader() {
-      const preloader = document.getElementById('preloader');
-      const fill = document.getElementById('preloader-fill');
-      const percentEl = document.getElementById('preloader-percent');
-      if (!preloader) return;
-
-      let pct = 0;
-      const interval = setInterval(() => {
-        pct += 25;
-        if (fill) fill.style.width = pct + '%';
-        if (percentEl) percentEl.textContent = pct + '%';
-        if (pct >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            preloader.classList.add('loaded');
-            document.querySelectorAll('.motion-reveal').forEach(el => {
-              const r = el.getBoundingClientRect();
-              if (r.top < window.innerHeight) el.classList.add('is-revealed');
-            });
-          }, 140);
+    function revealAboveFold() {
+      document.querySelectorAll('.motion-reveal, .motion-slide-left, .motion-slide-right').forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight + 150) {
+          el.classList.add('is-revealed');
         }
-      }, 60);
-    })();
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', revealAboveFold);
+    } else {
+      revealAboveFold();
+    }
 
     // ==========================================
     // 12. ADVANCED MAGNETIC FLUID CURSOR (O-CURSOR)
@@ -2391,218 +2299,6 @@ print("Tool Dispatches:", response.executed_actions)`
         osc.stop(now + 0.3);
       }
     };
-
-    // ==========================================
-    // 16. LENIS SMOOTH SCROLL (Awwwards Inertia Physics)
-    // ==========================================
-    (function initLenisScroll() {
-      if (typeof Lenis === 'undefined' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      try {
-        const lenis = new Lenis({
-          duration: 1.25,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          orientation: 'vertical',
-          gestureOrientation: 'vertical',
-          smoothWheel: true,
-          wheelMultiplier: 0.9,
-          touchMultiplier: 1.5,
-        });
-        window.lenisInstance = lenis;
-
-        function raf(time) {
-          lenis.raf(time);
-          requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-
-        // Smooth anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-          anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (href && href.length > 1) {
-              const target = document.querySelector(href);
-              if (target) {
-                e.preventDefault();
-                lenis.scrollTo(target, { offset: -70, duration: 1.2 });
-              }
-            }
-          });
-        });
-      } catch (e) {
-        console.warn('Lenis init notice:', e);
-      }
-    })();
-
-    // ==========================================
-    // 17. THREE.JS 3D CELESTIAL CORE & FLOATING EMBERS
-    // ==========================================
-    (function initThreeJSHeroScene() {
-      const canvas = document.getElementById('hero-3d-canvas');
-      if (!canvas || typeof THREE === 'undefined') return;
-
-      let renderer, scene, camera;
-      let coreGroup, outerIcosahedron, innerOctahedron, particleGeo, particleSystem;
-      let mouseX = 0, mouseY = 0;
-      let targetRotX = 0, targetRotY = 0;
-      let width = canvas.clientWidth || 800;
-      let height = canvas.clientHeight || 450;
-
-      try {
-        renderer = new THREE.WebGLRenderer({
-          canvas: canvas,
-          alpha: true,
-          antialias: true,
-          powerPreference: 'high-performance'
-        });
-        renderer.setSize(width, height, false);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-        scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-        camera.position.z = 7;
-
-        // Core Group
-        coreGroup = new THREE.Group();
-        scene.add(coreGroup);
-
-        // Outer Sacred Geometry Icosahedron (Gold Wireframe)
-        const outerGeo = new THREE.IcosahedronGeometry(1.6, 0);
-        const outerMat = new THREE.MeshBasicMaterial({
-          color: 0xF59E0B,
-          wireframe: true,
-          transparent: true,
-          opacity: 0.45
-        });
-        outerIcosahedron = new THREE.Mesh(outerGeo, outerMat);
-        coreGroup.add(outerIcosahedron);
-
-        // Inner Sacred Octahedron (Cyan Wireframe)
-        const innerGeo = new THREE.OctahedronGeometry(1.0, 0);
-        const innerMat = new THREE.MeshBasicMaterial({
-          color: 0x22D3EE,
-          wireframe: true,
-          transparent: true,
-          opacity: 0.75
-        });
-        innerOctahedron = new THREE.Mesh(innerGeo, innerMat);
-        coreGroup.add(innerOctahedron);
-
-        // Core Glowing Center Sphere
-        const centerGeo = new THREE.SphereGeometry(0.35, 16, 16);
-        const centerMat = new THREE.MeshBasicMaterial({
-          color: 0x67E8F9,
-          transparent: true,
-          opacity: 0.85
-        });
-        const centerSphere = new THREE.Mesh(centerGeo, centerMat);
-        coreGroup.add(centerSphere);
-
-        // 3D Floating Embers Particles
-        const particleCount = 140;
-        const positions = new Float32Array(particleCount * 3);
-        const velocities = [];
-
-        for (let i = 0; i < particleCount; i++) {
-          positions[i * 3] = (Math.random() - 0.5) * 12;
-          positions[i * 3 + 1] = (Math.random() - 0.5) * 6;
-          positions[i * 3 + 2] = (Math.random() - 0.5) * 8;
-          velocities.push({
-            vy: Math.random() * 0.015 + 0.005,
-            vx: (Math.random() - 0.5) * 0.004,
-            baseX: positions[i * 3]
-          });
-        }
-
-        particleGeo = new THREE.BufferGeometry();
-        particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-        // Create glowing circular particle canvas texture
-        const pCanvas = document.createElement('canvas');
-        pCanvas.width = 32;
-        pCanvas.height = 32;
-        const pCtx = pCanvas.getContext('2d');
-        const grad = pCtx.createRadialGradient(16, 16, 0, 16, 16, 16);
-        grad.addColorStop(0, 'rgba(255, 230, 150, 1)');
-        grad.addColorStop(0.3, 'rgba(245, 158, 11, 0.8)');
-        grad.addColorStop(0.7, 'rgba(6, 182, 212, 0.3)');
-        grad.addColorStop(1, 'transparent');
-        pCtx.fillStyle = grad;
-        pCtx.fillRect(0, 0, 32, 32);
-        const pTex = new THREE.CanvasTexture(pCanvas);
-
-        const particleMat = new THREE.PointsMaterial({
-          size: 0.22,
-          map: pTex,
-          transparent: true,
-          blending: THREE.AdditiveBlending,
-          depthWrite: false
-        });
-
-        particleSystem = new THREE.Points(particleGeo, particleMat);
-        scene.add(particleSystem);
-
-        // Mouse Parallax Listener
-        window.addEventListener('mousemove', (e) => {
-          mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-          mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-          targetRotY = mouseX * 0.8;
-          targetRotX = mouseY * 0.5;
-        }, { passive: true });
-
-        // Resize Listener
-        function onResize() {
-          if (!canvas.parentElement) return;
-          const rect = canvas.getBoundingClientRect();
-          if (rect.width <= 0 || rect.height <= 0) return;
-          width = rect.width;
-          height = rect.height;
-          camera.aspect = width / height;
-          camera.updateProjectionMatrix();
-          renderer.setSize(width, height, false);
-        }
-        window.addEventListener('resize', onResize);
-        setTimeout(onResize, 200);
-
-        // Render Loop
-        let clock = new THREE.Clock();
-        function animateThree() {
-          requestAnimationFrame(animateThree);
-          const delta = clock.getDelta();
-          const elapsed = clock.getElapsedTime();
-
-          // Auto-rotation + smooth mouse damping
-          outerIcosahedron.rotation.x += 0.005;
-          outerIcosahedron.rotation.y += 0.008;
-
-          innerOctahedron.rotation.x -= 0.012;
-          innerOctahedron.rotation.z += 0.01;
-
-          coreGroup.rotation.y += (targetRotY - coreGroup.rotation.y) * 0.05;
-          coreGroup.rotation.x += (targetRotX - coreGroup.rotation.x) * 0.05;
-
-          // Gentle floating bob
-          coreGroup.position.y = Math.sin(elapsed * 1.5) * 0.15;
-
-          // Particle Embers drift upwards
-          const pos = particleGeo.attributes.position.array;
-          for (let i = 0; i < particleCount; i++) {
-            pos[i * 3 + 1] += velocities[i].vy;
-            pos[i * 3] += Math.sin(elapsed + i) * 0.002;
-            // Reset when reaching top
-            if (pos[i * 3 + 1] > 3.5) {
-              pos[i * 3 + 1] = -3.5;
-              pos[i * 3] = (Math.random() - 0.5) * 12;
-            }
-          }
-          particleGeo.attributes.position.needsUpdate = true;
-
-          renderer.render(scene, camera);
-        }
-        animateThree();
-      } catch (err) {
-        console.warn('Three.js scene init notice:', err);
-      }
-    })();
   </script>
 
 </body>
